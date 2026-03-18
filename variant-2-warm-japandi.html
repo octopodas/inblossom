@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="INBLOSSOM — salon kosmetyczny w Białymstoku. Depilacja laserowa, masaż, manicure, pedicure i więcej. Piękno zaczyna się tutaj.">
+    <meta name="theme-color" content="#E8DED1">
+    <meta name="author" content="INBLOSSOM">
+    <meta property="og:title" content="INBLOSSOM — Salon Kosmetyczny Białystok">
+    <meta property="og:description" content="Piękno zaczyna się tutaj. Odkryj miejsce, gdzie Twoje piękno rozkwita!">
+    <meta property="og:type" content="website">
+    <title>INBLOSSOM — Salon Kosmetyczny Białystok</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: #C4785A;
+            color: #FAF7F2;
+        }
+
+        ::-moz-selection {
+            background-color: #C4785A;
+            color: #FAF7F2;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 400;
+            color: #2C2C2C;
+            background-color: #E8DED1;
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Paper-like noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+        }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        h1, h2, h3, h4 {
+            font-family: 'DM Serif Display', serif;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .section-label {
+            text-transform: lowercase;
+            letter-spacing: 0.3em;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #C4785A;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.4s ease;
+        }
+
+        a:hover {
+            color: #C4785A;
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children animations */
+        .fade-up.is-visible .stagger-child:nth-child(1) { transition-delay: 0.05s; }
+        .fade-up.is-visible .stagger-child:nth-child(2) { transition-delay: 0.1s; }
+        .fade-up.is-visible .stagger-child:nth-child(3) { transition-delay: 0.15s; }
+        .fade-up.is-visible .stagger-child:nth-child(4) { transition-delay: 0.2s; }
+        .fade-up.is-visible .stagger-child:nth-child(5) { transition-delay: 0.25s; }
+        .fade-up.is-visible .stagger-child:nth-child(6) { transition-delay: 0.3s; }
+
+        .stagger-child {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.is-visible .stagger-child {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           ORGANIC BLOB SHAPES
+           ============================================ */
+        .blob {
+            position: absolute;
+            border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(196, 120, 90, 0.08), rgba(212, 169, 160, 0.06));
+            top: -100px;
+            right: -150px;
+            animation: blobMorph1 20s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(122, 122, 94, 0.06), rgba(196, 120, 90, 0.04));
+            bottom: -100px;
+            left: -100px;
+            animation: blobMorph2 25s ease-in-out infinite;
+        }
+
+        .blob-3 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, rgba(212, 169, 160, 0.08), rgba(250, 247, 242, 0.1));
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: blobMorph1 18s ease-in-out infinite reverse;
+        }
+
+        @keyframes blobMorph1 {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%; }
+            25% { border-radius: 60% 40% 30% 70% / 40% 70% 30% 60%; }
+            50% { border-radius: 30% 70% 50% 50% / 70% 40% 60% 30%; }
+            75% { border-radius: 50% 50% 40% 60% / 30% 60% 40% 70%; }
+        }
+
+        @keyframes blobMorph2 {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 40% 70% 30% 60%; }
+            33% { border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%; }
+            66% { border-radius: 50% 50% 40% 60% / 30% 60% 40% 70%; }
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(232, 222, 209, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: box-shadow 0.4s ease;
+        }
+
+        .nav.scrolled {
+            box-shadow: 0 1px 20px rgba(44, 44, 44, 0.06);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.12em;
+            color: #2C2C2C;
+            transition: color 0.4s ease;
+        }
+
+        .nav-logo:hover {
+            color: #C4785A;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: lowercase;
+            color: #2C2C2C;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #C4785A;
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #C4785A;
+        }
+
+        /* Mobile menu toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: #2C2C2C;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10rem 2rem 6rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #E8DED1 0%, #F0E8DE 50%, #E8DED1 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-label {
+            text-transform: lowercase;
+            letter-spacing: 0.35em;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #7A7A5E;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            color: #2C2C2C;
+            margin-bottom: 1.5rem;
+            line-height: 1.05;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            font-weight: 300;
+            color: #5A5A5A;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: #C4785A;
+            color: #FAF7F2;
+            padding: 1rem 2.8rem;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+            box-shadow: 0 4px 20px rgba(196, 120, 90, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(196, 120, 90, 0.35);
+            background-color: #b86c50;
+            color: #FAF7F2;
+        }
+
+        /* Hero decorative divider */
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 0 0;
+        }
+
+        .hero-divider-line {
+            width: 120px;
+            height: 1px;
+            background-color: rgba(44, 44, 44, 0.15);
+        }
+
+        .hero-divider-circle {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 1px solid rgba(44, 44, 44, 0.2);
+            margin: 0 1rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           MARQUEE STRIP
+           ============================================ */
+        .marquee-section {
+            padding: 1.5rem 0;
+            overflow: hidden;
+            position: relative;
+            border-top: 1px solid rgba(44, 44, 44, 0.06);
+            border-bottom: 1px solid rgba(44, 44, 44, 0.06);
+            background-color: rgba(250, 247, 242, 0.4);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 40s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 0 2rem;
+            white-space: nowrap;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: lowercase;
+            color: #7A7A5E;
+        }
+
+        .marquee-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #C4785A;
+            flex-shrink: 0;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ============================================
+           SECTION SPACING & WARM GRADIENTS
+           ============================================ */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-gradient-1 {
+            background: linear-gradient(180deg, #E8DED1 0%, #EDE5DA 40%, #F0E8DE 100%);
+        }
+
+        .section-gradient-2 {
+            background: linear-gradient(180deg, #F0E8DE 0%, #E8DED1 100%);
+        }
+
+        .section-gradient-3 {
+            background: linear-gradient(180deg, #E8DED1 0%, #EAE0D4 50%, #E8DED1 100%);
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            color: #2C2C2C;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #4A4A4A;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text .accent-line {
+            width: 60px;
+            height: 2px;
+            background-color: #C4785A;
+            margin-bottom: 2rem;
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 24px;
+            background: linear-gradient(145deg, #FAF7F2, #EDE5DA);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(44, 44, 44, 0.06), inset 0 2px 8px rgba(44, 44, 44, 0.04);
+        }
+
+        .about-image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%;
+            background: linear-gradient(135deg, rgba(196, 120, 90, 0.12), rgba(212, 169, 160, 0.15));
+            animation: blobMorph1 15s ease-in-out infinite;
+        }
+
+        .about-image-placeholder::after {
+            content: 'INBLOSSOM';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.15em;
+            color: rgba(196, 120, 90, 0.35);
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2.5rem;
+        }
+
+        .about-stat {
+            text-align: left;
+        }
+
+        .about-stat-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.2rem;
+            color: #C4785A;
+            line-height: 1;
+        }
+
+        .about-stat-label {
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: #7A7A5E;
+            margin-top: 0.3rem;
+        }
+
+        /* ============================================
+           SERVICES SECTION
+           ============================================ */
+        .services-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .services-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #2C2C2C;
+        }
+
+        .services-header p {
+            font-size: 1.05rem;
+            color: #5A5A5A;
+            max-width: 550px;
+            margin: 1rem auto 0;
+        }
+
+        .service-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-tag {
+            padding: 0.5rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            background-color: rgba(250, 247, 242, 0.6);
+            color: #5A5A5A;
+            cursor: pointer;
+            border: 1px solid rgba(44, 44, 44, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .category-tag:hover,
+        .category-tag.active {
+            background-color: #C4785A;
+            color: #FAF7F2;
+            border-color: #C4785A;
+        }
+
+        .service-group {
+            margin-bottom: 2rem;
+        }
+
+        .service-group-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 1.2rem 1.8rem;
+            background-color: rgba(250, 247, 242, 0.5);
+            border-radius: 16px;
+            margin-bottom: 0.5rem;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(44, 44, 44, 0.04);
+        }
+
+        .service-group-header:hover {
+            background-color: rgba(250, 247, 242, 0.8);
+        }
+
+        .service-group-header h3 {
+            font-size: 1.3rem;
+            color: #2C2C2C;
+        }
+
+        .service-group-toggle {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(196, 120, 90, 0.1);
+            transition: transform 0.4s ease, background-color 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .service-group-toggle svg {
+            width: 14px;
+            height: 14px;
+            stroke: #C4785A;
+            transition: transform 0.4s ease;
+        }
+
+        .service-group.open .service-group-toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .service-group-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.4s ease;
+            opacity: 0;
+            padding: 0 0.5rem;
+        }
+
+        .service-group.open .service-group-items {
+            max-height: 2000px;
+            opacity: 1;
+            padding: 1rem 0.5rem;
+        }
+
+        .service-card {
+            background-color: #FAF7F2;
+            border-radius: 16px;
+            padding: 1.5rem 1.8rem;
+            border-left: 3px solid #C4785A;
+            box-shadow: 0 4px 20px rgba(44, 44, 44, 0.03), inset 0 1px 4px rgba(44, 44, 44, 0.03);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(44, 44, 44, 0.06), inset 0 1px 4px rgba(44, 44, 44, 0.03);
+        }
+
+        .service-card-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.05rem;
+            color: #2C2C2C;
+            margin-bottom: 0.3rem;
+        }
+
+        .service-card-desc {
+            font-size: 0.85rem;
+            color: #7A7A5E;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           WHY US SECTION
+           ============================================ */
+        .why-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .why-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #2C2C2C;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem 4rem;
+        }
+
+        .reason-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .reason-number {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 50%;
+            background-color: #C4785A;
+            color: #FAF7F2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(196, 120, 90, 0.25);
+        }
+
+        .reason-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2C2C2C;
+        }
+
+        .reason-content p {
+            font-size: 0.95rem;
+            color: #5A5A5A;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact-section {
+            background-color: #2C2C2C;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section .blob {
+            opacity: 0.3;
+        }
+
+        .contact-section .section-label {
+            color: #C4785A;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #FAF7F2;
+        }
+
+        .contact-header p {
+            font-size: 1.05rem;
+            color: rgba(250, 247, 242, 0.6);
+            max-width: 500px;
+            margin: 1rem auto 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            color: #FAF7F2;
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 12px;
+            background-color: rgba(196, 120, 90, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-info-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: #C4785A;
+        }
+
+        .contact-info-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: lowercase;
+            color: rgba(250, 247, 242, 0.4);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-info-value {
+            font-size: 1rem;
+            color: #FAF7F2;
+            line-height: 1.5;
+        }
+
+        .contact-info-value a {
+            color: #FAF7F2;
+            transition: color 0.4s ease;
+        }
+
+        .contact-info-value a:hover {
+            color: #C4785A;
+        }
+
+        .contact-form-area {
+            background-color: rgba(250, 247, 242, 0.05);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid rgba(250, 247, 242, 0.08);
+        }
+
+        .contact-form-area h3 {
+            font-size: 1.4rem;
+            color: #FAF7F2;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: lowercase;
+            color: rgba(250, 247, 242, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(250, 247, 242, 0.1);
+            background-color: rgba(250, 247, 242, 0.05);
+            color: #FAF7F2;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.4s ease, background-color 0.4s ease;
+            outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(250, 247, 242, 0.25);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #C4785A;
+            background-color: rgba(250, 247, 242, 0.08);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-form {
+            display: inline-block;
+            background-color: #C4785A;
+            color: #FAF7F2;
+            padding: 0.9rem 2.4rem;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+            box-shadow: 0 4px 20px rgba(196, 120, 90, 0.25);
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+
+        .btn-form:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(196, 120, 90, 0.35);
+            background-color: #b86c50;
+        }
+
+        /* Map placeholder */
+        .map-placeholder {
+            margin-top: 3rem;
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(250, 247, 242, 0.06), rgba(250, 247, 242, 0.02));
+            border: 1px solid rgba(250, 247, 242, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .map-placeholder-text {
+            font-size: 0.85rem;
+            color: rgba(250, 247, 242, 0.25);
+            letter-spacing: 0.15em;
+            text-transform: lowercase;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background-color: #242424;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(250, 247, 242, 0.05);
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background-color: rgba(250, 247, 242, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.4s ease, transform 0.4s ease;
+            border: 1px solid rgba(250, 247, 242, 0.06);
+        }
+
+        .footer-social a:hover {
+            background-color: #C4785A;
+            transform: scale(1.05);
+        }
+
+        .footer-social a svg {
+            width: 18px;
+            height: 18px;
+            fill: rgba(250, 247, 242, 0.6);
+            transition: fill 0.4s ease;
+        }
+
+        .footer-social a:hover svg {
+            fill: #FAF7F2;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: rgba(250, 247, 242, 0.3);
+            letter-spacing: 0.05em;
+        }
+
+        .footer-copyright a {
+            color: rgba(250, 247, 242, 0.5);
+        }
+
+        .footer-copyright a:hover {
+            color: #C4785A;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .about-grid {
+                gap: 3rem;
+            }
+
+            .reasons-grid {
+                gap: 2rem 3rem;
+            }
+
+            .contact-grid {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 5rem 0;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(232, 222, 209, 0.98);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                padding: 1rem 0 2rem;
+                box-shadow: 0 10px 30px rgba(44, 44, 44, 0.06);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 8rem 2rem 4rem;
+                min-height: 70vh;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image-placeholder {
+                aspect-ratio: 16/10;
+                order: -1;
+            }
+
+            .about-stats {
+                gap: 2rem;
+            }
+
+            .service-group-items {
+                grid-template-columns: 1fr;
+            }
+
+            .reasons-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .blob-1 {
+                width: 300px;
+                height: 300px;
+            }
+
+            .blob-2 {
+                width: 250px;
+                height: 250px;
+            }
+
+            .blob-3 {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 15px;
+            }
+
+            .container {
+                padding: 0 1.2rem;
+            }
+
+            .nav-inner {
+                padding: 1rem 1.2rem;
+            }
+
+            .hero {
+                padding: 7rem 1.2rem 3rem;
+                min-height: 65vh;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .about-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                padding: 1.2rem 1.4rem;
+            }
+
+            .contact-form-area {
+                padding: 1.8rem;
+            }
+
+            .reason-item {
+                gap: 1rem;
+            }
+
+            .reason-number {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         NAVIGATION
+         ========================================== -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">INBLOSSOM</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu nawigacyjne" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#o-nas">o nas</a></li>
+                <li><a href="#uslugi">usługi</a></li>
+                <li><a href="#dlaczego-my">dlaczego my</a></li>
+                <li><a href="#kontakt">kontakt</a></li>
+                <li><a href="#kontakt" class="nav-cta">umów wizytę</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section class="hero" id="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="hero-content fade-up">
+            <p class="hero-label">salon kosmetyczny białystok</p>
+            <h1>INBLOSSOM</h1>
+            <p class="hero-subtitle">Piękno zaczyna się tutaj</p>
+            <a href="#kontakt" class="btn-primary">Umów wizytę</a>
+            <div class="hero-divider">
+                <div class="hero-divider-line"></div>
+                <div class="hero-divider-circle"></div>
+                <div class="hero-divider-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MARQUEE STRIP
+         ========================================== -->
+    <div class="marquee-section">
+        <div class="marquee-track" id="marqueeTrack">
+            <div class="marquee-item"><span class="marquee-dot"></span>depilacja laserowa</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>masaż</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>manicure</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>pedicure</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>brwi i rzęsy</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>mezoterapia</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>peeling</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>karboksyterapia</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>oczyszczanie twarzy</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>odmładzanie laserowe</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>leczenie trądziku</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>maski twarzy</div>
+            <!-- Duplicated for seamless loop -->
+            <div class="marquee-item"><span class="marquee-dot"></span>depilacja laserowa</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>masaż</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>manicure</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>pedicure</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>brwi i rzęsy</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>mezoterapia</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>peeling</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>karboksyterapia</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>oczyszczanie twarzy</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>odmładzanie laserowe</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>leczenie trądziku</div>
+            <div class="marquee-item"><span class="marquee-dot"></span>maski twarzy</div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         ABOUT SECTION
+         ========================================== -->
+    <section class="section section-gradient-1" id="o-nas">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <span class="section-label">o nas</span>
+                    <h2>Miejsce, gdzie Twoje piękno rozkwita</h2>
+                    <div class="accent-line"></div>
+                    <p>Odkryj miejsce, gdzie Twoje piękno rozkwita! Nasz salon to przestrzeń, w&nbsp;której łączymy profesjonalizm z&nbsp;pasją, oferując szeroki wachlarz usług kosmetycznych dostosowanych do Twoich indywidualnych potrzeb.</p>
+                    <p>Tworzymy atmosferę relaksu i&nbsp;harmonii, w&nbsp;której każda wizyta staje się wyjątkowym doświadczeniem. Nasz zespół specjalistów dba o&nbsp;każdy detal, abyś mogła poczuć się piękna i&nbsp;zadbana.</p>
+                    <div class="about-stats">
+                        <div class="about-stat stagger-child">
+                            <div class="about-stat-number">500+</div>
+                            <div class="about-stat-label">zadowolonych klientek</div>
+                        </div>
+                        <div class="about-stat stagger-child">
+                            <div class="about-stat-number">12+</div>
+                            <div class="about-stat-label">kategorii usług</div>
+                        </div>
+                        <div class="about-stat stagger-child">
+                            <div class="about-stat-number">5+</div>
+                            <div class="about-stat-label">lat doświadczenia</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image-placeholder fade-up"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SERVICES SECTION
+         ========================================== -->
+    <section class="section section-gradient-2" id="uslugi">
+        <div class="blob blob-3"></div>
+        <div class="container">
+            <div class="services-header fade-up">
+                <span class="section-label">usługi</span>
+                <h2>Nasza oferta</h2>
+                <p>Szeroki wybór zabiegów kosmetycznych i&nbsp;pielęgnacyjnych, dostosowanych do Twoich potrzeb</p>
+            </div>
+
+            <div class="service-categories fade-up">
+                <span class="category-tag active" data-filter="all">wszystkie</span>
+                <span class="category-tag" data-filter="laser">laser</span>
+                <span class="category-tag" data-filter="twarz">twarz</span>
+                <span class="category-tag" data-filter="cialo">ciało</span>
+                <span class="category-tag" data-filter="dlonie">dłonie &amp; stopy</span>
+                <span class="category-tag" data-filter="oczy">brwi &amp; rzęsy</span>
+            </div>
+
+            <!-- Depilacja Laserowa -->
+            <div class="service-group open fade-up" data-category="laser">
+                <div class="service-group-header" role="button" tabindex="0" aria-expanded="true">
+                    <h3>Depilacja Laserowa</h3>
+                    <div class="service-group-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                </div>
+                <div class="service-group-items">
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Depilacja Laserowa Damska</div>
+                        <div class="service-card-desc">Trwałe usunięcie owłosienia — bezpiecznie i skutecznie</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Depilacja Laserowa Męska</div>
+                        <div class="service-card-desc">Gładka skóra bez kompromisów — zabiegi dla mężczyzn</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zabiegi Laserowe -->
+            <div class="service-group fade-up" data-category="laser">
+                <div class="service-group-header" role="button" tabindex="0" aria-expanded="false">
+                    <h3>Zabiegi Laserowe</h3>
+                    <div class="service-group-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                </div>
+                <div class="service-group-items">
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Laserowe Odmładzanie</div>
+                        <div class="service-card-desc">Odmłodzenie skóry z wykorzystaniem najnowszej technologii laserowej</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Laserowe Leczenie Trądziku</div>
+                        <div class="service-card-desc">Skuteczne zwalczanie trądziku i niedoskonałości skóry</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Masaż -->
+            <div class="service-group fade-up" data-category="cialo">
+                <div class="service-group-header" role="button" tabindex="0" aria-expanded="false">
+                    <h3>Masaż</h3>
+                    <div class="service-group-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                </div>
+                <div class="service-group-items">
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Masaż Relaksacyjny</div>
+                        <div class="service-card-desc">Głęboki relaks ciała i umysłu — pozwól sobie odpocząć</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Masaż Twarzy</div>
+                        <div class="service-card-desc">Ujędrnienie i odświeżenie skóry twarzy</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brwi & Rzęsy -->
+            <div class="service-group fade-up" data-category="oczy">
+                <div class="service-group-header" role="button" tabindex="0" aria-expanded="false">
+                    <h3>Brwi &amp; Rzęsy</h3>
+                    <div class="service-group-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                </div>
+                <div class="service-group-items">
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Stylizacja &amp; Laminacja Brwi</div>
+                        <div class="service-card-desc">Idealne brwi dopasowane do kształtu Twojej twarzy</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Laminacja Rzęs</div>
+                        <div class="service-card-desc">Naturalnie podkręcone i pogrubione rzęsy</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Przedłużenie Rzęs</div>
+                        <div class="service-card-desc">Gęste i długie rzęsy — efekt wow na co dzień</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">KOMBO</div>
+                        <div class="service-card-desc">Pakiet brwi + rzęsy w atrakcyjnej cenie</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manicure & Pedicure -->
+            <div class="service-group fade-up" data-category="dlonie">
+                <div class="service-group-header" role="button" tabindex="0" aria-expanded="false">
+                    <h3>Manicure &amp; Pedicure</h3>
+                    <div class="service-group-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                </div>
+                <div class="service-group-items">
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Manicure</div>
+                        <div class="service-card-desc">Zadbane i piękne paznokcie — klasyczny, hybrydowy i więcej</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Pedicure</div>
+                        <div class="service-card-desc">Kompleksowa pielęgnacja stóp i paznokci</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zabiegi na Twarz -->
+            <div class="service-group fade-up" data-category="twarz">
+                <div class="service-group-header" role="button" tabindex="0" aria-expanded="false">
+                    <h3>Zabiegi na Twarz</h3>
+                    <div class="service-group-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                </div>
+                <div class="service-group-items">
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Maski + Masaż Twarzy</div>
+                        <div class="service-card-desc">Odżywienie i regeneracja skóry z głębokim relaksem</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Oczyszczanie Twarzy</div>
+                        <div class="service-card-desc">Głębokie oczyszczenie i odświeżenie cery</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Peeling</div>
+                        <div class="service-card-desc">Złuszczanie martwego naskórka — gładka i promienna skóra</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mezoterapia -->
+            <div class="service-group fade-up" data-category="twarz">
+                <div class="service-group-header" role="button" tabindex="0" aria-expanded="false">
+                    <h3>Mezoterapia Mikroigłowa</h3>
+                    <div class="service-group-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                </div>
+                <div class="service-group-items">
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Mezoterapia Twarzy</div>
+                        <div class="service-card-desc">Głębokie nawilżenie i odmłodzenie skóry twarzy</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Mezoterapia Brwi</div>
+                        <div class="service-card-desc">Stymulacja wzrostu i wzmocnienie brwi</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Mezoterapia Głowy</div>
+                        <div class="service-card-desc">Wzmocnienie cebulek włosów i poprawa kondycji skóry głowy</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inne zabiegi -->
+            <div class="service-group fade-up" data-category="cialo">
+                <div class="service-group-header" role="button" tabindex="0" aria-expanded="false">
+                    <h3>Inne Zabiegi</h3>
+                    <div class="service-group-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                </div>
+                <div class="service-group-items">
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Karboksyterapia</div>
+                        <div class="service-card-desc">Poprawa krążenia i redukcja cellulitu dzięki CO2</div>
+                    </div>
+                    <div class="service-card stagger-child">
+                        <div class="service-card-name">Depilacja Pastą Cukrową</div>
+                        <div class="service-card-desc">Naturalna i delikatna metoda usuwania owłosienia</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         WHY US SECTION
+         ========================================== -->
+    <section class="section section-gradient-3" id="dlaczego-my">
+        <div class="container">
+            <div class="why-header fade-up">
+                <span class="section-label">dlaczego my</span>
+                <h2>6 powodów, aby nas wybrać</h2>
+            </div>
+
+            <div class="reasons-grid fade-up">
+                <div class="reason-item stagger-child">
+                    <div class="reason-number">1</div>
+                    <div class="reason-content">
+                        <h3>Profesjonalizm</h3>
+                        <p>Nasz zespół to wykwalifikowani specjaliści z&nbsp;wieloletnim doświadczeniem, którzy nieustannie podnoszą swoje kwalifikacje.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item stagger-child">
+                    <div class="reason-number">2</div>
+                    <div class="reason-content">
+                        <h3>Nowoczesne technologie</h3>
+                        <p>Korzystamy z&nbsp;najnowszych urządzeń i&nbsp;sprawdzonych metod, aby zapewnić Ci najlepsze efekty zabiegów.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item stagger-child">
+                    <div class="reason-number">3</div>
+                    <div class="reason-content">
+                        <h3>Szeroka oferta</h3>
+                        <p>Od depilacji laserowej po mezoterapię — znajdziesz u&nbsp;nas pełen wachlarz usług kosmetycznych i&nbsp;pielęgnacyjnych.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item stagger-child">
+                    <div class="reason-number">4</div>
+                    <div class="reason-content">
+                        <h3>Indywidualne podejście</h3>
+                        <p>Każda klientka jest wyjątkowa. Dopasowujemy zabiegi do Twoich potrzeb, typu skóry i&nbsp;oczekiwań.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item stagger-child">
+                    <div class="reason-number">5</div>
+                    <div class="reason-content">
+                        <h3>Relaksująca atmosfera</h3>
+                        <p>Nasz salon to oaza spokoju. Zadbaliśmy o&nbsp;każdy detal, abyś mogła się zrelaksować i&nbsp;odetchnąć od codzienności.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item stagger-child">
+                    <div class="reason-number">6</div>
+                    <div class="reason-content">
+                        <h3>Zadowolenie klientów</h3>
+                        <p>Setki pozytywnych opinii to nasz najlepszy dowód jakości. Twoje zadowolenie jest naszym priorytetem.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         CONTACT SECTION
+         ========================================== -->
+    <section class="section contact-section" id="kontakt">
+        <div class="blob blob-1"></div>
+        <div class="container">
+            <div class="contact-header fade-up">
+                <span class="section-label">kontakt</span>
+                <h2>Skontaktuj się z nami</h2>
+                <p>Zapraszamy do kontaktu — chętnie odpowiemy na Twoje pytania i pomożemy umówić wizytę</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info fade-up">
+                    <div class="contact-info-item stagger-child">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
+                        <div>
+                            <div class="contact-info-label">adres</div>
+                            <div class="contact-info-value">ul. Towarowa 22A<br>15-007 Białystok</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item stagger-child">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        </div>
+                        <div>
+                            <div class="contact-info-label">telefon</div>
+                            <div class="contact-info-value"><a href="tel:+48535449538">+48 535-449-538</a></div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item stagger-child">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <div>
+                            <div class="contact-info-label">email</div>
+                            <div class="contact-info-value"><a href="mailto:Inblossom.pl@gmail.com">Inblossom.pl@gmail.com</a></div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-item stagger-child">
+                        <div class="contact-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        </div>
+                        <div>
+                            <div class="contact-info-label">godziny otwarcia</div>
+                            <div class="contact-info-value">Poniedziałek — Sobota<br>8:00 — 21:00</div>
+                        </div>
+                    </div>
+
+                    <div class="map-placeholder stagger-child">
+                        <span class="map-placeholder-text">mapa — ul. Towarowa 22A, Białystok</span>
+                    </div>
+                </div>
+
+                <div class="contact-form-area fade-up">
+                    <h3>Napisz do nas</h3>
+                    <form id="contactForm" onsubmit="return false;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">imię</label>
+                                <input type="text" id="contactName" name="name" placeholder="Twoje imię" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPhone">telefon</label>
+                                <input type="tel" id="contactPhone" name="phone" placeholder="+48 ___-___-___">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">email</label>
+                            <input type="email" id="contactEmail" name="email" placeholder="twoj@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">wiadomość</label>
+                            <textarea id="contactMessage" name="message" placeholder="Jak możemy Ci pomóc?" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-form">Wyślij wiadomość</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-social">
+                <!-- Facebook -->
+                <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <!-- Instagram -->
+                <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+                </a>
+                <!-- WhatsApp -->
+                <a href="#" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                </a>
+                <!-- Booksy -->
+                <a href="#" aria-label="Booksy" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24"><path d="M6 4h4a6 6 0 0 1 0 12H6V4zm2 2v8h2a4 4 0 0 0 0-8H8zm6-2h4a6 6 0 0 1 0 12h-4V4zm2 2v8h2a4 4 0 0 0 0-8h-2z" fill-rule="evenodd"/></svg>
+                </a>
+            </div>
+            <p class="footer-copyright">&copy; 2024 <a href="#">INBLOSSOM</a> — Salon Kosmetyczny Białystok. Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ========================================
+            // NAVIGATION
+            // ========================================
+            const nav = document.getElementById('nav');
+            const navToggle = document.getElementById('navToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            // Sticky nav shadow on scroll
+            let lastScrollY = 0;
+            function handleNavScroll() {
+                const scrollY = window.scrollY;
+                if (scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                lastScrollY = scrollY;
+            }
+
+            window.addEventListener('scroll', handleNavScroll, { passive: true });
+
+            // Mobile toggle
+            navToggle.addEventListener('click', function() {
+                const isOpen = navLinks.classList.toggle('open');
+                navToggle.classList.toggle('active');
+                navToggle.setAttribute('aria-expanded', isOpen);
+            });
+
+            // Close mobile menu on link click
+            navLinks.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('open');
+                    navToggle.classList.remove('active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // ========================================
+            // INTERSECTION OBSERVER - FADE UP
+            // ========================================
+            const fadeElements = document.querySelectorAll('.fade-up');
+
+            if ('IntersectionObserver' in window) {
+                const fadeObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            fadeObserver.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -60px 0px'
+                });
+
+                fadeElements.forEach(function(el) {
+                    fadeObserver.observe(el);
+                });
+            } else {
+                // Fallback for older browsers
+                fadeElements.forEach(function(el) {
+                    el.classList.add('is-visible');
+                });
+            }
+
+            // ========================================
+            // SERVICE GROUP TOGGLE (ACCORDION)
+            // ========================================
+            const serviceGroups = document.querySelectorAll('.service-group');
+
+            serviceGroups.forEach(function(group) {
+                const header = group.querySelector('.service-group-header');
+
+                header.addEventListener('click', function() {
+                    const isOpen = group.classList.contains('open');
+
+                    if (isOpen) {
+                        group.classList.remove('open');
+                        header.setAttribute('aria-expanded', 'false');
+                    } else {
+                        group.classList.add('open');
+                        header.setAttribute('aria-expanded', 'true');
+                    }
+                });
+
+                // Keyboard accessibility
+                header.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        header.click();
+                    }
+                });
+            });
+
+            // ========================================
+            // SERVICE CATEGORY FILTER TAGS
+            // ========================================
+            const categoryTags = document.querySelectorAll('.category-tag');
+
+            categoryTags.forEach(function(tag) {
+                tag.addEventListener('click', function() {
+                    // Update active state
+                    categoryTags.forEach(function(t) { t.classList.remove('active'); });
+                    tag.classList.add('active');
+
+                    const filter = tag.getAttribute('data-filter');
+
+                    serviceGroups.forEach(function(group) {
+                        if (filter === 'all') {
+                            group.style.display = '';
+                        } else {
+                            const category = group.getAttribute('data-category');
+                            group.style.display = category === filter ? '' : 'none';
+                        }
+                    });
+                });
+            });
+
+            // ========================================
+            // SMOOTH SCROLL FOR ANCHOR LINKS
+            // ========================================
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        const navHeight = nav.offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // ========================================
+            // CONTACT FORM (placeholder behavior)
+            // ========================================
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const btn = contactForm.querySelector('.btn-form');
+                    const originalText = btn.textContent;
+                    btn.textContent = 'Wysłano!';
+                    btn.style.backgroundColor = '#7A7A5E';
+
+                    setTimeout(function() {
+                        btn.textContent = originalText;
+                        btn.style.backgroundColor = '';
+                        contactForm.reset();
+                    }, 2500);
+                });
+            }
+
+            // ========================================
+            // INITIAL STATE
+            // ========================================
+            // Trigger nav scroll check on load
+            handleNavScroll();
+
+            // Make hero content visible immediately (it's above the fold)
+            const heroFade = document.querySelector('.hero .fade-up');
+            if (heroFade) {
+                setTimeout(function() {
+                    heroFade.classList.add('is-visible');
+                }, 100);
+            }
+
+        })();
+    </script>
+</body>
+</html>

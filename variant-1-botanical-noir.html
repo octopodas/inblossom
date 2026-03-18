@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="INBLOSSOM — salon piękności w Białymstoku. Depilacja laserowa, masaże, zabiegi na twarz, manicure i więcej. Odkryj miejsce, gdzie Twoje piękno rozkwita.">
+<meta name="keywords" content="salon piękności, Białystok, depilacja laserowa, masaż, manicure, pedicure, mezoterapia, brwi, rzęsy">
+<meta name="author" content="INBLOSSOM">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:title" content="INBLOSSOM — Piękno zaczyna się tutaj">
+<meta property="og:description" content="Odkryj miejsce, gdzie Twoje piękno rozkwita. Salon piękności w Białymstoku.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<title>INBLOSSOM — Piękno zaczyna się tutaj</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #0A0A0A;
+  --dark-green: #0D1F0D;
+  --gold: #C4A265;
+  --gold-light: #D4B87A;
+  --gold-dark: #A68B52;
+  --cream: #F5F0E8;
+  --sage: #8B9A6B;
+  --sage-muted: rgba(139, 154, 107, 0.4);
+  --glass-bg: rgba(13, 31, 13, 0.35);
+  --glass-border: rgba(196, 162, 101, 0.12);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sub: 'Cormorant Garamond', Garamond, serif;
+  --font-body: 'Jost', Helvetica, Arial, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  background-color: var(--black);
+  color: var(--cream);
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: repeating-conic-gradient(
+    rgba(245, 240, 232, 0.8) 0% 25%,
+    transparent 0% 50%
+  );
+  background-size: 4px 4px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Interactive elements cursor */
+a, button, [role="button"], .service-card, .nav__cta {
+  cursor: crosshair;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border-radius: 3px;
+}
+
+/* ============================================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+}
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+}
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.5s ease, padding 0.4s ease, backdrop-filter 0.5s ease;
+}
+
+.nav--scrolled {
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1rem 3rem;
+  border-bottom: 1px solid rgba(196, 162, 101, 0.08);
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: var(--cream);
+  flex-shrink: 0;
+}
+
+.nav__logo span {
+  color: var(--gold);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.nav__link {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream);
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.5s var(--ease-out-expo);
+}
+
+.nav__link:hover::after {
+  width: 100%;
+}
+
+.nav__cta {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 0.7rem 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease, border-color 0.4s ease;
+  flex-shrink: 0;
+}
+
+.nav__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, var(--gold) 50%, transparent 100%);
+  background-size: 250% 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.nav__cta:hover {
+  color: var(--black);
+  border-color: var(--gold-light);
+}
+
+.nav__cta:hover::before {
+  opacity: 1;
+  animation: shimmer 0.8s ease forwards;
+}
+
+@keyframes shimmer {
+  0% { background-position: 150% 0; }
+  100% { background-position: -50% 0; }
+}
+
+/* Mobile nav toggle */
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  z-index: 1001;
+}
+
+.nav__toggle span {
+  display: block;
+  width: 26px;
+  height: 1.5px;
+  background: var(--cream);
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.nav__toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 5px);
+}
+.nav__toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav__toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -5px);
+}
+
+/* Mobile menu overlay */
+.nav__mobile-overlay {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .nav {
+    padding: 1.2rem 1.5rem;
+  }
+  .nav--scrolled {
+    padding: 0.9rem 1.5rem;
+  }
+  .nav__links {
+    display: none;
+  }
+  .nav__cta.nav__cta--desktop {
+    display: none;
+  }
+  .nav__toggle {
+    display: flex;
+  }
+  .nav__mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(10, 10, 10, 0.97);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  .nav__mobile-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .nav__mobile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 2rem;
+  }
+  .nav__mobile-link {
+    font-family: var(--font-sub);
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
+  }
+  .nav__mobile-overlay.open .nav__mobile-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav__mobile-overlay.open .nav__mobile-link:nth-child(1) { transition-delay: 0.1s; }
+  .nav__mobile-overlay.open .nav__mobile-link:nth-child(2) { transition-delay: 0.15s; }
+  .nav__mobile-overlay.open .nav__mobile-link:nth-child(3) { transition-delay: 0.2s; }
+  .nav__mobile-overlay.open .nav__mobile-link:nth-child(4) { transition-delay: 0.25s; }
+  .nav__mobile-overlay.open .nav__mobile-link:nth-child(5) { transition-delay: 0.3s; }
+  .nav__mobile-overlay.open .nav__mobile-link:nth-child(6) { transition-delay: 0.35s; }
+  .nav__mobile-link:hover {
+    color: var(--gold);
+  }
+  .nav__mobile-cta {
+    margin-top: 1rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 1rem 2.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease 0.4s, transform 0.4s ease 0.4s, background 0.3s ease, color 0.3s ease;
+  }
+  .nav__mobile-overlay.open .nav__mobile-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav__mobile-cta:hover {
+    background: var(--gold);
+    color: var(--black);
+  }
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* Background gradient mesh */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 80%, rgba(13, 31, 13, 0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(13, 31, 13, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(196, 162, 101, 0.03) 0%, transparent 50%),
+    var(--black);
+}
+
+/* Botanical line decorations on hero */
+.hero__botanical-left,
+.hero__botanical-right {
+  position: absolute;
+  z-index: -1;
+  opacity: 0.12;
+}
+
+.hero__botanical-left {
+  left: 3%;
+  top: 15%;
+  width: 120px;
+  height: 400px;
+}
+
+.hero__botanical-right {
+  right: 3%;
+  bottom: 10%;
+  width: 120px;
+  height: 400px;
+}
+
+.hero__label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.hero__label-inner {
+  display: inline-block;
+  animation: slideUp 0.8s var(--ease-out-expo) 0.3s both;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.hero__title-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero__title-inner {
+  display: inline-block;
+  animation: slideUp 1s var(--ease-out-expo) 0.5s both;
+}
+
+.hero__rule {
+  width: 80px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 1.5rem;
+  animation: expandWidth 1s var(--ease-out-expo) 0.9s both;
+  transform-origin: center;
+}
+
+.hero__subtitle {
+  font-family: var(--font-sub);
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--sage);
+  letter-spacing: 0.05em;
+  margin-bottom: 3rem;
+  overflow: hidden;
+}
+
+.hero__subtitle-inner {
+  display: inline-block;
+  animation: slideUp 0.9s var(--ease-out-expo) 1.1s both;
+}
+
+.hero__cta {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 1.1rem 3rem;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1s ease 1.4s both;
+  transition: color 0.4s ease, border-color 0.4s ease;
+}
+
+.hero__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, var(--gold) 50%, transparent 100%);
+  background-size: 250% 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.hero__cta:hover {
+  color: var(--black);
+  border-color: var(--gold-light);
+}
+
+.hero__cta:hover::before {
+  opacity: 1;
+  animation: shimmer 0.8s ease forwards;
+}
+
+/* Scroll indicator */
+.hero__scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  animation: fadeIn 1s ease 1.8s both;
+}
+
+.hero__scroll-text {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--sage-muted);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gold);
+  animation: scrollLine 2s ease infinite;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(110%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes expandWidth {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollLine {
+  0% { top: -100%; }
+  50% { top: 100%; }
+  50.01% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* ============================================================
+   SECTION SHARED STYLES
+   ============================================================ */
+.section {
+  position: relative;
+  padding: 8rem 2rem;
+}
+
+.section--contained {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section__label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.section__heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+}
+
+.section__heading em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* Botanical divider */
+.botanical-divider {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.botanical-divider__line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gold-dark) 20%,
+    var(--gold) 50%,
+    var(--gold-dark) 80%,
+    transparent 100%
+  );
+  opacity: 0.3;
+}
+
+.botanical-divider__icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  color: var(--gold);
+  opacity: 0.5;
+}
+
+/* Diagonal clip transition between sections */
+.section-transition {
+  position: relative;
+  height: 120px;
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--black) 0%,
+    var(--dark-green) 100%
+  );
+  clip-path: polygon(0 0, 100% 30%, 100% 100%, 0 70%);
+}
+
+.section-transition--reverse {
+  background: linear-gradient(
+    180deg,
+    var(--dark-green) 0%,
+    var(--black) 100%
+  );
+  clip-path: polygon(0 30%, 100% 0, 100% 70%, 0 100%);
+}
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+.about {
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 50%, rgba(13, 31, 13, 0.5) 0%, transparent 60%),
+    var(--black);
+}
+
+.about__grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about__text {
+  padding-right: 2rem;
+}
+
+.about__description {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(245, 240, 232, 0.75);
+  margin-bottom: 2rem;
+}
+
+.about__highlight {
+  font-family: var(--font-sub);
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1.6;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--gold-dark);
+}
+
+.about__botanical {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.about__botanical svg {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  opacity: 0.2;
+}
+
+/* Gold decorative frame around botanical art */
+.about__botanical::before {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border: 1px solid rgba(196, 162, 101, 0.12);
+  top: 15%;
+  left: 15%;
+}
+
+.about__botanical::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  border: 1px solid rgba(196, 162, 101, 0.06);
+  top: 25%;
+  left: 25%;
+}
+
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .about__text {
+    padding-right: 0;
+  }
+  .about__botanical {
+    order: -1;
+    max-height: 300px;
+  }
+}
+
+/* ============================================================
+   SERVICES SECTION
+   ============================================================ */
+.services {
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(13, 31, 13, 0.6) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(13, 31, 13, 0.4) 0%, transparent 50%),
+    var(--black);
+}
+
+.services__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.service-card {
+  position: relative;
+  padding: 2.2rem 2rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.5s var(--ease-out-expo), border-color 0.5s ease, background 0.4s ease;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(196, 162, 101, 0.04) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(196, 162, 101, 0.35);
+  background: rgba(13, 31, 13, 0.5);
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-card__icon {
+  width: 28px;
+  height: 28px;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  opacity: 0.7;
+}
+
+.service-card__name {
+  font-family: var(--font-sub);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+}
+
+.service-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: rgba(245, 240, 232, 0.55);
+  line-height: 1.6;
+}
+
+/* Gold line at bottom of card on hover */
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+  transition: width 0.6s var(--ease-out-expo);
+}
+
+.service-card:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* ============================================================
+   WHY US SECTION
+   ============================================================ */
+.why {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(13, 31, 13, 0.35) 0%, transparent 60%),
+    var(--black);
+}
+
+.why__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.why__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem 4rem;
+  margin-top: 4rem;
+}
+
+.why__item {
+  position: relative;
+  padding-left: 0;
+}
+
+.why__number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+.why__item-title {
+  font-family: var(--font-sub);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+}
+
+.why__item-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(245, 240, 232, 0.55);
+}
+
+@media (max-width: 900px) {
+  .why__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .why__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* ============================================================
+   CONTACT SECTION
+   ============================================================ */
+.contact {
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 50%, rgba(13, 31, 13, 0.6) 0%, transparent 55%),
+    var(--dark-green);
+}
+
+.contact__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact__block-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+.contact__block-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(245, 240, 232, 0.7);
+}
+
+.contact__block-text a {
+  transition: color 0.3s ease;
+}
+
+.contact__block-text a:hover {
+  color: var(--gold);
+}
+
+.contact__social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.contact__social-link {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(196, 162, 101, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.contact__social-link:hover {
+  border-color: var(--gold);
+  background: rgba(196, 162, 101, 0.08);
+  transform: translateY(-2px);
+}
+
+.contact__social-link svg {
+  width: 18px;
+  height: 18px;
+  color: var(--cream);
+  transition: color 0.3s ease;
+}
+
+.contact__social-link:hover svg {
+  color: var(--gold);
+}
+
+.contact__map {
+  position: relative;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.contact__map-placeholder {
+  text-align: center;
+  color: rgba(245, 240, 232, 0.3);
+}
+
+.contact__map-placeholder svg {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  opacity: 0.4;
+}
+
+.contact__map-placeholder p {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* Gold corner accents on map */
+.contact__map::before,
+.contact__map::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: var(--gold);
+  border-style: solid;
+  opacity: 0.3;
+}
+
+.contact__map::before {
+  top: 12px;
+  left: 12px;
+  border-width: 1px 0 0 1px;
+}
+
+.contact__map::after {
+  bottom: 12px;
+  right: 12px;
+  border-width: 0 1px 1px 0;
+}
+
+@media (max-width: 900px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .contact__map {
+    min-height: 280px;
+  }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: var(--black);
+  border-top: 1px solid rgba(196, 162, 101, 0.06);
+  padding: 3rem 2rem;
+}
+
+.footer__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__copy {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: rgba(245, 240, 232, 0.35);
+  letter-spacing: 0.05em;
+}
+
+.footer__social {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.footer__social-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(196, 162, 101, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.footer__social-circle:hover {
+  border-color: var(--gold);
+  background: rgba(196, 162, 101, 0.06);
+}
+
+.footer__social-circle svg {
+  width: 14px;
+  height: 14px;
+  color: rgba(245, 240, 232, 0.5);
+  transition: color 0.3s ease;
+}
+
+.footer__social-circle:hover svg {
+  color: var(--gold);
+}
+
+@media (max-width: 600px) {
+  .footer__inner {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+}
+
+/* ============================================================
+   UTILITY: SECTION BACKGROUND PARALLAX-LIKE EFFECT
+   ============================================================ */
+.parallax-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav__logo">IN<span>BLOSSOM</span></a>
+  <div class="nav__links">
+    <a href="#o-nas" class="nav__link">O nas</a>
+    <a href="#uslugi" class="nav__link">Usługi</a>
+    <a href="#dlaczego-my" class="nav__link">Dlaczego my</a>
+    <a href="#kontakt" class="nav__link">Kontakt</a>
+  </div>
+  <a href="#kontakt" class="nav__cta nav__cta--desktop">Umów wizytę</a>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="nav__mobile-overlay" id="mobileOverlay">
+  <div class="nav__mobile-menu">
+    <a href="#o-nas" class="nav__mobile-link">O nas</a>
+    <a href="#uslugi" class="nav__mobile-link">Usługi</a>
+    <a href="#dlaczego-my" class="nav__mobile-link">Dlaczego my</a>
+    <a href="#kontakt" class="nav__mobile-link">Kontakt</a>
+    <a href="https://www.facebook.com" class="nav__mobile-link" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://www.instagram.com" class="nav__mobile-link" target="_blank" rel="noopener">Instagram</a>
+    <a href="#kontakt" class="nav__mobile-cta">Umów wizytę</a>
+  </div>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero__bg"></div>
+
+  <!-- Left botanical line art -->
+  <svg class="hero__botanical-left" viewBox="0 0 120 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 400 L60 200" stroke="#C4A265" stroke-width="0.5" opacity="0.6"/>
+    <path d="M60 320 Q30 290 20 240" stroke="#C4A265" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <path d="M60 280 Q80 250 100 220" stroke="#C4A265" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <path d="M60 240 Q35 210 25 170" stroke="#C4A265" stroke-width="0.5" fill="none" opacity="0.3"/>
+    <path d="M60 220 Q85 190 95 150" stroke="#C4A265" stroke-width="0.5" fill="none" opacity="0.3"/>
+    <ellipse cx="20" cy="238" rx="8" ry="14" stroke="#C4A265" stroke-width="0.4" fill="none" opacity="0.25" transform="rotate(-30 20 238)"/>
+    <ellipse cx="100" cy="218" rx="8" ry="14" stroke="#C4A265" stroke-width="0.4" fill="none" opacity="0.25" transform="rotate(30 100 218)"/>
+    <ellipse cx="25" cy="168" rx="6" ry="11" stroke="#C4A265" stroke-width="0.4" fill="none" opacity="0.2" transform="rotate(-25 25 168)"/>
+    <ellipse cx="95" cy="148" rx="6" ry="11" stroke="#C4A265" stroke-width="0.4" fill="none" opacity="0.2" transform="rotate(25 95 148)"/>
+    <circle cx="60" cy="200" r="2" fill="#C4A265" opacity="0.3"/>
+  </svg>
+
+  <!-- Right botanical line art -->
+  <svg class="hero__botanical-right" viewBox="0 0 120 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 400 L60 180" stroke="#C4A265" stroke-width="0.5" opacity="0.6"/>
+    <path d="M60 350 Q30 320 15 280" stroke="#C4A265" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <path d="M60 310 Q90 280 105 250" stroke="#C4A265" stroke-width="0.5" fill="none" opacity="0.4"/>
+    <path d="M60 270 Q25 240 15 200" stroke="#C4A265" stroke-width="0.5" fill="none" opacity="0.3"/>
+    <path d="M60 230 Q90 200 100 170" stroke="#C4A265" stroke-width="0.5" fill="none" opacity="0.3"/>
+    <ellipse cx="15" cy="278" rx="7" ry="13" stroke="#C4A265" stroke-width="0.4" fill="none" opacity="0.25" transform="rotate(-35 15 278)"/>
+    <ellipse cx="105" cy="248" rx="7" ry="13" stroke="#C4A265" stroke-width="0.4" fill="none" opacity="0.25" transform="rotate(35 105 248)"/>
+    <circle cx="60" cy="180" r="2.5" fill="#C4A265" opacity="0.3"/>
+    <!-- Small flower -->
+    <circle cx="60" cy="180" r="6" stroke="#C4A265" stroke-width="0.3" fill="none" opacity="0.2"/>
+    <circle cx="60" cy="180" r="10" stroke="#C4A265" stroke-width="0.3" fill="none" opacity="0.12"/>
+  </svg>
+
+  <div class="hero__label">
+    <span class="hero__label-inner">Salon Piękności — Białystok</span>
+  </div>
+
+  <h1 class="hero__title">
+    <span class="hero__title-line">
+      <span class="hero__title-inner">INBLOSSOM</span>
+    </span>
+  </h1>
+
+  <div class="hero__rule"></div>
+
+  <p class="hero__subtitle">
+    <span class="hero__subtitle-inner">Odkryj miejsce, gdzie Twoje piękno rozkwita</span>
+  </p>
+
+  <a href="#kontakt" class="hero__cta">Umów wizytę</a>
+
+  <div class="hero__scroll">
+    <span class="hero__scroll-text">Odkryj</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BOTANICAL DIVIDER
+     ============================================================ -->
+<div class="botanical-divider reveal">
+  <div class="botanical-divider__line"></div>
+  <svg class="botanical-divider__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2 C12 2 7 7 7 12 C7 14.5 9 17 12 17 C15 17 17 14.5 17 12 C17 7 12 2 12 2Z" stroke="currentColor" stroke-width="0.8" fill="none"/>
+    <path d="M12 17 L12 22" stroke="currentColor" stroke-width="0.8"/>
+    <path d="M10 19 L14 19" stroke="currentColor" stroke-width="0.5"/>
+  </svg>
+</div>
+
+<!-- ============================================================
+     ABOUT SECTION
+     ============================================================ -->
+<section class="section about" id="o-nas">
+  <div class="about__grid">
+    <div class="about__text">
+      <div class="section__label reveal">O nas</div>
+      <h2 class="section__heading reveal reveal-delay-1">Piękno zaczyna się <em>tutaj</em></h2>
+      <p class="about__description reveal reveal-delay-2">
+        INBLOSSOM to miejsce stworzone z pasji do piękna i dbałości o każdy detal.
+        Nasz salon w sercu Białegostoku łączy profesjonalizm z indywidualnym podejściem
+        do każdego klienta. Korzystamy z najnowszych technologii i sprawdzonych metod,
+        aby zapewnić Ci rezultaty, które mówią same za siebie.
+      </p>
+      <p class="about__description reveal reveal-delay-3">
+        Wierzymy, że każdy zasługuje na chwilę relaksu i troskę o siebie.
+        Dlatego tworzymy atmosferę, w której poczujesz się wyjątkowo — od momentu,
+        gdy przekroczysz nasze progi.
+      </p>
+      <blockquote class="about__highlight reveal reveal-delay-4">
+        „Twoje piękno jest naszą inspiracją — pozwól nam wydobyć to, co w Tobie najlepsze."
+      </blockquote>
+    </div>
+    <div class="about__botanical reveal-right">
+      <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Main stem -->
+        <path d="M200 480 L200 60" stroke="#C4A265" stroke-width="0.8"/>
+        <!-- Branches left -->
+        <path d="M200 400 Q140 360 100 310" stroke="#C4A265" stroke-width="0.6" fill="none"/>
+        <path d="M200 320 Q130 280 80 230" stroke="#C4A265" stroke-width="0.6" fill="none"/>
+        <path d="M200 240 Q140 200 110 150" stroke="#C4A265" stroke-width="0.6" fill="none"/>
+        <path d="M200 170 Q150 130 130 80" stroke="#C4A265" stroke-width="0.5" fill="none"/>
+        <!-- Branches right -->
+        <path d="M200 360 Q260 320 300 280" stroke="#C4A265" stroke-width="0.6" fill="none"/>
+        <path d="M200 280 Q270 240 310 200" stroke="#C4A265" stroke-width="0.6" fill="none"/>
+        <path d="M200 200 Q260 160 280 120" stroke="#C4A265" stroke-width="0.6" fill="none"/>
+        <!-- Leaves left -->
+        <ellipse cx="100" cy="308" rx="20" ry="35" stroke="#C4A265" stroke-width="0.5" fill="none" transform="rotate(-40 100 308)"/>
+        <ellipse cx="80" cy="228" rx="18" ry="30" stroke="#C4A265" stroke-width="0.5" fill="none" transform="rotate(-35 80 228)"/>
+        <ellipse cx="110" cy="148" rx="15" ry="25" stroke="#C4A265" stroke-width="0.5" fill="none" transform="rotate(-30 110 148)"/>
+        <ellipse cx="130" cy="78" rx="12" ry="20" stroke="#C4A265" stroke-width="0.5" fill="none" transform="rotate(-25 130 78)"/>
+        <!-- Leaves right -->
+        <ellipse cx="300" cy="278" rx="18" ry="32" stroke="#C4A265" stroke-width="0.5" fill="none" transform="rotate(40 300 278)"/>
+        <ellipse cx="310" cy="198" rx="16" ry="28" stroke="#C4A265" stroke-width="0.5" fill="none" transform="rotate(35 310 198)"/>
+        <ellipse cx="280" cy="118" rx="14" ry="22" stroke="#C4A265" stroke-width="0.5" fill="none" transform="rotate(30 280 118)"/>
+        <!-- Leaf veins -->
+        <path d="M100 308 Q90 290 85 270" stroke="#C4A265" stroke-width="0.3" fill="none" opacity="0.5"/>
+        <path d="M300 278 Q310 260 315 245" stroke="#C4A265" stroke-width="0.3" fill="none" opacity="0.5"/>
+        <!-- Flower at top -->
+        <circle cx="200" cy="55" r="8" stroke="#C4A265" stroke-width="0.5" fill="none"/>
+        <circle cx="200" cy="55" r="14" stroke="#C4A265" stroke-width="0.4" fill="none" opacity="0.5"/>
+        <circle cx="200" cy="55" r="20" stroke="#C4A265" stroke-width="0.3" fill="none" opacity="0.3"/>
+        <circle cx="200" cy="55" r="3" fill="#C4A265" opacity="0.2"/>
+        <!-- Small buds -->
+        <circle cx="100" cy="308" r="3" fill="#C4A265" opacity="0.15"/>
+        <circle cx="300" cy="278" r="3" fill="#C4A265" opacity="0.15"/>
+        <circle cx="80" cy="228" r="2.5" fill="#C4A265" opacity="0.12"/>
+        <circle cx="310" cy="198" r="2.5" fill="#C4A265" opacity="0.12"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Transition -->
+<div class="section-transition"></div>
+
+<!-- ============================================================
+     SERVICES SECTION
+     ============================================================ -->
+<section class="section services" id="uslugi">
+  <div class="services__inner">
+    <div class="section__label reveal">Nasza oferta</div>
+    <h2 class="section__heading reveal reveal-delay-1">Usługi stworzone <em>dla Ciebie</em></h2>
+    <p class="about__description reveal reveal-delay-2" style="max-width: 600px;">
+      Oferujemy szeroką gamę zabiegów, dopasowanych do Twoich indywidualnych potrzeb.
+      Każda usługa wykonywana jest z najwyższą starannością.
+    </p>
+
+    <div class="services__grid">
+
+      <div class="service-card reveal reveal-delay-1">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 3 L14 25" stroke="currentColor" stroke-width="0.8"/>
+          <path d="M14 8 Q8 12 6 18" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M14 8 Q20 12 22 18" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <circle cx="14" cy="3" r="1.5" stroke="currentColor" stroke-width="0.6" fill="none"/>
+        </svg>
+        <h3 class="service-card__name">Depilacja Laserowa</h3>
+        <p class="service-card__desc">Trwałe usuwanie niechcianego owłosienia najnowszą technologią laserową. Bezpieczna i skuteczna metoda dla każdego typu skóry.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <circle cx="14" cy="14" r="5" stroke="currentColor" stroke-width="0.5" fill="none"/>
+          <path d="M14 4 L14 8" stroke="currentColor" stroke-width="0.5"/>
+          <path d="M14 20 L14 24" stroke="currentColor" stroke-width="0.5"/>
+          <path d="M4 14 L8 14" stroke="currentColor" stroke-width="0.5"/>
+          <path d="M20 14 L24 14" stroke="currentColor" stroke-width="0.5"/>
+        </svg>
+        <h3 class="service-card__name">Laserowe Odmładzanie</h3>
+        <p class="service-card__desc">Zaawansowane zabiegi laserowe przywracające skórze młodzieńczy wygląd. Redukcja zmarszczek, przebarwień i nierówności.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 6 Q14 2 20 6 Q24 10 20 16 Q16 22 14 26 Q12 22 8 16 Q4 10 8 6Z" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M14 8 L14 20" stroke="currentColor" stroke-width="0.4"/>
+        </svg>
+        <h3 class="service-card__name">Laserowe Leczenie Trądziku</h3>
+        <p class="service-card__desc">Profesjonalne leczenie trądziku i blizn potrądzikowych z wykorzystaniem precyzyjnej terapii laserowej.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 20 Q10 8 14 6 Q18 8 22 20" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M8 18 Q14 14 20 18" stroke="currentColor" stroke-width="0.5" fill="none"/>
+          <path d="M10 22 Q14 20 18 22" stroke="currentColor" stroke-width="0.4" fill="none"/>
+        </svg>
+        <h3 class="service-card__name">Masaż</h3>
+        <p class="service-card__desc">Relaksacyjne i terapeutyczne masaże ciała. Idealne połączenie odprężenia z dbałością o zdrowie mięśni i stawów.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 14 Q8 8 14 10 Q20 8 24 14" stroke="currentColor" stroke-width="0.7" fill="none"/>
+          <path d="M10 16 Q11 20 10 24" stroke="currentColor" stroke-width="0.4" fill="none"/>
+          <path d="M14 15 Q14 20 14 24" stroke="currentColor" stroke-width="0.4" fill="none"/>
+          <path d="M18 16 Q17 20 18 24" stroke="currentColor" stroke-width="0.4" fill="none"/>
+        </svg>
+        <h3 class="service-card__name">Brwi / Rzęsy</h3>
+        <p class="service-card__desc">Stylizacja i laminacja brwi, przedłużanie i zagęszczanie rzęs. Podkreśl spojrzenie i zyskaj pewność siebie.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="14" cy="16" rx="5" ry="4" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M10 12 Q14 4 18 12" stroke="currentColor" stroke-width="0.5" fill="none"/>
+          <path d="M14 20 L14 26" stroke="currentColor" stroke-width="0.4"/>
+          <circle cx="14" cy="7" r="1" fill="currentColor" opacity="0.4"/>
+        </svg>
+        <h3 class="service-card__name">Manicure / Pedicure</h3>
+        <p class="service-card__desc">Klasyczny i hybrydowy manicure oraz pedicure. Zadbane dłonie i stopy z użyciem najwyższej jakości produktów.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="12" r="7" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M9 22 Q14 18 19 22" stroke="currentColor" stroke-width="0.5" fill="none"/>
+          <path d="M14 5 L14 7" stroke="currentColor" stroke-width="0.4"/>
+          <path d="M14 17 L14 19" stroke="currentColor" stroke-width="0.4"/>
+        </svg>
+        <h3 class="service-card__name">Maski + Masaż Twarzy</h3>
+        <p class="service-card__desc">Odżywcze maski dopasowane do potrzeb Twojej skóry w połączeniu z relaksującym masażem twarzy.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="13" r="8" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M10 10 Q14 7 18 10" stroke="currentColor" stroke-width="0.4" fill="none"/>
+          <path d="M10 16 Q14 19 18 16" stroke="currentColor" stroke-width="0.4" fill="none"/>
+          <circle cx="14" cy="13" r="3" stroke="currentColor" stroke-width="0.4" fill="none"/>
+        </svg>
+        <h3 class="service-card__name">Oczyszczanie Twarzy</h3>
+        <p class="service-card__desc">Głębokie oczyszczanie skóry twarzy. Usuwa zanieczyszczenia, oczyszcza pory i przywraca skórze zdrowy blask.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 4 L14 24" stroke="currentColor" stroke-width="0.6"/>
+          <path d="M10 8 L18 8" stroke="currentColor" stroke-width="0.4"/>
+          <path d="M11 12 L17 12" stroke="currentColor" stroke-width="0.4"/>
+          <path d="M12 16 L16 16" stroke="currentColor" stroke-width="0.4"/>
+          <circle cx="14" cy="24" r="1.5" stroke="currentColor" stroke-width="0.5" fill="none"/>
+        </svg>
+        <h3 class="service-card__name">Mezoterapia Mikroigłowa</h3>
+        <p class="service-card__desc">Precyzyjna mezoterapia stymulująca naturalną regenerację skóry. Poprawia koloryt, elastyczność i nawilżenie.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 20 Q8 10 14 8 Q20 10 22 20" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M6 20 L22 20" stroke="currentColor" stroke-width="0.5"/>
+          <path d="M14 8 L14 4" stroke="currentColor" stroke-width="0.4"/>
+          <circle cx="14" cy="4" r="1" fill="currentColor" opacity="0.4"/>
+        </svg>
+        <h3 class="service-card__name">Peeling</h3>
+        <p class="service-card__desc">Profesjonalne peelingi chemiczne i mechaniczne. Złuszczają martwy naskórek, wygładzają i rozjaśniają cerę.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="3" stroke="currentColor" stroke-width="0.5" fill="none"/>
+          <circle cx="14" cy="14" r="7" stroke="currentColor" stroke-width="0.4" fill="none" stroke-dasharray="2 3"/>
+          <circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="0.3" fill="none" stroke-dasharray="1 4"/>
+          <circle cx="14" cy="14" r="1" fill="currentColor" opacity="0.5"/>
+        </svg>
+        <h3 class="service-card__name">Karboksyterapia</h3>
+        <p class="service-card__desc">Nieinwazyjna terapia dwutlenkiem węgla poprawiająca krążenie, redukująca cellulit i odmładzająca skórę.</p>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <svg class="service-card__icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 22 Q6 14 10 8 Q14 4 18 8 Q22 14 20 22" stroke="currentColor" stroke-width="0.6" fill="none"/>
+          <path d="M8 22 L20 22" stroke="currentColor" stroke-width="0.4"/>
+          <path d="M14 8 L14 22" stroke="currentColor" stroke-width="0.3" opacity="0.5"/>
+        </svg>
+        <h3 class="service-card__name">Depilacja Pastą Cukrową</h3>
+        <p class="service-card__desc">Naturalna metoda depilacji pastą cukrową — delikatna dla skóry, skuteczna w działaniu, idealna dla wrażliwych obszarów.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Transition -->
+<div class="section-transition section-transition--reverse"></div>
+
+<!-- ============================================================
+     BOTANICAL DIVIDER 2
+     ============================================================ -->
+<div class="botanical-divider reveal">
+  <div class="botanical-divider__line"></div>
+  <svg class="botanical-divider__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 4 Q8 8 8 12 Q8 16 12 20 Q16 16 16 12 Q16 8 12 4Z" stroke="currentColor" stroke-width="0.7" fill="none"/>
+    <path d="M12 4 L12 20" stroke="currentColor" stroke-width="0.5"/>
+    <path d="M9 10 L12 12 L15 10" stroke="currentColor" stroke-width="0.4" fill="none"/>
+  </svg>
+</div>
+
+<!-- ============================================================
+     WHY US SECTION
+     ============================================================ -->
+<section class="section why" id="dlaczego-my">
+  <div class="why__inner">
+    <div class="section__label reveal">Dlaczego warto</div>
+    <h2 class="section__heading reveal reveal-delay-1">Dlaczego <em>my</em></h2>
+
+    <div class="why__grid">
+
+      <div class="why__item reveal reveal-delay-1">
+        <div class="why__number">01</div>
+        <h3 class="why__item-title">Profesjonalizm</h3>
+        <p class="why__item-desc">Nasz zespół to wykwalifikowani specjaliści z wieloletnim doświadczeniem. Stale poszerzamy wiedzę, aby oferować zabiegi na najwyższym poziomie.</p>
+      </div>
+
+      <div class="why__item reveal reveal-delay-2">
+        <div class="why__number">02</div>
+        <h3 class="why__item-title">Nowoczesne technologie</h3>
+        <p class="why__item-desc">Pracujemy na certyfikowanym sprzęcie najnowszej generacji. Inwestujemy w technologie, które gwarantują bezpieczeństwo i skuteczność.</p>
+      </div>
+
+      <div class="why__item reveal reveal-delay-3">
+        <div class="why__number">03</div>
+        <h3 class="why__item-title">Szeroka oferta</h3>
+        <p class="why__item-desc">Od depilacji laserowej po zabiegi na twarz — znajdziesz u nas wszystko, czego potrzebujesz, aby zadbać o siebie kompleksowo.</p>
+      </div>
+
+      <div class="why__item reveal reveal-delay-4">
+        <div class="why__number">04</div>
+        <h3 class="why__item-title">Indywidualne podejście</h3>
+        <p class="why__item-desc">Każdy klient jest dla nas wyjątkowy. Dopasowujemy zabiegi do indywidualnych potrzeb, typu skóry i oczekiwanych rezultatów.</p>
+      </div>
+
+      <div class="why__item reveal reveal-delay-5">
+        <div class="why__number">05</div>
+        <h3 class="why__item-title">Relaksująca atmosfera</h3>
+        <p class="why__item-desc">Nasz salon to oaza spokoju. Eleganckie wnętrze i przyjazna atmosfera sprawią, że każda wizyta będzie chwilą prawdziwego relaksu.</p>
+      </div>
+
+      <div class="why__item reveal reveal-delay-6">
+        <div class="why__number">06</div>
+        <h3 class="why__item-title">Zadowolenie klientów</h3>
+        <p class="why__item-desc">Setki zadowolonych klientów to nasza najlepsza rekomendacja. Zależy nam na trwałych efektach i Twoim pełnym zadowoleniu.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Transition -->
+<div class="section-transition"></div>
+
+<!-- ============================================================
+     CONTACT SECTION
+     ============================================================ -->
+<section class="section contact" id="kontakt">
+  <div class="contact__inner">
+    <div class="section__label reveal">Skontaktuj się</div>
+    <h2 class="section__heading reveal reveal-delay-1">Umów <em>wizytę</em></h2>
+
+    <div class="contact__grid">
+      <div class="contact__info">
+
+        <div class="reveal reveal-delay-2">
+          <div class="contact__block-label">Adres</div>
+          <div class="contact__block-text">
+            ul. Towarowa 22A<br>
+            15-007 Białystok
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-3">
+          <div class="contact__block-label">Telefon</div>
+          <div class="contact__block-text">
+            <a href="tel:+48535449538">+48 535-449-538</a>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-3">
+          <div class="contact__block-label">Email</div>
+          <div class="contact__block-text">
+            <a href="mailto:Inblossom.pl@gmail.com">Inblossom.pl@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-4">
+          <div class="contact__block-label">Godziny otwarcia</div>
+          <div class="contact__block-text">
+            Poniedziałek — Sobota<br>
+            8:00 — 21:00
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-5">
+          <div class="contact__block-label">Znajdź nas</div>
+          <div class="contact__social">
+            <!-- Facebook -->
+            <a href="https://www.facebook.com" class="contact__social-link" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com" class="contact__social-link" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+              </svg>
+            </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/48535449538" class="contact__social-link" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382C17.18 14.237 15.84 13.582 15.578 13.488C15.316 13.394 15.125 13.347 14.934 13.641C14.743 13.935 14.222 14.538 14.054 14.73C13.886 14.922 13.717 14.946 13.425 14.8C12.3 14.237 11.518 13.795 10.734 12.458C10.524 12.098 10.944 12.121 11.334 11.341C11.422 11.15 11.375 10.983 11.299 10.838C11.223 10.693 10.692 9.352 10.456 8.766C10.226 8.196 9.99 8.276 9.816 8.266C9.648 8.256 9.457 8.256 9.266 8.256C9.075 8.256 8.76 8.332 8.498 8.626C8.236 8.92 7.536 9.574 7.536 10.916C7.536 12.258 8.522 13.552 8.664 13.744C8.806 13.936 10.686 16.854 13.528 18.022C15.266 18.766 15.914 18.824 16.742 18.706C17.244 18.632 18.328 18.046 18.564 17.396C18.8 16.746 18.8 16.192 18.724 16.07C18.65 15.942 18.458 15.866 18.166 15.72L17.472 14.382Z" fill="currentColor"/>
+                <path d="M20.52 3.49C12.83 -3.18 1.08 2.28 1.05 12.21C1.04 14.33 1.58 16.4 2.63 18.22L1 23L5.89 21.41C7.64 22.37 9.58 22.87 11.56 22.87C21.47 22.87 27.23 11.12 20.52 3.49ZM19.11 19.11C15.01 23.21 8.12 23.21 4.02 19.11C3.45 18.54 2.96 17.9 2.55 17.21L3.48 13.89L3.77 14.35C4.09 14.87 4.47 15.35 4.89 15.79C8.2 19.1 13.56 19.55 17.39 16.89C17.77 16.63 18.13 16.34 18.46 16.02L19.11 19.11Z" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.3"/>
+              </svg>
+            </a>
+            <!-- Booksy -->
+            <a href="https://booksy.com" class="contact__social-link" target="_blank" rel="noopener" aria-label="Booksy">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M8 6H16" stroke="currentColor" stroke-width="1"/>
+                <path d="M8 10H14" stroke="currentColor" stroke-width="1"/>
+                <path d="M8 14H12" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="contact__map reveal reveal-delay-3">
+        <div class="contact__map-placeholder">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4C17.37 4 12 9.37 12 16C12 26 24 44 24 44C24 44 36 26 36 16C36 9.37 30.63 4 24 4Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <circle cx="24" cy="16" r="5" stroke="currentColor" stroke-width="1.2" fill="none"/>
+          </svg>
+          <p>ul. Towarowa 22A, Białystok</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__copy">&copy; 2026 INBLOSSOM. Wszelkie prawa zastrzeżone.</div>
+    <div class="footer__social">
+      <!-- Facebook -->
+      <a href="https://www.facebook.com" class="footer__social-circle" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com" class="footer__social-circle" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+        </svg>
+      </a>
+      <!-- WhatsApp -->
+      <a href="https://wa.me/48535449538" class="footer__social-circle" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12C2 13.85 2.5 15.55 3.35 17.02L2 22L7.08 20.68C8.52 21.45 10.21 21.9 12 21.9C17.52 21.9 22 17.42 22 11.9C22 6.38 17.52 2 12 2Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M8.5 10.5C8.5 10.5 9 8.5 12 8.5C15 8.5 15.5 10.5 15.5 10.5" stroke="currentColor" stroke-width="1"/>
+          <path d="M8.5 14C8.5 14 9.5 16 12 16C14.5 16 15.5 14 15.5 14" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </a>
+      <!-- Booksy -->
+      <a href="https://booksy.com" class="footer__social-circle" target="_blank" rel="noopener" aria-label="Booksy">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M9 7H15" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M9 11H13" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* -------------------------------------------------------
+     NAVIGATION — scroll background & mobile toggle
+     ------------------------------------------------------- */
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const mobileLinks = mobileOverlay.querySelectorAll('.nav__mobile-link, .nav__mobile-cta');
+  let lastScrollY = 0;
+
+  function handleNavScroll() {
+    const scrollY = window.scrollY;
+    if (scrollY > 60) {
+      nav.classList.add('nav--scrolled');
+    } else {
+      nav.classList.remove('nav--scrolled');
+    }
+    lastScrollY = scrollY;
+  }
+
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
+
+  navToggle.addEventListener('click', function() {
+    navToggle.classList.toggle('active');
+    mobileOverlay.classList.toggle('open');
+    document.body.style.overflow = mobileOverlay.classList.contains('open') ? 'hidden' : '';
+  });
+
+  mobileLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      navToggle.classList.remove('active');
+      mobileOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* -------------------------------------------------------
+     INTERSECTION OBSERVER — reveal on scroll
+     ------------------------------------------------------- */
+  const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealElements.forEach(function(el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    // Fallback: show everything immediately
+    revealElements.forEach(function(el) {
+      el.classList.add('revealed');
+    });
+  }
+
+  /* -------------------------------------------------------
+     PARALLAX-LIKE EFFECT on section backgrounds
+     ------------------------------------------------------- */
+  const sections = document.querySelectorAll('.about, .services, .why, .contact');
+
+  function handleParallax() {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+
+    sections.forEach(function(section) {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top + scrollY;
+      const sectionHeight = rect.height;
+
+      if (scrollY + windowHeight > sectionTop && scrollY < sectionTop + sectionHeight) {
+        const progress = (scrollY + windowHeight - sectionTop) / (windowHeight + sectionHeight);
+        const offset = (progress - 0.5) * 30;
+        section.style.backgroundPositionY = offset + 'px';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', handleParallax, { passive: true });
+
+  /* -------------------------------------------------------
+     SMOOTH SCROLL for anchor links (polyfill for older browsers)
+     ------------------------------------------------------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        const navHeight = nav.offsetHeight;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  /* -------------------------------------------------------
+     ACTIVE NAV LINK highlighting
+     ------------------------------------------------------- */
+  const navLinks = document.querySelectorAll('.nav__link');
+  const sectionIds = ['o-nas', 'uslugi', 'dlaczego-my', 'kontakt'];
+
+  function updateActiveLink() {
+    const scrollY = window.scrollY;
+    const navHeight = nav.offsetHeight;
+
+    let currentSection = '';
+
+    sectionIds.forEach(function(id) {
+      const section = document.getElementById(id);
+      if (section) {
+        const sectionTop = section.offsetTop - navHeight - 100;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollY >= sectionTop && scrollY < sectionBottom) {
+          currentSection = id;
+        }
+      }
+    });
+
+    navLinks.forEach(function(link) {
+      const href = link.getAttribute('href').slice(1);
+      if (href === currentSection) {
+        link.style.color = 'var(--gold)';
+      } else {
+        link.style.color = '';
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+
+  /* -------------------------------------------------------
+     INITIAL CALLS
+     ------------------------------------------------------- */
+  handleNavScroll();
+  updateActiveLink();
+
+})();
+</script>
+</body>
+</html>

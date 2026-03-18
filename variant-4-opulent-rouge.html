@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="INBLOSSOM — Salon Kosmetyczny w Białymstoku. Depilacja laserowa, odmładzanie, masaż, stylizacja brwi i rzęs, manicure, mezoterapia i więcej. Piękno zaczyna się tutaj.">
+    <meta name="keywords" content="salon kosmetyczny, Białystok, depilacja laserowa, odmładzanie, masaż, brwi, rzęsy, manicure, pedicure, mezoterapia, peeling, karboksyterapia">
+    <meta name="author" content="INBLOSSOM">
+    <meta name="theme-color" content="#8B1A1A">
+    <meta property="og:title" content="INBLOSSOM — Salon Kosmetyczny w Białymstoku">
+    <meta property="og:description" content="Piękno zaczyna się tutaj. Profesjonalne usługi kosmetyczne w sercu Białegostoku.">
+    <meta property="og:image" content="https://inblossom.pl/content/images/makeupgirl.jpg">
+    <meta property="og:type" content="website">
+    <title>INBLOSSOM — Salon Kosmetyczny w Białymstoku</title>
+    <link rel="icon" type="image/png" href="https://inblossom.pl/content/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&family=Tenor+Sans&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --crimson: #8B1A1A;
+            --gold: #D4A017;
+            --gold-bright: #F0C040;
+            --gold-light: #F5D76E;
+            --burgundy-dark: #1A0505;
+            --wine: #4A0E0E;
+            --wine-light: #5C1414;
+            --cream: #FFF8EC;
+            --rose-gold: #C9A06C;
+            --black: #0D0202;
+            --gold-glow: rgba(212, 160, 23, 0.3);
+            --gold-glow-strong: rgba(212, 160, 23, 0.5);
+            --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-fast: 0.25s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 300;
+            color: var(--cream);
+            background-color: var(--burgundy-dark);
+            cursor: default;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        a { cursor: pointer; }
+        button { cursor: pointer; }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== PAGE LOAD SHIMMER ===== */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--burgundy-dark);
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .page-loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-shimmer {
+            width: 200px;
+            height: 2px;
+            background: var(--wine);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .loader-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-bright), var(--gold), transparent);
+            animation: loaderSweep 1s ease-in-out infinite;
+        }
+
+        @keyframes loaderSweep {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* ===== FIXED GOLD RIBBON (LEFT EDGE) ===== */
+        .gold-ribbon {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--gold), var(--gold-bright), var(--gold), var(--rose-gold), var(--gold));
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color var(--transition-smooth), border-color var(--transition-smooth), padding var(--transition-smooth);
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav.scrolled {
+            background-color: rgba(26, 5, 5, 0.97);
+            border-bottom: 1px solid var(--gold);
+            padding: 0.8rem 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-logo img {
+            height: 40px;
+            width: auto;
+            transition: height var(--transition-smooth);
+        }
+
+        .nav.scrolled .nav-logo img {
+            height: 34px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Tenor Sans', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--gold-bright);
+            transition: width var(--transition-smooth), left var(--transition-smooth);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-bright);
+        }
+
+        .nav-cta {
+            display: inline-block;
+            padding: 0.55rem 1.6rem;
+            border: 1px solid var(--gold);
+            color: var(--gold) !important;
+            font-family: 'Tenor Sans', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+            background: transparent;
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            color: var(--burgundy-dark) !important;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 8px;
+            z-index: 1002;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 1.5px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4.5px, 4.5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4.5px, -4.5px);
+        }
+
+        /* Mobile menu overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(160deg, var(--burgundy-dark) 0%, #2A0808 30%, var(--crimson) 70%, var(--black) 100%);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .mobile-menu.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Tenor Sans', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: color var(--transition-fast);
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold-bright);
+        }
+
+        .mobile-menu .mobile-cta {
+            margin-top: 1rem;
+            padding: 0.8rem 2.5rem;
+            border: 1px solid var(--gold);
+            font-size: 1rem;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://inblossom.pl/content/images/makeupgirl.jpg');
+            background-size: cover;
+            background-position: 70% top;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(26,5,5,0.92) 0%, rgba(26,5,5,0.85) 35%, rgba(139,26,26,0.45) 55%, rgba(0,0,0,0.15) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            padding: 0 2rem 0 clamp(2rem, 6vw, 8rem);
+        }
+
+        .hero-title {
+            font-family: 'Bodoni Moda', serif;
+            font-weight: 900;
+            font-size: clamp(3.5rem, 10vw, 9rem);
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(212, 160, 23, 0.4), 0 0 80px rgba(212, 160, 23, 0.2);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 40px rgba(212, 160, 23, 0.4), 0 0 80px rgba(212, 160, 23, 0.15); }
+            100% { text-shadow: 0 0 50px rgba(212, 160, 23, 0.6), 0 0 100px rgba(212, 160, 23, 0.3), 0 2px 4px rgba(0,0,0,0.5); }
+        }
+
+        .hero-subtitle {
+            font-family: 'Tenor Sans', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1.3rem);
+            color: var(--cream);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-tagline {
+            font-family: 'Bodoni Moda', serif;
+            font-style: italic;
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            color: var(--rose-gold);
+            letter-spacing: 0.08em;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-ornament {
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright), var(--gold), transparent);
+            margin: 0 0 2.5rem;
+            animation: ornamentExpand 1.5s 0.5s ease-out forwards;
+        }
+
+        @keyframes ornamentExpand {
+            to { width: min(300px, 60vw); }
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+            color: var(--burgundy-dark);
+            font-family: 'Tenor Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 2px solid transparent;
+            transition: all var(--transition-smooth);
+        }
+
+        .hero-cta:hover {
+            background: var(--crimson);
+            color: var(--gold);
+            border-color: var(--gold);
+            box-shadow: 0 0 30px var(--gold-glow);
+        }
+
+        /* Gold Floating Particles */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(30px);
+                opacity: 0;
+            }
+        }
+
+        /* Generate 20 particles with varying properties */
+        .particle:nth-child(1) { left: 5%; bottom: -10%; animation-duration: 12s; animation-delay: 0s; width: 2px; height: 2px; }
+        .particle:nth-child(2) { left: 12%; bottom: -10%; animation-duration: 15s; animation-delay: 1s; width: 3px; height: 3px; }
+        .particle:nth-child(3) { left: 20%; bottom: -10%; animation-duration: 11s; animation-delay: 3s; width: 2px; height: 2px; }
+        .particle:nth-child(4) { left: 28%; bottom: -10%; animation-duration: 14s; animation-delay: 0.5s; width: 4px; height: 4px; background: var(--gold-bright); }
+        .particle:nth-child(5) { left: 35%; bottom: -10%; animation-duration: 13s; animation-delay: 2s; width: 2px; height: 2px; }
+        .particle:nth-child(6) { left: 42%; bottom: -10%; animation-duration: 16s; animation-delay: 4s; width: 3px; height: 3px; }
+        .particle:nth-child(7) { left: 50%; bottom: -10%; animation-duration: 10s; animation-delay: 1.5s; width: 2px; height: 2px; }
+        .particle:nth-child(8) { left: 57%; bottom: -10%; animation-duration: 14s; animation-delay: 3.5s; width: 3px; height: 3px; background: var(--rose-gold); }
+        .particle:nth-child(9) { left: 64%; bottom: -10%; animation-duration: 12s; animation-delay: 0.8s; width: 2px; height: 2px; }
+        .particle:nth-child(10) { left: 72%; bottom: -10%; animation-duration: 15s; animation-delay: 2.5s; width: 4px; height: 4px; background: var(--gold-bright); }
+        .particle:nth-child(11) { left: 78%; bottom: -10%; animation-duration: 11s; animation-delay: 1.2s; width: 2px; height: 2px; }
+        .particle:nth-child(12) { left: 85%; bottom: -10%; animation-duration: 13s; animation-delay: 4.5s; width: 3px; height: 3px; }
+        .particle:nth-child(13) { left: 92%; bottom: -10%; animation-duration: 16s; animation-delay: 0.3s; width: 2px; height: 2px; }
+        .particle:nth-child(14) { left: 8%; bottom: -10%; animation-duration: 14s; animation-delay: 5s; width: 3px; height: 3px; background: var(--rose-gold); }
+        .particle:nth-child(15) { left: 45%; bottom: -10%; animation-duration: 11s; animation-delay: 2.8s; width: 2px; height: 2px; }
+        .particle:nth-child(16) { left: 68%; bottom: -10%; animation-duration: 15s; animation-delay: 1.8s; width: 3px; height: 3px; }
+        .particle:nth-child(17) { left: 30%; bottom: -10%; animation-duration: 13s; animation-delay: 3.2s; width: 2px; height: 2px; background: var(--gold-bright); }
+        .particle:nth-child(18) { left: 55%; bottom: -10%; animation-duration: 12s; animation-delay: 0.7s; width: 4px; height: 4px; }
+        .particle:nth-child(19) { left: 82%; bottom: -10%; animation-duration: 14s; animation-delay: 4.2s; width: 2px; height: 2px; }
+        .particle:nth-child(20) { left: 18%; bottom: -10%; animation-duration: 16s; animation-delay: 2.2s; width: 3px; height: 3px; background: var(--rose-gold); }
+
+        /* ===== SECTION COMMON STYLES ===== */
+        .section {
+            position: relative;
+            padding: 6rem 2rem;
+            overflow: hidden;
+        }
+
+        .section--dark {
+            background: var(--burgundy-dark);
+            background: radial-gradient(ellipse at center, rgba(74, 14, 14, 0.4) 0%, var(--burgundy-dark) 70%);
+        }
+
+        .section--wine {
+            background: var(--wine);
+            background: radial-gradient(ellipse at center, rgba(92, 20, 20, 0.6) 0%, var(--wine) 70%);
+        }
+
+        /* Gold corner ornaments */
+        .section--ornamented::before,
+        .section--ornamented::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-color: var(--gold);
+            border-style: solid;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .section--ornamented::before {
+            top: 30px;
+            left: 30px;
+            border-width: 1px 0 0 1px;
+        }
+
+        .section--ornamented::after {
+            bottom: 30px;
+            right: 30px;
+            border-width: 0 1px 1px 0;
+        }
+
+        /* Section diagonal gold line transitions */
+        .section-transition {
+            position: relative;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .section-transition::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--gold) 0px,
+                var(--gold) 8px,
+                transparent 8px,
+                transparent 16px
+            );
+            opacity: 0.4;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Section headings with gold shimmer */
+        .section-heading {
+            font-family: 'Tenor Sans', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            text-align: center;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright), var(--gold-light), var(--gold-bright), var(--gold));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 4s linear infinite;
+        }
+
+        @keyframes shimmerText {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Gold diamond divider */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            height: 1px;
+            width: 80px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .section-divider .diamond {
+            color: var(--gold);
+            font-size: 0.6rem;
+            opacity: 0.8;
+        }
+
+        /* ===== SERVICES SECTION ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #F0C040 0%, #D4A017 50%, #C4920F 100%);
+            border: 2px solid var(--crimson);
+            border-left: 4px solid var(--crimson);
+            padding: 2.2rem 1.8rem;
+            transition: all var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            box-shadow:
+                0 8px 16px rgba(0, 0, 0, 0.35),
+                0 2px 4px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            transform: perspective(800px) rotateX(1deg);
+            transform-style: preserve-3d;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.08) 100%);
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--crimson), #A02020, var(--crimson));
+            border-radius: 0 0 4px 4px;
+            opacity: 0.7;
+            transition: opacity var(--transition-fast);
+        }
+
+        .service-card:hover {
+            transform: perspective(800px) rotateX(0deg) translateY(-10px) scale(1.02);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.45),
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(139, 26, 26, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -2px 6px rgba(0, 0, 0, 0.12);
+            border-color: #A02020;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1.5rem;
+            color: var(--crimson);
+        }
+
+        .service-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: var(--crimson);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
+        }
+
+        .service-card h3 {
+            font-family: 'Tenor Sans', sans-serif;
+            font-size: 1.1rem;
+            color: var(--crimson);
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            color: #3A1010;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+        .service-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-links a {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: var(--crimson);
+            text-decoration: none;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(139, 26, 26, 0.35);
+            border-radius: 3px;
+            transition: all var(--transition-fast);
+            letter-spacing: 0.05em;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .service-links a:hover {
+            color: var(--cream);
+            border-color: var(--crimson);
+            background: var(--crimson);
+            box-shadow: 0 2px 8px rgba(139, 26, 26, 0.3);
+        }
+
+        /* ===== WHY US SECTION ===== */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 4rem;
+        }
+
+        .reason-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .reason-number {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            min-width: 60px;
+            opacity: 0.6;
+        }
+
+        .reason-content {
+            border-left: 1px solid rgba(212, 160, 23, 0.3);
+            padding-left: 1.5rem;
+        }
+
+        .reason-content h3 {
+            font-family: 'Tenor Sans', sans-serif;
+            font-size: 1.05rem;
+            color: var(--gold);
+            letter-spacing: 0.08em;
+            margin-bottom: 0.6rem;
+        }
+
+        .reason-content p {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.8;
+            line-height: 1.65;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-monogram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .monogram-frame {
+            width: 220px;
+            height: 280px;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .monogram-frame::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid rgba(212, 160, 23, 0.3);
+        }
+
+        .monogram-frame::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border: 1px solid rgba(212, 160, 23, 0.15);
+        }
+
+        .monogram-text {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-bright), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.1em;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--cream);
+            opacity: 0.9;
+        }
+
+        .about-text .drop-cap {
+            float: left;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 0.75;
+            padding-right: 0.5rem;
+            padding-top: 0.15rem;
+        }
+
+        .about-text .gold-highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--gold);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .contact-item-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .contact-item h4 {
+            font-family: 'Tenor Sans', sans-serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item p,
+        .contact-item a {
+            font-size: 0.95rem;
+            color: var(--cream);
+            opacity: 0.85;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .contact-item a:hover {
+            color: var(--gold);
+            opacity: 1;
+        }
+
+        .map-container {
+            border: 2px solid;
+            border-image: linear-gradient(135deg, var(--gold), var(--gold-bright), var(--gold)) 1;
+            height: 100%;
+            min-height: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+        }
+
+        .social-link:hover {
+            background: var(--crimson);
+            border-color: var(--crimson);
+            color: var(--cream);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139, 26, 26, 0.4);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--black);
+            text-align: center;
+            padding: 3.5rem 2rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .footer-logo {
+            margin: 0 auto 1.5rem;
+            height: 50px;
+            width: auto;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social .social-link {
+            width: 38px;
+            height: 38px;
+        }
+
+        .footer-social .social-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--cream);
+            opacity: 0.5;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-tagline {
+            font-family: 'Bodoni Moda', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--rose-gold);
+            opacity: 0.6;
+        }
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-stagger > .reveal-child {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal-stagger.visible > .reveal-child {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays for children */
+        .reveal-stagger.visible > .reveal-child:nth-child(1) { transition-delay: 0.05s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(2) { transition-delay: 0.12s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(3) { transition-delay: 0.19s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(4) { transition-delay: 0.26s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(5) { transition-delay: 0.33s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(6) { transition-delay: 0.40s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(7) { transition-delay: 0.47s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(8) { transition-delay: 0.54s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(9) { transition-delay: 0.61s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(10) { transition-delay: 0.68s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(11) { transition-delay: 0.75s; }
+        .reveal-stagger.visible > .reveal-child:nth-child(12) { transition-delay: 0.82s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .reasons-grid {
+                gap: 2rem 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .reasons-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                text-align: center;
+            }
+
+            .about-monogram {
+                order: -1;
+            }
+
+            .monogram-frame {
+                width: 180px;
+                height: 230px;
+            }
+
+            .monogram-text {
+                font-size: 4rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .map-container {
+                min-height: 280px;
+            }
+
+            .section--ornamented::before,
+            .section--ornamented::after {
+                width: 40px;
+                height: 40px;
+            }
+
+            .hero-bg {
+                background-position: 65% center;
+            }
+
+            .hero {
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .hero-content {
+                padding: 0 1.5rem 0 1.5rem;
+                max-width: 100%;
+            }
+
+            .hero-overlay {
+                background: linear-gradient(to bottom, rgba(26,5,5,0.85) 0%, rgba(26,5,5,0.7) 50%, rgba(0,0,0,0.4) 100%);
+            }
+
+            .reason-number {
+                font-size: 2.5rem;
+                min-width: 45px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                letter-spacing: 0.08em;
+            }
+
+            .hero-subtitle {
+                letter-spacing: 0.15em;
+            }
+
+            .nav {
+                padding: 1rem 1.2rem;
+            }
+
+            .section {
+                padding: 3.5rem 1.2rem;
+            }
+
+            .service-card {
+                padding: 1.8rem 1.4rem;
+            }
+
+            .reason-item {
+                gap: 1rem;
+            }
+
+            .reason-content {
+                padding-left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-shimmer"></div>
+    </div>
+
+    <!-- Fixed Gold Ribbon -->
+    <div class="gold-ribbon"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="mainNav">
+        <a href="#" class="nav-logo">
+            <img src="https://inblossom.pl/content/images/logo.png" alt="INBLOSSOM Logo" width="120" height="40">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#uslugi">Uslugi</a></li>
+            <li><a href="#dlaczego-my">Dlaczego my</a></li>
+            <li><a href="#o-nas">O nas</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="nav-cta">Umow wizyte</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Otwórz menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#uslugi">Uslugi</a>
+        <a href="#dlaczego-my">Dlaczego my</a>
+        <a href="#o-nas">O nas</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="mobile-cta">Umow wizyte</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="particles-container">
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+            <div class="particle"></div><div class="particle"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">INBLOSSOM</h1>
+            <p class="hero-subtitle">Salon Kosmetyczny w Bialymstoku</p>
+            <p class="hero-tagline">Piekno zaczyna sie tutaj</p>
+            <div class="hero-ornament"></div>
+            <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="hero-cta">Umow wizyte</a>
+        </div>
+    </section>
+
+    <!-- Section Transition -->
+    <div class="section-transition" style="background: var(--burgundy-dark);"></div>
+
+    <!-- Services Section -->
+    <section class="section section--dark section--ornamented" id="uslugi">
+        <div class="section-container">
+            <div class="reveal">
+                <h2 class="section-heading">Uslugi</h2>
+                <div class="section-divider"><span class="diamond">&#9670;</span></div>
+            </div>
+            <div class="services-grid reveal-stagger">
+
+                <!-- Depilacja Laserowa -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <line x1="6" y1="42" x2="24" y2="6" />
+                            <line x1="24" y1="6" x2="26" y2="6" />
+                            <line x1="20" y1="18" x2="36" y2="18" />
+                            <circle cx="36" cy="18" r="3" />
+                            <line x1="16" y1="30" x2="40" y2="30" />
+                            <circle cx="40" cy="30" r="2" />
+                            <path d="M10 38 L14 34 L18 38" />
+                        </svg>
+                    </div>
+                    <h3>Depilacja Laserowa</h3>
+                    <p>Precyzyjna depilacja laserowa dla gladkiej i jedwabistej skory. Trwale efekty, bezpieczenstwo i komfort zabiegu.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/depilacja-laserowa-damska">Damska</a>
+                        <a href="https://inblossom.pl/depilacja-laserowa-meska">Meska</a>
+                    </div>
+                </div>
+
+                <!-- Laserowe Odmladzanie -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M24 4 L26 14 L36 12 L28 20 L38 24 L28 28 L36 36 L26 34 L24 44 L22 34 L12 36 L20 28 L10 24 L20 20 L12 12 L22 14 Z" />
+                        </svg>
+                    </div>
+                    <h3>Laserowe Odmladzanie</h3>
+                    <p>Zaawansowane zabiegi laserowe przywracajace skore mlodzienczy blask. Redukcja zmarszczek i poprawa elastycznosci.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/laserowe-odmladzanie">Sprawdz</a>
+                    </div>
+                </div>
+
+                <!-- Laserowe Leczenie Tradziku -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="16" />
+                            <path d="M24 4 L24 8" />
+                            <path d="M24 40 L24 44" />
+                            <path d="M4 24 L8 24" />
+                            <path d="M40 24 L44 24" />
+                            <circle cx="24" cy="24" r="6" />
+                            <path d="M20 20 L28 28 M28 20 L20 28" />
+                        </svg>
+                    </div>
+                    <h3>Laserowe Leczenie Tradziku</h3>
+                    <p>Skuteczna walka z trądzikiem dzieki nowoczesnej technologii laserowej. Czysta i zdrowa skóra bez niedoskonałosci.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/laserowe-leczenie-tradziku">Sprawdz</a>
+                    </div>
+                </div>
+
+                <!-- Masaz -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M8 36 C8 36 10 24 16 20 C22 16 24 18 24 24 C24 18 26 16 32 20 C38 24 40 36 40 36" />
+                            <path d="M14 32 Q24 26 34 32" />
+                            <circle cx="24" cy="12" r="4" />
+                        </svg>
+                    </div>
+                    <h3>Masaz</h3>
+                    <p>Relaksujace i terapeutyczne masaze, ktore uwalniaja napiecie i przywracaja harmonie cialu i umyslowi.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/masaz">Sprawdz</a>
+                    </div>
+                </div>
+
+                <!-- Brwi / Rzesy -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <ellipse cx="24" cy="24" rx="14" ry="10" />
+                            <circle cx="24" cy="24" r="5" />
+                            <circle cx="24" cy="24" r="2" fill="var(--gold)" stroke="none" />
+                            <path d="M6 18 Q14 8 24 10 Q34 8 42 18" />
+                            <line x1="2" y1="14" x2="8" y2="18" />
+                            <line x1="4" y1="10" x2="10" y2="16" />
+                            <line x1="38" y1="16" x2="44" y2="10" />
+                            <line x1="40" y1="18" x2="46" y2="14" />
+                        </svg>
+                    </div>
+                    <h3>Brwi i Rzesy</h3>
+                    <p>Perfekcyjna stylizacja i laminacja brwi oraz rzes. Podkresli Twoje naturalne piekno i nadaj spojrzeniu wyrazistosci.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/laminacja-brwi">Laminacja brwi</a>
+                        <a href="https://inblossom.pl/laminacja-rzes">Laminacja rzes</a>
+                        <a href="https://inblossom.pl/przedluzenie-rzesy">Przedluzenie rzes</a>
+                        <a href="https://inblossom.pl/kombo-brwi-rzesy">KOMBO</a>
+                        <a href="https://inblossom.pl/mezoterapia-mikroiglowa-brwi">Mezoterapia brwi</a>
+                    </div>
+                </div>
+
+                <!-- Manicure / Pedicure -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M20 44 L20 16 Q20 8 24 6 Q28 8 28 16 L28 44" />
+                            <ellipse cx="24" cy="44" rx="6" ry="2" />
+                            <path d="M22 16 L22 28" />
+                            <path d="M26 16 L26 28" />
+                            <circle cx="24" cy="10" r="2" fill="var(--gold)" stroke="none" />
+                        </svg>
+                    </div>
+                    <h3>Manicure i Pedicure</h3>
+                    <p>Profesjonalna pielegnacja dloni i stop. Piekne paznokcie i zdrowa skora to nasza specjalnosc.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/manicure-pedicure">Sprawdz</a>
+                    </div>
+                </div>
+
+                <!-- Maski + Masaz Twarzy -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <ellipse cx="24" cy="24" rx="12" ry="16" />
+                            <circle cx="18" cy="20" r="2" />
+                            <circle cx="30" cy="20" r="2" />
+                            <path d="M20 30 Q24 34 28 30" />
+                            <path d="M12 12 Q8 16 8 24" />
+                            <path d="M36 12 Q40 16 40 24" />
+                        </svg>
+                    </div>
+                    <h3>Maski i Masaz Twarzy</h3>
+                    <p>Luksusowe maski w polaczeniu z profesjonalnym masazem twarzy. Glebokie odzywienie i relaks dla Twojej skory.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/maski-masaz-twarzy">Sprawdz</a>
+                    </div>
+                </div>
+
+                <!-- Oczyszczanie Twarzy -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <ellipse cx="24" cy="26" rx="12" ry="16" />
+                            <path d="M16 20 L20 16 L24 20 L28 16 L32 20" />
+                            <path d="M18 28 Q24 32 30 28" />
+                            <path d="M24 6 L24 10" />
+                            <path d="M18 8 L20 12" />
+                            <path d="M30 8 L28 12" />
+                        </svg>
+                    </div>
+                    <h3>Oczyszczanie Twarzy</h3>
+                    <p>Doglebne oczyszczanie, ktore przywraca skore naturalny blask. Pozbadz sie zanieczyszczen i ciesz sie swiezoscia.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/oczyszczanie-twarzy">Sprawdz</a>
+                    </div>
+                </div>
+
+                <!-- Mezoterapia Mikroiglowa -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M24 4 L24 32" />
+                            <path d="M20 32 L28 32 L26 44 L22 44 Z" />
+                            <line x1="20" y1="10" x2="28" y2="10" />
+                            <line x1="20" y1="16" x2="28" y2="16" />
+                            <line x1="20" y1="22" x2="28" y2="22" />
+                            <circle cx="24" cy="38" r="1" fill="var(--gold)" stroke="none" />
+                        </svg>
+                    </div>
+                    <h3>Mezoterapia Mikroiglowa</h3>
+                    <p>Innowacyjna mezoterapia dostarczajaca skladniki odzywcze gleboko w skore. Odmladza, regeneruje i rewitalizuje.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/mezoterapia-mikroiglowa-twarzy-szyji">Twarzy i szyi</a>
+                        <a href="https://inblossom.pl/mezoterapia-mikroiglowa-brwi">Brwi</a>
+                    </div>
+                </div>
+
+                <!-- Peeling -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M10 34 Q10 14 24 10 Q38 14 38 34" />
+                            <path d="M10 34 L38 34" />
+                            <path d="M16 34 L16 40" />
+                            <path d="M24 34 L24 42" />
+                            <path d="M32 34 L32 40" />
+                            <path d="M24 10 L24 6" />
+                            <path d="M20 22 L28 22" />
+                            <path d="M18 28 L30 28" />
+                        </svg>
+                    </div>
+                    <h3>Peeling</h3>
+                    <p>Profesjonalne peelingi oczyszczajace i wygladzajace skore. Usun martwy naskórek i odkryj promienna karnacje.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/peeling">Sprawdz</a>
+                    </div>
+                </div>
+
+                <!-- Karboksyterapia -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <circle cx="16" cy="16" r="6" />
+                            <circle cx="32" cy="14" r="5" />
+                            <circle cx="24" cy="28" r="7" />
+                            <circle cx="14" cy="34" r="4" />
+                            <circle cx="34" cy="32" r="4" />
+                            <circle cx="24" cy="40" r="3" />
+                        </svg>
+                    </div>
+                    <h3>Karboksyterapia</h3>
+                    <p>Terapia dwutlenkiem wegla pobudzajaca krazenie i regeneracje skory. Skuteczna na cellulit, rozstepy i blizny.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/karboksyterapia">Sprawdz</a>
+                    </div>
+                </div>
+
+                <!-- Depilacja Pasta Cukrowa -->
+                <div class="service-card reveal-child">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M18 8 Q14 8 14 14 L14 20 Q14 26 20 28 L20 40 Q20 44 24 44 Q28 44 28 40 L28 28 Q34 26 34 20 L34 14 Q34 8 30 8" />
+                            <path d="M18 8 Q20 4 24 4 Q28 4 30 8" />
+                            <line x1="14" y1="18" x2="34" y2="18" />
+                            <line x1="14" y1="24" x2="20" y2="24" />
+                            <line x1="28" y1="24" x2="34" y2="24" />
+                        </svg>
+                    </div>
+                    <h3>Depilacja Pasta Cukrowa</h3>
+                    <p>Naturalna i delikatna metoda depilacji pasta cukrowa. Gladka skóra bez podrazien, idealna dla wrazliwej skóry.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/depilacja-pasta-cukrowa">Sprawdz</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Transition -->
+    <div class="section-transition" style="background: linear-gradient(to bottom, var(--burgundy-dark), var(--wine));"></div>
+
+    <!-- Why Us Section -->
+    <section class="section section--wine section--ornamented" id="dlaczego-my">
+        <div class="section-container">
+            <div class="reveal">
+                <h2 class="section-heading">Dlaczego my</h2>
+                <div class="section-divider"><span class="diamond">&#9670;</span></div>
+            </div>
+            <div class="reasons-grid reveal-stagger">
+
+                <div class="reason-item reveal-child">
+                    <div class="reason-number">01</div>
+                    <div class="reason-content">
+                        <h3>Doswiadczony zespol</h3>
+                        <p>Nasi specjalisci to wykwalifikowani eksperci z wieloletnim doswiadczeniem w branzy kosmetycznej. Regularnie poszerzaja swoja wiedze na szkoleniach i konferencjach.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item reveal-child">
+                    <div class="reason-number">02</div>
+                    <div class="reason-content">
+                        <h3>Nowoczesny sprzet</h3>
+                        <p>Korzystamy z najnowszych technologii i certyfikowanego sprzetu kosmetycznego, ktory gwarantuje bezpieczenstwo i najwyzszą skutecznosc zabiegow.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item reveal-child">
+                    <div class="reason-number">03</div>
+                    <div class="reason-content">
+                        <h3>Indywidualne podejscie</h3>
+                        <p>Kazdy klient jest dla nas wyjatkowy. Dobieramy zabiegi i kosmetyki indywidualnie, uwzgledniajac Twoje potrzeby, typ skory i oczekiwania.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item reveal-child">
+                    <div class="reason-number">04</div>
+                    <div class="reason-content">
+                        <h3>Profesjonalne kosmetyki</h3>
+                        <p>Stosujemy wylacznie najwyzszej jakosci, profesjonalne kosmetyki renomowanych marek, ktore gwarantuja doskonale rezultaty.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item reveal-child">
+                    <div class="reason-number">05</div>
+                    <div class="reason-content">
+                        <h3>Komfortowa atmosfera</h3>
+                        <p>Nasz salon to miejsce stworzone z mysla o Twoim komforcie. Eleganckie wnetrze, przyjemna muzyka i aromaterapia tworza niepowtarzalna atmosfere relaksu.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item reveal-child">
+                    <div class="reason-number">06</div>
+                    <div class="reason-content">
+                        <h3>Przystepne ceny</h3>
+                        <p>Oferujemy konkurencyjne ceny przy zachowaniu najwyzszej jakosci uslug. Regularne promocje i programy lojalnosciowe dla stalych klientow.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Transition -->
+    <div class="section-transition" style="background: linear-gradient(to bottom, var(--wine), var(--burgundy-dark));"></div>
+
+    <!-- About Section -->
+    <section class="section section--dark section--ornamented" id="o-nas">
+        <div class="section-container">
+            <div class="reveal">
+                <h2 class="section-heading">O nas</h2>
+                <div class="section-divider"><span class="diamond">&#9670;</span></div>
+            </div>
+            <div class="about-grid reveal">
+                <div class="about-monogram">
+                    <div class="monogram-frame">
+                        <span class="monogram-text">IB</span>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <span class="drop-cap">O</span>dkryj miejsce, gdzie Twoje <span class="gold-highlight">piekno rozkwita</span>! Nasz salon to przestrzen, w ktorej laczymy <span class="gold-highlight">profesjonalizm z pasja</span>, oferujac szeroki wachlarz uslug kosmetycznych dostosowanych do Twoich indywidualnych potrzeb. Zaufaj naszym ekspertom i podaruj sobie chwile <span class="gold-highlight">relaksu oraz wyjatkowej pielegnacji</span>.
+                    <br><br>
+                    W INBLOSSOM wierzymy, ze kazda kobieta i kazdy mezczyzna zasluguje na chwile luksusu. Nasze zabiegi lacza najnowsze technologie z naturalnym podejsciem, aby zapewnic Ci najlepsze rezultaty w komfortowej i eleganckiej atmosferze.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Transition -->
+    <div class="section-transition" style="background: linear-gradient(to bottom, var(--burgundy-dark), var(--wine));"></div>
+
+    <!-- Contact Section -->
+    <section class="section section--wine" id="kontakt" style="background: radial-gradient(ellipse at center, rgba(139, 26, 26, 0.3) 0%, var(--wine) 70%);">
+        <div class="section-container">
+            <div class="reveal">
+                <h2 class="section-heading">Kontakt</h2>
+                <div class="section-divider"><span class="diamond">&#9670;</span></div>
+            </div>
+            <div class="contact-grid reveal">
+                <div class="contact-info">
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <h4>Adres</h4>
+                            <p>ul. Towarowa 22A, 15-007 Bialystok</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div>
+                            <h4>Telefon</h4>
+                            <a href="tel:+48535449538">+48 535-449-538</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div>
+                            <h4>E-mail</h4>
+                            <a href="mailto:Inblossom.pl@gmail.com">Inblossom.pl@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <div>
+                            <h4>Godziny otwarcia</h4>
+                            <p>Poniedzialek - Sobota: 8:00 - 21:00</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/p/Inblossom-Salon-kosmetyczny-Bia%C5%82ystok-61557928358263/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/inblossom.bialystok" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        </a>
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/48535449538" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                        </a>
+                        <!-- Booksy -->
+                        <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="social-link" aria-label="Booksy">
+                            <svg viewBox="0 0 24 24"><path d="M6 2h8a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4H6V2z"/><path d="M6 10h9a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4H6V10z"/><line x1="6" y1="2" x2="6" y2="22"/><path d="M6 18h10a4 4 0 0 1 0 4H6v-4z" fill="none"/></svg>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2367.5!2d23.1468!3d53.1325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ffb6d5e1e1e1d%3A0x1234567890abcdef!2sul.%20Towarowa%2022A%2C%2015-007%20Bia%C5%82ystok!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa - INBLOSSOM Salon Kosmetyczny"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <img src="https://inblossom.pl/content/images/logo.png" alt="INBLOSSOM" class="footer-logo" width="150" height="50">
+
+        <div class="footer-social">
+            <a href="https://www.facebook.com/p/Inblossom-Salon-kosmetyczny-Bia%C5%82ystok-61557928358263/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://instagram.com/inblossom.bialystok" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://wa.me/48535449538" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            </a>
+            <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="social-link" aria-label="Booksy">
+                <svg viewBox="0 0 24 24"><path d="M6 2h8a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4H6V2z"/><path d="M6 10h9a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4H6V10z"/><line x1="6" y1="2" x2="6" y2="22"/></svg>
+            </a>
+        </div>
+
+        <p class="footer-copy">&copy; 2025 INBLOSSOM. Wszystkie prawa zastrzezone.</p>
+        <p class="footer-tagline">Powered by passion</p>
+    </footer>
+
+    <script>
+        /* ===== PAGE LOADER ===== */
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('pageLoader').classList.add('loaded');
+            }, 800);
+        });
+
+        /* ===== NAVIGATION SCROLL EFFECT ===== */
+        (function() {
+            var nav = document.getElementById('mainNav');
+            var scrollThreshold = 60;
+
+            function onScroll() {
+                if (window.scrollY > scrollThreshold) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
+
+        /* ===== MOBILE MENU ===== */
+        (function() {
+            var hamburger = document.getElementById('hamburger');
+            var mobileMenu = document.getElementById('mobileMenu');
+            var mobileLinks = mobileMenu.querySelectorAll('a');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                mobileMenu.classList.toggle('open');
+                document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+            });
+
+            mobileLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = '';
+                });
+            });
+        })();
+
+        /* ===== SMOOTH SCROLL FOR ANCHOR LINKS ===== */
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                var target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    var navHeight = document.getElementById('mainNav').offsetHeight;
+                    var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        /* ===== INTERSECTION OBSERVER — REVEAL ON SCROLL ===== */
+        (function() {
+            var observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -80px 0px',
+                threshold: 0.1
+            };
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) {
+                observer.observe(el);
+            });
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="INBLOSSOM — Salon kosmetyczny w Białymstoku. Depilacja laserowa, masaże, manicure, mezoterapia i więcej. Piękno zaczyna się tutaj.">
+<meta name="keywords" content="salon kosmetyczny, Białystok, depilacja laserowa, masaż, manicure, pedicure, mezoterapia, brwi, rzęsy">
+<meta name="author" content="INBLOSSOM">
+<meta name="theme-color" content="#8C3A4B">
+<meta property="og:title" content="INBLOSSOM — Salon Kosmetyczny">
+<meta property="og:description" content="Piękno zaczyna się tutaj. Profesjonalny salon kosmetyczny w Białymstoku.">
+<meta property="og:type" content="website">
+<title>INBLOSSOM — Salon Kosmetyczny | Białystok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS RESET & ROOT
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --ivory: #FDF8F0;
+  --ivory-dark: #F5EDE0;
+  --rose: #8C3A4B;
+  --rose-light: #A84D60;
+  --rose-glow: rgba(140, 58, 75, 0.35);
+  --gold: #B8923F;
+  --gold-light: #D4AD5A;
+  --gold-glow: rgba(184, 146, 63, 0.4);
+  --green: #2D4A3E;
+  --green-dark: #1F3A2E;
+  --charcoal: #3A3232;
+  --mauve: #9E7B8D;
+  --mauve-light: #BFA0B2;
+  --font-display: 'Cinzel Decorative', serif;
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Libre Baskerville', serif;
+}
+
+::selection {
+  background: var(--rose);
+  color: var(--ivory);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='8' fill='none' stroke='%238C3A4B' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%238C3A4B'/%3E%3C/svg%3E") 10 10, default;
+}
+
+a, button, [role="button"], input[type="submit"] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%23B8923F' stroke-width='1.5'/%3E%3Ccircle cx='12' cy='12' r='3' fill='%23B8923F'/%3E%3C/svg%3E") 12 12, pointer;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  background-color: var(--ivory);
+  line-height: 1.8;
+  overflow-x: hidden;
+  /* Subtle parchment texture via CSS noise */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(186, 170, 145, 0.015) 2px,
+      rgba(186, 170, 145, 0.015) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(186, 170, 145, 0.015) 2px,
+      rgba(186, 170, 145, 0.015) 4px
+    ),
+    radial-gradient(ellipse at 30% 20%, rgba(184,146,63,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(140,58,75,0.02) 0%, transparent 50%);
+}
+
+/* ============================================================
+   UTILITY & SHARED
+   ============================================================ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.small-caps {
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+}
+
+.section-label {
+  font-family: var(--font-heading);
+  font-variant: small-caps;
+  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+  color: var(--mauve);
+  margin-bottom: 0.5rem;
+  display: block;
+  text-align: center;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--charcoal);
+}
+
+.section-title.light {
+  color: var(--ivory);
+}
+
+/* Reveal animation base */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* ============================================================
+   INLINE SVG DECORATIONS
+   ============================================================ */
+.svg-divider {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.svg-ornament-line {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.svg-ornament-line.rose {
+  stroke: var(--rose);
+}
+
+.svg-ornament-line.mauve {
+  stroke: var(--mauve);
+}
+
+.svg-ornament-line.ivory {
+  stroke: var(--ivory);
+}
+
+/* Stroke draw animation */
+.draw-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.visible .draw-line,
+.draw-line.animate {
+  stroke-dashoffset: 0;
+}
+
+/* ============================================================
+   HEADER / NAVIGATION
+   ============================================================ */
+.site-header {
+  background: var(--ivory);
+  padding: 1.5rem 0 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(184,146,63,0.2);
+  transition: box-shadow 0.3s ease, padding 0.3s ease;
+}
+.site-header.scrolled {
+  box-shadow: 0 2px 20px rgba(58, 50, 50, 0.08);
+  padding: 0.8rem 0 0.3rem;
+}
+
+.header-inner {
+  text-align: center;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.4rem;
+  letter-spacing: 0.25em;
+  color: var(--rose);
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  /* Gold shimmer effect */
+  background: linear-gradient(
+    90deg,
+    var(--rose) 0%,
+    var(--rose) 40%,
+    var(--gold-light) 50%,
+    var(--rose) 60%,
+    var(--rose) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 100% 0; }
+  50% { background-position: -100% 0; }
+}
+
+.site-header.scrolled .brand-name {
+  font-size: 1.6rem;
+}
+
+.main-nav {
+  margin-top: 0.6rem;
+  padding: 0.4rem 0;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.nav-list li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-list li:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin: 0 1.2rem;
+  opacity: 0.6;
+}
+
+.nav-list a {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  font-variant: small-caps;
+  text-decoration: none;
+  color: var(--charcoal);
+  transition: color 0.3s ease;
+  padding: 0.3rem 0;
+  position: relative;
+}
+
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-list a:hover {
+  color: var(--rose);
+}
+
+.nav-list a:hover::after {
+  width: 100%;
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-heading);
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  color: var(--rose);
+  margin: 0.5rem auto 0;
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero {
+  padding: 5rem 1.5rem 4rem;
+  text-align: center;
+  position: relative;
+  background:
+    radial-gradient(ellipse at center, var(--ivory) 0%, var(--ivory-dark) 70%);
+  overflow: hidden;
+}
+
+/* Ornamental frame around hero */
+.hero-frame {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 3.5rem 3rem;
+  position: relative;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+}
+
+.hero-frame::before,
+.hero-frame::after {
+  content: '';
+  position: absolute;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  opacity: 0.4;
+}
+
+.hero-frame::before {
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+}
+
+.hero-frame::after {
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  border-style: dashed;
+  opacity: 0.2;
+}
+
+/* Corner ornaments */
+.hero-corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+}
+
+.hero-corner--tl { top: -2px; left: -2px; }
+.hero-corner--tr { top: -2px; right: -2px; transform: scaleX(-1); }
+.hero-corner--bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
+.hero-corner--br { bottom: -2px; right: -2px; transform: scale(-1, -1); }
+
+.hero-brand {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  letter-spacing: 0.3em;
+  color: var(--rose);
+  margin-bottom: 0.6rem;
+  position: relative;
+  z-index: 3;
+  /* Gold shimmer */
+  background: linear-gradient(
+    90deg,
+    var(--rose) 0%,
+    var(--rose) 35%,
+    var(--gold) 48%,
+    var(--gold-light) 52%,
+    var(--rose) 65%,
+    var(--rose) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroShimmer 5s ease-in-out infinite;
+}
+
+@keyframes heroShimmer {
+  0%, 100% { background-position: 100% 0; }
+  50% { background-position: -100% 0; }
+}
+
+.hero-tagline {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: var(--mauve);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-ornament-hr {
+  display: block;
+  max-width: 320px;
+  margin: 0 auto 2rem;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-cta {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  font-size: 0.95rem;
+  padding: 0.9rem 2.8rem;
+  color: var(--ivory);
+  background: linear-gradient(135deg, var(--rose) 0%, var(--rose-light) 100%);
+  border: 2px solid var(--gold);
+  border-radius: 50px;
+  text-decoration: none;
+  position: relative;
+  z-index: 3;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(140, 58, 75, 0.2);
+}
+
+.hero-cta:hover {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  color: var(--ivory);
+  border-color: var(--rose);
+  box-shadow: 0 6px 25px var(--gold-glow);
+  transform: translateY(-2px);
+}
+
+/* Decorative floating motifs in hero */
+.hero-motif {
+  position: absolute;
+  opacity: 0.07;
+  z-index: 1;
+}
+.hero-motif--left {
+  left: 2%;
+  top: 15%;
+  width: 180px;
+}
+.hero-motif--right {
+  right: 2%;
+  bottom: 10%;
+  width: 160px;
+  transform: scaleX(-1);
+}
+
+/* ============================================================
+   WAVY SECTION DIVIDERS
+   ============================================================ */
+.wave-divider {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: -1px 0;
+  position: relative;
+  z-index: 5;
+}
+
+.wave-divider--ivory-to-green .wave-fill { fill: var(--green); }
+.wave-divider--green-to-ivory .wave-fill { fill: var(--ivory); }
+.wave-divider--ivory-to-ivory .wave-fill { fill: var(--ivory); }
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+.about {
+  padding: 5rem 1.5rem;
+  background: var(--ivory);
+  position: relative;
+}
+
+.about-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+/* Ornamental quote framing */
+.about-frame {
+  position: relative;
+  padding: 2.5rem 2rem;
+}
+
+.about-frame::before,
+.about-frame::after {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: var(--gold);
+  opacity: 0.25;
+  position: absolute;
+  line-height: 1;
+}
+
+.about-frame::before {
+  content: '\201C';
+  top: -0.5rem;
+  left: 0;
+}
+
+.about-frame::after {
+  content: '\201D';
+  bottom: -1.5rem;
+  right: 0;
+}
+
+/* Vine corner accents for about */
+.about-corner {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  opacity: 0.3;
+}
+.about-corner--tl { top: 0; left: 0; }
+.about-corner--br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+.about-text {
+  font-size: 1.05rem;
+  line-height: 2;
+  color: var(--charcoal);
+}
+
+/* Circular ornamental placeholder */
+.about-emblem {
+  width: 140px;
+  height: 140px;
+  margin: 2.5rem auto 0;
+  position: relative;
+}
+
+.about-emblem-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(135deg, var(--ivory) 0%, var(--ivory-dark) 100%);
+}
+
+.about-emblem-circle::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  opacity: 0.4;
+}
+
+.about-emblem-circle::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 1px dashed var(--mauve);
+  opacity: 0.25;
+}
+
+.about-emblem-initials {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--rose);
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   SERVICES SECTION
+   ============================================================ */
+.services {
+  padding: 5rem 1.5rem;
+  background: var(--ivory);
+  position: relative;
+}
+
+.services-group {
+  margin-bottom: 3rem;
+}
+
+.services-group:last-child {
+  margin-bottom: 0;
+}
+
+.group-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 0.15em;
+  color: var(--rose);
+  text-align: center;
+  margin-bottom: 1.8rem;
+  position: relative;
+}
+
+/* Decorative lines flanking group title */
+.group-title::before,
+.group-title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.group-title::before { right: calc(50% + 1em + 60px); left: auto; right: unset; left: calc(50% - 60px - 8em); }
+.group-title::after { left: calc(50% + 8em + 10px); }
+
+/* Services grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Service card with ornamental frame */
+.service-card {
+  background: var(--ivory);
+  padding: 1.8rem 1.5rem;
+  text-align: center;
+  position: relative;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  transition: all 0.4s ease;
+}
+
+/* Ornamental corners on cards via pseudo-elements */
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px solid var(--mauve);
+  border-radius: 5px;
+  opacity: 0.3;
+  transition: opacity 0.4s ease, border-color 0.4s ease;
+  pointer-events: none;
+}
+
+.service-card:hover {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 25px var(--gold-glow), 0 8px 30px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+}
+
+.service-card:hover::before {
+  opacity: 0.6;
+  border-color: var(--gold);
+}
+
+.service-card-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 1rem;
+  opacity: 0.6;
+}
+
+.service-card-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--charcoal);
+  margin-bottom: 0.3rem;
+}
+
+.service-card-category {
+  font-family: var(--font-heading);
+  font-variant: small-caps;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--mauve);
+}
+
+/* Group divider ornament */
+.group-divider {
+  display: block;
+  max-width: 200px;
+  margin: 2.5rem auto;
+  opacity: 0.5;
+}
+
+/* ============================================================
+   WHY US SECTION (on green bg)
+   ============================================================ */
+.why-us {
+  padding: 5rem 1.5rem;
+  background: var(--green);
+  position: relative;
+}
+
+.why-us .section-label {
+  color: var(--gold-light);
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem 3rem;
+  max-width: 900px;
+  margin: 2rem auto 0;
+}
+
+.reason-item {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+.reason-number {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--gold);
+  position: relative;
+}
+
+.reason-number::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  opacity: 0.3;
+}
+
+.reason-content h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--ivory);
+  margin-bottom: 0.3rem;
+}
+
+.reason-content p {
+  font-size: 0.9rem;
+  color: var(--mauve-light);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   CONTACT SECTION
+   ============================================================ */
+.contact {
+  padding: 5rem 1.5rem;
+  background: var(--green-dark);
+  position: relative;
+}
+
+.contact-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Ornamental frame around contact */
+.contact-frame {
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 3rem 2.5rem;
+  position: relative;
+}
+
+.contact-frame::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.contact-detail {
+  margin-bottom: 1.5rem;
+}
+
+.contact-detail:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.contact-label {
+  font-family: var(--font-heading);
+  font-variant: small-caps;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.contact-value {
+  font-size: 1rem;
+  color: var(--ivory);
+}
+
+.contact-value a {
+  color: var(--ivory);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  border-bottom: 1px solid rgba(253,248,240,0.2);
+}
+
+.contact-value a:hover {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold-light);
+}
+
+/* Social links */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-link {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+}
+
+.social-link::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.social-link:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px var(--gold-glow);
+}
+
+.social-link:hover::after {
+  opacity: 0.4;
+}
+
+.social-link svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--ivory);
+  transition: fill 0.3s ease;
+}
+
+.social-link:hover svg {
+  fill: var(--green-dark);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--ivory);
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.footer-ornament {
+  display: block;
+  max-width: 300px;
+  margin: 0 auto 1.5rem;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  color: var(--rose);
+  margin-bottom: 0.5rem;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--mauve);
+  letter-spacing: 0.05em;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.footer-social a {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--mauve);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+  border-color: var(--rose);
+  background: var(--rose);
+}
+
+.footer-social a svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--mauve);
+  transition: fill 0.3s ease;
+}
+
+.footer-social a:hover svg {
+  fill: var(--ivory);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .brand-name {
+    font-size: 1.6rem;
+    letter-spacing: 0.15em;
+  }
+
+  .site-header.scrolled .brand-name {
+    font-size: 1.3rem;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.8rem 0;
+  }
+
+  .nav-list.open {
+    display: flex;
+  }
+
+  .nav-list li:not(:last-child)::after {
+    display: none;
+  }
+
+  .nav-list a {
+    padding: 0.6rem 0;
+    display: block;
+  }
+
+  .hero {
+    padding: 3rem 1rem 2.5rem;
+  }
+
+  .hero-frame {
+    padding: 2rem 1.2rem;
+  }
+
+  .hero-brand {
+    letter-spacing: 0.15em;
+  }
+
+  .hero-corner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hero-motif { display: none; }
+
+  .about-frame {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .about-frame::before,
+  .about-frame::after {
+    font-size: 3rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .group-title::before,
+  .group-title::after {
+    display: none;
+  }
+
+  .reasons-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .contact-frame {
+    padding: 2rem 1.2rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html { font-size: 14px; }
+
+  .brand-name {
+    font-size: 1.3rem;
+  }
+
+  .hero-frame {
+    padding: 1.5rem 1rem;
+    border-radius: 8px;
+  }
+
+  .hero-frame::before {
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+  }
+
+  .hero-frame::after {
+    display: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .site-header { position: static; }
+  .reveal { opacity: 1; transform: none; }
+  .hero-motif { display: none; }
+  .wave-divider { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER / NAVIGATION
+     ============================================================ -->
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="#" class="brand-name" aria-label="INBLOSSOM - strona główna">INBLOSSOM</a>
+    <nav class="main-nav" aria-label="Nawigacja główna">
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-list" id="menuToggle">Menu</button>
+      <ul class="nav-list" id="nav-list" role="list">
+        <li><a href="#o-nas">O nas</a></li>
+        <li><a href="#uslugi">Usługi</a></li>
+        <li><a href="#dlaczego-my">Dlaczego my</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO SECTION
+     ============================================================ -->
+<section class="hero" id="hero">
+  <!-- Decorative floating vine motifs -->
+  <svg class="hero-motif hero-motif--left" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M100,0 Q60,50 80,100 Q100,150 60,200 Q20,250 70,300 Q120,350 80,400" fill="none" stroke="var(--gold)" stroke-width="2"/>
+    <path d="M80,100 Q120,80 130,60" fill="none" stroke="var(--rose)" stroke-width="1.5"/>
+    <circle cx="130" cy="60" r="8" fill="none" stroke="var(--rose)" stroke-width="1"/>
+    <path d="M60,200 Q20,180 10,160" fill="none" stroke="var(--rose)" stroke-width="1.5"/>
+    <circle cx="10" cy="160" r="6" fill="none" stroke="var(--rose)" stroke-width="1"/>
+    <path d="M70,300 Q110,280 125,265" fill="none" stroke="var(--mauve)" stroke-width="1.5"/>
+    <circle cx="125" cy="265" r="7" fill="none" stroke="var(--mauve)" stroke-width="1"/>
+    <path d="M80,100 Q40,120 30,140" fill="none" stroke="var(--gold)" stroke-width="1"/>
+    <path d="M60,200 Q100,220 115,240" fill="none" stroke="var(--gold)" stroke-width="1"/>
+  </svg>
+  <svg class="hero-motif hero-motif--right" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M100,0 Q60,50 80,100 Q100,150 60,200 Q20,250 70,300 Q120,350 80,400" fill="none" stroke="var(--gold)" stroke-width="2"/>
+    <path d="M80,100 Q120,80 130,60" fill="none" stroke="var(--rose)" stroke-width="1.5"/>
+    <circle cx="130" cy="60" r="8" fill="none" stroke="var(--rose)" stroke-width="1"/>
+    <path d="M60,200 Q20,180 10,160" fill="none" stroke="var(--rose)" stroke-width="1.5"/>
+    <circle cx="10" cy="160" r="6" fill="none" stroke="var(--rose)" stroke-width="1"/>
+    <path d="M70,300 Q110,280 125,265" fill="none" stroke="var(--mauve)" stroke-width="1.5"/>
+    <circle cx="125" cy="265" r="7" fill="none" stroke="var(--mauve)" stroke-width="1"/>
+  </svg>
+
+  <div class="hero-frame reveal">
+    <!-- Corner ornaments -->
+    <svg class="hero-corner hero-corner--tl" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,30 Q0,0 30,0" fill="none" stroke="var(--gold)" stroke-width="2"/>
+      <path d="M0,20 Q0,5 15,2" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4"/>
+      <path d="M5,0 Q8,12 0,15" fill="none" stroke="var(--rose)" stroke-width="1" opacity="0.5"/>
+      <circle cx="2" cy="2" r="2" fill="var(--gold)" opacity="0.6"/>
+    </svg>
+    <svg class="hero-corner hero-corner--tr" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,30 Q0,0 30,0" fill="none" stroke="var(--gold)" stroke-width="2"/>
+      <path d="M0,20 Q0,5 15,2" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4"/>
+      <path d="M5,0 Q8,12 0,15" fill="none" stroke="var(--rose)" stroke-width="1" opacity="0.5"/>
+      <circle cx="2" cy="2" r="2" fill="var(--gold)" opacity="0.6"/>
+    </svg>
+    <svg class="hero-corner hero-corner--bl" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,30 Q0,0 30,0" fill="none" stroke="var(--gold)" stroke-width="2"/>
+      <path d="M0,20 Q0,5 15,2" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4"/>
+      <path d="M5,0 Q8,12 0,15" fill="none" stroke="var(--rose)" stroke-width="1" opacity="0.5"/>
+      <circle cx="2" cy="2" r="2" fill="var(--gold)" opacity="0.6"/>
+    </svg>
+    <svg class="hero-corner hero-corner--br" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,30 Q0,0 30,0" fill="none" stroke="var(--gold)" stroke-width="2"/>
+      <path d="M0,20 Q0,5 15,2" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.4"/>
+      <path d="M5,0 Q8,12 0,15" fill="none" stroke="var(--rose)" stroke-width="1" opacity="0.5"/>
+      <circle cx="2" cy="2" r="2" fill="var(--gold)" opacity="0.6"/>
+    </svg>
+
+    <h1 class="hero-brand">INBLOSSOM</h1>
+    <p class="hero-tagline">Piękno zaczyna się tutaj</p>
+
+    <!-- Ornamental HR -->
+    <svg class="hero-ornament-hr" viewBox="0 0 320 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path class="svg-ornament-line draw-line" d="M0,15 Q40,0 80,15 Q120,30 160,15 Q200,0 240,15 Q280,30 320,15" stroke-width="1.5"/>
+      <circle cx="160" cy="15" r="4" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+      <circle cx="160" cy="15" r="1.5" fill="var(--gold)"/>
+      <circle cx="80" cy="15" r="2" fill="var(--rose)" opacity="0.5"/>
+      <circle cx="240" cy="15" r="2" fill="var(--rose)" opacity="0.5"/>
+    </svg>
+
+    <a href="#uslugi" class="hero-cta">Odkryj nasze usługi</a>
+  </div>
+</section>
+
+<!-- Wave divider: ivory to ivory (about section) -->
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="background: var(--ivory); margin-top: -1px;">
+  <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="var(--ivory-dark)" opacity="0.3"/>
+  <path class="svg-ornament-line draw-line" d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40" stroke-width="1"/>
+</svg>
+
+<!-- ============================================================
+     O NAS (ABOUT) SECTION
+     ============================================================ -->
+<section class="about" id="o-nas">
+  <div class="container">
+    <div class="about-inner">
+      <span class="section-label reveal">salon kosmetyczny</span>
+      <h2 class="section-title reveal">O Nas</h2>
+
+      <!-- Small floral motif -->
+      <svg class="reveal" width="60" height="30" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block; margin: 0.5rem auto 1.5rem;">
+        <path d="M10,15 Q20,5 30,15 Q40,5 50,15" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+        <circle cx="30" cy="15" r="2.5" fill="none" stroke="var(--rose)" stroke-width="1"/>
+        <circle cx="30" cy="15" r="1" fill="var(--rose)" opacity="0.5"/>
+      </svg>
+
+      <div class="about-frame reveal">
+        <!-- Vine corner accents -->
+        <svg class="about-corner about-corner--tl" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0,80 Q0,30 30,15 Q60,0 80,0" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+          <path d="M30,15 Q20,30 25,45" fill="none" stroke="var(--rose)" stroke-width="1" opacity="0.4"/>
+          <circle cx="25" cy="45" r="3" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+          <path d="M0,50 Q10,40 20,35" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.3"/>
+        </svg>
+        <svg class="about-corner about-corner--br" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0,80 Q0,30 30,15 Q60,0 80,0" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+          <path d="M30,15 Q20,30 25,45" fill="none" stroke="var(--rose)" stroke-width="1" opacity="0.4"/>
+          <circle cx="25" cy="45" r="3" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+        </svg>
+
+        <p class="about-text">
+          Odkryj miejsce, gdzie Twoje piękno rozkwita! Nasz salon to przestrzeń, w&nbsp;której łączymy profesjonalizm z&nbsp;pasją, oferując szeroki wachlarz usług kosmetycznych dostosowanych do Twoich indywidualnych potrzeb. Zaufaj naszym ekspertom i&nbsp;podaruj sobie chwilę relaksu oraz wyjątkowej pielęgnacji.
+        </p>
+      </div>
+
+      <!-- Ornamental emblem with initials -->
+      <div class="about-emblem reveal">
+        <div class="about-emblem-circle">
+          <span class="about-emblem-initials">IB</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider ornament -->
+<svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="background: var(--ivory);">
+  <path class="svg-ornament-line draw-line" d="M0,30 C180,60 360,0 540,30 C720,60 900,0 1080,30 C1260,60 1440,0 1440,30" stroke-width="1" opacity="0.4"/>
+  <path class="svg-ornament-line rose draw-line" d="M0,32 C180,58 360,5 540,32 C720,58 900,5 1080,32 C1260,58 1440,5 1440,32" stroke-width="0.8" opacity="0.2"/>
+</svg>
+
+<!-- ============================================================
+     USŁUGI (SERVICES) SECTION
+     ============================================================ -->
+<section class="services" id="uslugi">
+  <div class="container">
+    <span class="section-label reveal">oferta</span>
+    <h2 class="section-title reveal">Usługi</h2>
+
+    <!-- Small floral motif -->
+    <svg class="reveal" width="80" height="25" viewBox="0 0 80 25" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block; margin: 0.5rem auto 2.5rem;">
+      <path d="M0,12 Q20,2 40,12 Q60,22 80,12" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+      <path d="M15,12 Q25,6 35,12" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.4"/>
+      <path d="M45,12 Q55,18 65,12" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="40" cy="12" r="3" fill="none" stroke="var(--gold)" stroke-width="1"/>
+      <circle cx="40" cy="12" r="1" fill="var(--gold)"/>
+    </svg>
+
+    <!-- GROUP: Depilacja Laserowa -->
+    <div class="services-group reveal">
+      <h3 class="group-title">Depilacja Laserowa</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M14,26 Q20,10 26,26" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+            <circle cx="20" cy="16" r="3" fill="none" stroke="var(--rose)" stroke-width="1"/>
+          </svg>
+          <h4 class="service-card-name">Depilacja Laserowa Damska</h4>
+          <span class="service-card-category">laser</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M14,26 Q20,10 26,26" fill="none" stroke="var(--gold)" stroke-width="1.2"/>
+            <circle cx="20" cy="16" r="3" fill="none" stroke="var(--rose)" stroke-width="1"/>
+          </svg>
+          <h4 class="service-card-name">Depilacja Laserowa Męska</h4>
+          <span class="service-card-category">laser</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group divider -->
+    <svg class="group-divider" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q50,0 100,10 Q150,20 200,10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+      <circle cx="100" cy="10" r="2" fill="var(--rose)" opacity="0.4"/>
+    </svg>
+
+    <!-- GROUP: Zabiegi Laserowe -->
+    <div class="services-group reveal">
+      <h3 class="group-title">Zabiegi Laserowe</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M12,20 Q20,8 28,20" fill="none" stroke="var(--rose)" stroke-width="1.2"/>
+            <path d="M15,24 Q20,16 25,24" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
+          </svg>
+          <h4 class="service-card-name">Laserowe Odmładzanie</h4>
+          <span class="service-card-category">laser</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M12,20 Q20,8 28,20" fill="none" stroke="var(--rose)" stroke-width="1.2"/>
+            <path d="M15,24 Q20,16 25,24" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
+          </svg>
+          <h4 class="service-card-name">Laserowe Leczenie Trądziku</h4>
+          <span class="service-card-category">laser</span>
+        </div>
+      </div>
+    </div>
+
+    <svg class="group-divider" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q50,0 100,10 Q150,20 200,10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+      <circle cx="100" cy="10" r="2" fill="var(--rose)" opacity="0.4"/>
+    </svg>
+
+    <!-- GROUP: Masaż -->
+    <div class="services-group reveal">
+      <h3 class="group-title">Masaż</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--mauve)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M10,25 Q15,12 20,20 Q25,28 30,15" fill="none" stroke="var(--rose)" stroke-width="1.2"/>
+          </svg>
+          <h4 class="service-card-name">Masaż</h4>
+          <span class="service-card-category">relaks &amp; odnowa</span>
+        </div>
+      </div>
+    </div>
+
+    <svg class="group-divider" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q50,0 100,10 Q150,20 200,10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+      <circle cx="100" cy="10" r="2" fill="var(--rose)" opacity="0.4"/>
+    </svg>
+
+    <!-- GROUP: Brwi / Rzęsy -->
+    <div class="services-group reveal">
+      <h3 class="group-title">Brwi &amp; Rzęsy</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M10,18 Q20,12 30,18" fill="none" stroke="var(--charcoal)" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10,24 Q20,18 30,24" fill="none" stroke="var(--charcoal)" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+          <h4 class="service-card-name">Stylizacja / Laminacja Brwi</h4>
+          <span class="service-card-category">brwi &amp; rzęsy</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M12,20 Q16,14 20,20 Q24,14 28,20" fill="none" stroke="var(--charcoal)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <h4 class="service-card-name">Laminacja Rzęs</h4>
+          <span class="service-card-category">brwi &amp; rzęsy</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M14,22 Q17,15 20,22 Q23,15 26,22" fill="none" stroke="var(--charcoal)" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M17,19 L14,14" fill="none" stroke="var(--charcoal)" stroke-width="0.8" opacity="0.5"/>
+            <path d="M23,19 L26,14" fill="none" stroke="var(--charcoal)" stroke-width="0.8" opacity="0.5"/>
+          </svg>
+          <h4 class="service-card-name">Przedłużenie Rzęs</h4>
+          <span class="service-card-category">brwi &amp; rzęsy</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M10,17 Q20,11 30,17" fill="none" stroke="var(--charcoal)" stroke-width="1.2" stroke-linecap="round"/>
+            <path d="M12,23 Q16,18 20,23 Q24,18 28,23" fill="none" stroke="var(--charcoal)" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+          <h4 class="service-card-name">KOMBO: Brwi + Rzęsy</h4>
+          <span class="service-card-category">brwi &amp; rzęsy</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M10,18 Q20,12 30,18" fill="none" stroke="var(--charcoal)" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="18" y1="22" x2="18" y2="28" stroke="var(--gold)" stroke-width="0.8"/>
+            <line x1="22" y1="22" x2="22" y2="28" stroke="var(--gold)" stroke-width="0.8"/>
+            <line x1="20" y1="21" x2="20" y2="29" stroke="var(--gold)" stroke-width="0.8"/>
+          </svg>
+          <h4 class="service-card-name">Mezoterapia Mikroigłowa Brwi</h4>
+          <span class="service-card-category">brwi &amp; rzęsy</span>
+        </div>
+      </div>
+    </div>
+
+    <svg class="group-divider" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q50,0 100,10 Q150,20 200,10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+      <circle cx="100" cy="10" r="2" fill="var(--rose)" opacity="0.4"/>
+    </svg>
+
+    <!-- GROUP: Manicure / Pedicure -->
+    <div class="services-group reveal">
+      <h3 class="group-title">Manicure &amp; Pedicure</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+            <ellipse cx="20" cy="18" rx="6" ry="8" fill="none" stroke="var(--rose)" stroke-width="1.2"/>
+            <path d="M16,22 Q20,28 24,22" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
+          </svg>
+          <h4 class="service-card-name">Manicure</h4>
+          <span class="service-card-category">dłonie &amp; stopy</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+            <ellipse cx="20" cy="18" rx="7" ry="9" fill="none" stroke="var(--rose)" stroke-width="1.2"/>
+            <path d="M15,22 Q20,30 25,22" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
+          </svg>
+          <h4 class="service-card-name">Pedicure</h4>
+          <span class="service-card-category">dłonie &amp; stopy</span>
+        </div>
+      </div>
+    </div>
+
+    <svg class="group-divider" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q50,0 100,10 Q150,20 200,10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+      <circle cx="100" cy="10" r="2" fill="var(--rose)" opacity="0.4"/>
+    </svg>
+
+    <!-- GROUP: Zabiegi na Twarz -->
+    <div class="services-group reveal">
+      <h3 class="group-title">Zabiegi na Twarz</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--mauve)" stroke-width="0.8" opacity="0.3"/>
+            <ellipse cx="20" cy="19" rx="10" ry="13" fill="none" stroke="var(--rose)" stroke-width="1"/>
+            <path d="M15,16 Q17.5,14 20,16 Q22.5,14 25,16" fill="none" stroke="var(--charcoal)" stroke-width="0.8" opacity="0.5"/>
+          </svg>
+          <h4 class="service-card-name">Maski + Masaż Twarzy</h4>
+          <span class="service-card-category">pielęgnacja twarzy</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--mauve)" stroke-width="0.8" opacity="0.3"/>
+            <ellipse cx="20" cy="19" rx="10" ry="13" fill="none" stroke="var(--rose)" stroke-width="1"/>
+            <circle cx="20" cy="20" r="4" fill="none" stroke="var(--gold)" stroke-width="0.8" stroke-dasharray="2 2"/>
+          </svg>
+          <h4 class="service-card-name">Oczyszczanie Twarzy</h4>
+          <span class="service-card-category">pielęgnacja twarzy</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--mauve)" stroke-width="0.8" opacity="0.3"/>
+            <ellipse cx="20" cy="19" rx="10" ry="13" fill="none" stroke="var(--rose)" stroke-width="1"/>
+            <line x1="17" y1="15" x2="17" y2="25" stroke="var(--gold)" stroke-width="0.6"/>
+            <line x1="20" y1="14" x2="20" y2="26" stroke="var(--gold)" stroke-width="0.6"/>
+            <line x1="23" y1="15" x2="23" y2="25" stroke="var(--gold)" stroke-width="0.6"/>
+          </svg>
+          <h4 class="service-card-name">Mezoterapia Mikroigłowa Twarzy</h4>
+          <span class="service-card-category">pielęgnacja twarzy</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M12,24 Q16,12 20,20 Q24,28 28,16" fill="none" stroke="var(--rose)" stroke-width="1.2"/>
+          </svg>
+          <h4 class="service-card-name">Peeling</h4>
+          <span class="service-card-category">pielęgnacja twarzy</span>
+        </div>
+      </div>
+    </div>
+
+    <svg class="group-divider" viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,10 Q50,0 100,10 Q150,20 200,10" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+      <circle cx="100" cy="10" r="2" fill="var(--rose)" opacity="0.4"/>
+    </svg>
+
+    <!-- GROUP: Zabiegi Specjalistyczne -->
+    <div class="services-group reveal">
+      <h3 class="group-title">Zabiegi Specjalistyczne</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.3"/>
+            <line x1="17" y1="12" x2="17" y2="28" stroke="var(--gold)" stroke-width="0.8"/>
+            <line x1="20" y1="10" x2="20" y2="30" stroke="var(--gold)" stroke-width="0.8"/>
+            <line x1="23" y1="12" x2="23" y2="28" stroke="var(--gold)" stroke-width="0.8"/>
+            <circle cx="20" cy="20" r="6" fill="none" stroke="var(--rose)" stroke-width="1" stroke-dasharray="3 2"/>
+          </svg>
+          <h4 class="service-card-name">Mezoterapia Mikroigłowa Głowy</h4>
+          <span class="service-card-category">mezoterapia</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+            <circle cx="20" cy="20" r="8" fill="none" stroke="var(--gold)" stroke-width="1"/>
+            <circle cx="20" cy="20" r="3" fill="none" stroke="var(--rose)" stroke-width="1"/>
+            <line x1="20" y1="12" x2="20" y2="7" stroke="var(--gold)" stroke-width="0.8"/>
+            <line x1="20" y1="28" x2="20" y2="33" stroke="var(--gold)" stroke-width="0.8"/>
+          </svg>
+          <h4 class="service-card-name">Karboksyterapia</h4>
+          <span class="service-card-category">zabieg specjalistyczny</span>
+        </div>
+        <div class="service-card">
+          <svg class="service-card-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" fill="none" stroke="var(--mauve)" stroke-width="0.8" opacity="0.3"/>
+            <path d="M14,15 Q20,10 26,15 Q28,20 26,25 Q20,30 14,25 Q12,20 14,15 Z" fill="none" stroke="var(--rose)" stroke-width="1.2"/>
+            <path d="M17,20 Q20,17 23,20" fill="none" stroke="var(--gold)" stroke-width="0.8"/>
+          </svg>
+          <h4 class="service-card-name">Depilacja Pastą Cukrową</h4>
+          <span class="service-card-category">depilacja</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Wave divider: ivory to green -->
+<svg class="wave-divider" viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="background: var(--ivory); display: block;">
+  <path d="M0,20 C180,60 360,0 540,40 C720,80 900,10 1080,50 C1260,90 1380,20 1440,40 L1440,100 L0,100 Z" fill="var(--green)"/>
+  <path class="svg-ornament-line draw-line" d="M0,20 C180,60 360,0 540,40 C720,80 900,10 1080,50 C1260,90 1380,20 1440,40" stroke="var(--gold)" stroke-width="1.5" opacity="0.4"/>
+</svg>
+
+<!-- ============================================================
+     DLACZEGO MY (WHY US) SECTION
+     ============================================================ -->
+<section class="why-us" id="dlaczego-my">
+  <div class="container">
+    <span class="section-label reveal">zaufaj ekspertom</span>
+    <h2 class="section-title light reveal">Dlaczego My</h2>
+
+    <!-- Small floral motif (light) -->
+    <svg class="reveal" width="80" height="25" viewBox="0 0 80 25" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block; margin: 0.5rem auto 2rem;">
+      <path d="M0,12 Q20,2 40,12 Q60,22 80,12" fill="none" stroke="var(--gold)" stroke-width="1.2" opacity="0.6"/>
+      <circle cx="40" cy="12" r="3" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+      <circle cx="40" cy="12" r="1" fill="var(--gold)" opacity="0.4"/>
+    </svg>
+
+    <div class="reasons-grid">
+      <div class="reason-item reveal reveal-delay-1">
+        <div class="reason-number">1</div>
+        <div class="reason-content">
+          <h3>Profesjonalizm na najwyższym poziomie</h3>
+          <p>Nasi specjaliści posiadają wieloletnie doświadczenie i&nbsp;nieustannie doskonalą swoje umiejętności, aby zapewnić Ci najwyższą jakość usług.</p>
+        </div>
+      </div>
+      <div class="reason-item reveal reveal-delay-2">
+        <div class="reason-number">2</div>
+        <div class="reason-content">
+          <h3>Nowoczesne technologie</h3>
+          <p>Korzystamy z&nbsp;najnowocześniejszych urządzeń i&nbsp;sprawdzonych preparatów, gwarantując skuteczne i&nbsp;bezpieczne zabiegi.</p>
+        </div>
+      </div>
+      <div class="reason-item reveal reveal-delay-3">
+        <div class="reason-number">3</div>
+        <div class="reason-content">
+          <h3>Szeroka oferta</h3>
+          <p>Od depilacji laserowej, przez zabiegi na twarz, po manicure — znajdziesz u&nbsp;nas wszystko, czego potrzebujesz.</p>
+        </div>
+      </div>
+      <div class="reason-item reveal reveal-delay-4">
+        <div class="reason-number">4</div>
+        <div class="reason-content">
+          <h3>Indywidualne podejście</h3>
+          <p>Każdy zabieg dopasowujemy do Twoich potrzeb i&nbsp;oczekiwań, zapewniając spersonalizowaną pielęgnację.</p>
+        </div>
+      </div>
+      <div class="reason-item reveal reveal-delay-5">
+        <div class="reason-number">5</div>
+        <div class="reason-content">
+          <h3>Relaksująca atmosfera</h3>
+          <p>Nasz salon to oaza spokoju, gdzie możesz zapomnieć o&nbsp;codziennych troskach i&nbsp;oddać się chwili relaksu.</p>
+        </div>
+      </div>
+      <div class="reason-item reveal reveal-delay-6">
+        <div class="reason-number">6</div>
+        <div class="reason-content">
+          <h3>Zadowolenie klientów</h3>
+          <p>Setki zadowolonych klientów to najlepsza rekomendacja. Twoje piękno i&nbsp;satysfakcja są naszym priorytetem.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider: green to dark green (contact) -->
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="background: var(--green); display: block;">
+  <path d="M0,30 C360,70 720,0 1080,50 C1260,70 1380,30 1440,40 L1440,80 L0,80 Z" fill="var(--green-dark)"/>
+  <path class="svg-ornament-line ivory draw-line" d="M0,30 C360,70 720,0 1080,50 C1260,70 1380,30 1440,40" stroke-width="1" opacity="0.15"/>
+</svg>
+
+<!-- ============================================================
+     KONTAKT (CONTACT) SECTION
+     ============================================================ -->
+<section class="contact" id="kontakt">
+  <div class="container">
+    <div class="contact-inner">
+      <span class="section-label reveal" style="color: var(--gold-light);">zapraszamy</span>
+      <h2 class="section-title light reveal">Kontakt</h2>
+
+      <svg class="reveal" width="80" height="25" viewBox="0 0 80 25" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block; margin: 0.5rem auto 2rem;">
+        <path d="M0,12 Q20,2 40,12 Q60,22 80,12" fill="none" stroke="var(--gold)" stroke-width="1.2" opacity="0.5"/>
+        <circle cx="40" cy="12" r="2" fill="var(--gold)" opacity="0.4"/>
+      </svg>
+
+      <div class="contact-frame reveal">
+        <div class="contact-detail">
+          <span class="contact-label">Adres</span>
+          <p class="contact-value">ul. Towarowa 22A, 15-007 Białystok</p>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-label">Telefon</span>
+          <p class="contact-value"><a href="tel:+48535449538">+48 535-449-538</a></p>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-label">E-mail</span>
+          <p class="contact-value"><a href="mailto:Inblossom.pl@gmail.com">Inblossom.pl@gmail.com</a></p>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-label">Godziny otwarcia</span>
+          <p class="contact-value">Poniedziałek &ndash; Sobota: 8:00 &ndash; 21:00</p>
+        </div>
+
+        <!-- Ornamental divider inside contact -->
+        <svg width="120" height="15" viewBox="0 0 120 15" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block; margin: 1rem auto;">
+          <path d="M0,7 Q30,0 60,7 Q90,14 120,7" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="60" cy="7" r="2" fill="var(--gold)" opacity="0.3"/>
+        </svg>
+
+        <div class="social-links">
+          <!-- Facebook -->
+          <a href="#" class="social-link" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" class="social-link" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+            </svg>
+          </a>
+          <!-- WhatsApp -->
+          <a href="#" class="social-link" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </a>
+          <!-- Booksy -->
+          <a href="#" class="social-link" aria-label="Booksy" title="Booksy">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 2h8a4 4 0 014 4v0a4 4 0 01-4 4H6V2z" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M6 10h9a4 4 0 014 4v0a4 4 0 01-4 4H6V10z" fill="none" stroke="currentColor" stroke-width="2"/>
+              <line x1="4" y1="2" x2="4" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider: dark green to ivory (footer) -->
+<svg class="wave-divider" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="background: var(--green-dark); display: block;">
+  <path d="M0,20 C240,60 480,10 720,40 C960,70 1200,15 1440,35 L1440,80 L0,80 Z" fill="var(--ivory)"/>
+  <path class="svg-ornament-line draw-line" d="M0,20 C240,60 480,10 720,40 C960,70 1200,15 1440,35" stroke="var(--gold)" stroke-width="1" opacity="0.3"/>
+</svg>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <!-- Decorative vine line -->
+  <svg class="footer-ornament" viewBox="0 0 300 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,15 Q37.5,5 75,15 Q112.5,25 150,15 Q187.5,5 225,15 Q262.5,25 300,15" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.5"/>
+    <path d="M75,15 Q65,8 60,5" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+    <circle cx="60" cy="5" r="2" fill="none" stroke="var(--rose)" stroke-width="0.6" opacity="0.3"/>
+    <path d="M150,15 Q145,22 140,25" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+    <circle cx="140" cy="25" r="2" fill="none" stroke="var(--rose)" stroke-width="0.6" opacity="0.3"/>
+    <path d="M225,15 Q220,8 215,5" fill="none" stroke="var(--rose)" stroke-width="0.8" opacity="0.3"/>
+    <circle cx="215" cy="5" r="2" fill="none" stroke="var(--rose)" stroke-width="0.6" opacity="0.3"/>
+    <circle cx="150" cy="15" r="3" fill="none" stroke="var(--gold)" stroke-width="0.8" opacity="0.4"/>
+  </svg>
+
+  <div class="footer-brand">INBLOSSOM</div>
+  <p class="footer-copy">&copy; 2026 INBLOSSOM. Wszelkie prawa zastrzeżone.</p>
+
+  <div class="footer-social">
+    <a href="#" aria-label="Facebook" title="Facebook">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    </a>
+    <a href="#" aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+      </svg>
+    </a>
+    <a href="#" aria-label="WhatsApp" title="WhatsApp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    </a>
+    <a href="#" aria-label="Booksy" title="Booksy">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M6 2h8a4 4 0 014 4v0a4 4 0 01-4 4H6V2z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M6 10h9a4 4 0 014 4v0a4 4 0 01-4 4H6V10z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="4" y1="2" x2="4" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ============================================================
+     INTERSECTION OBSERVER — REVEAL ON SCROLL
+     ============================================================ */
+  const revealElements = document.querySelectorAll('.reveal');
+  const drawLines = document.querySelectorAll('.draw-line');
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(function(el) {
+      revealObserver.observe(el);
+    });
+
+    // SVG line draw animation
+    const lineObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          lineObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    drawLines.forEach(function(line) {
+      lineObserver.observe(line);
+    });
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    revealElements.forEach(function(el) {
+      el.classList.add('visible');
+    });
+    drawLines.forEach(function(line) {
+      line.classList.add('animate');
+    });
+  }
+
+  /* ============================================================
+     HEADER SCROLL EFFECT
+     ============================================================ */
+  var header = document.getElementById('header');
+  var lastScroll = 0;
+
+  function handleScroll() {
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollY > 60) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+    lastScroll = scrollY;
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+
+  /* ============================================================
+     MOBILE MENU TOGGLE
+     ============================================================ */
+  var menuToggle = document.getElementById('menuToggle');
+  var navList = document.getElementById('nav-list');
+
+  if (menuToggle && navList) {
+    menuToggle.addEventListener('click', function() {
+      var isOpen = navList.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      menuToggle.textContent = isOpen ? 'Zamknij' : 'Menu';
+    });
+
+    // Close menu when a nav link is clicked
+    navList.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navList.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = 'Menu';
+      });
+    });
+  }
+
+  /* ============================================================
+     SMOOTH SCROLL FOR ANCHOR LINKS
+     ============================================================ */
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      var target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        var headerHeight = header ? header.offsetHeight : 0;
+        var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  /* ============================================================
+     STROKE DASHARRAY INITIALIZATION
+     ============================================================ */
+  drawLines.forEach(function(line) {
+    var length = 0;
+    try {
+      length = line.getTotalLength();
+    } catch (e) {
+      length = 1000;
+    }
+    if (length > 0) {
+      line.style.strokeDasharray = length;
+      line.style.strokeDashoffset = length;
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
