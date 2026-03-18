@@ -1,0 +1,553 @@
+---
+const variants = [
+  {
+    id: 1,
+    file: '/variant-1-botanical-noir.html',
+    screenshot: '/screenshots/variant-1.webp',
+    name: 'Botanical Noir',
+    description: 'Dark editorial luxury with gold foil accents, botanical SVG line art, and glassmorphism service cards.',
+    aesthetic: 'Luxurious & Intimate',
+    colors: ['#0A0A0A', '#0D1F0D', '#C4A265', '#F5F0E8', '#8B9A6B'],
+    fonts: 'Playfair Display + Cormorant Garamond + Jost',
+    badge: 'Dark',
+  },
+  {
+    id: 2,
+    file: '/variant-2-warm-japandi.html',
+    screenshot: '/screenshots/variant-2.webp',
+    name: 'Warm Japandi',
+    description: 'Calm Scandinavian-Japanese minimalism with organic blob shapes, generous whitespace, and terracotta accents.',
+    aesthetic: 'Calm & Refined',
+    colors: ['#E8DED1', '#C4785A', '#2C2C2C', '#FAF7F2', '#7A7A5E'],
+    fonts: 'DM Serif Display + Outfit',
+    badge: 'Light',
+  },
+  {
+    id: 3,
+    file: '/variant-3-art-nouveau.html',
+    screenshot: '/screenshots/variant-3.webp',
+    name: 'Art Nouveau Revival',
+    description: 'Mucha-inspired ornamental elegance with flowing SVG borders, jewel tones, and decorative vine motifs.',
+    aesthetic: 'Artistic & Heritage',
+    colors: ['#FDF8F0', '#8C3A4B', '#B8923F', '#2D4A3E', '#9E7B8D'],
+    fonts: 'Cinzel Decorative + Libre Baskerville',
+    badge: 'Mixed',
+  },
+  {
+    id: 4,
+    file: '/variant-4-opulent-rouge.html',
+    screenshot: '/screenshots/variant-4.webp',
+    name: 'Opulent Rouge & Gold',
+    description: 'Maximalist luxury with deep crimson reds, 24k gold accents, real hero image, and floating gold particles.',
+    aesthetic: 'Bold & Dramatic',
+    colors: ['#1A0505', '#8B1A1A', '#D4A017', '#F0C040', '#FFF8EC'],
+    fonts: 'Bodoni Moda + Tenor Sans + Nunito Sans',
+    badge: 'Dark',
+  },
+  {
+    id: 5,
+    file: '/variant-5-ethereal-glass.html',
+    screenshot: '/screenshots/variant-5.webp',
+    name: 'Ethereal Glass',
+    description: 'Frosted glass morphism on a living aurora gradient canvas with luminous orbs and refraction borders.',
+    aesthetic: 'Otherworldly & Modern',
+    colors: ['#0F2027', '#1A0A2E', '#B4A7D6', '#7FDBCA', '#D4A0A0'],
+    fonts: 'Lora + Questrial',
+    badge: 'Dark',
+  },
+];
+---
+
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="INBLOSSOM — Design variants for a beauty salon website in Bialystok" />
+  <title>INBLOSSOM — Design Variants</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --surface: #FAFAF8;
+      --surface-raised: #FFFFFF;
+      --border: #E8E6E1;
+      --border-hover: #D0CEC8;
+      --text-primary: #1A1918;
+      --text-secondary: #6B6966;
+      --text-tertiary: #9C9891;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Geist', -apple-system, system-ui, sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--surface);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    ::selection {
+      background: var(--text-primary);
+      color: var(--surface);
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      padding: 3rem 2rem 1rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--text-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--surface);
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-style: italic;
+      flex-shrink: 0;
+    }
+
+    .header h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .header h1 em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .header-sub {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-top: 0.75rem;
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    .header-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin-top: 2rem;
+    }
+
+    /* ===== GALLERY — single column ===== */
+    .gallery {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* ===== CARD — horizontal layout ===== */
+    .card {
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all var(--transition);
+      text-decoration: none;
+      color: inherit;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      position: relative;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.07), 0 2px 10px rgba(0,0,0,0.04);
+      transform: translateY(-3px);
+    }
+
+    .card:hover .card-arrow {
+      opacity: 1;
+      transform: translate(2px, -2px);
+    }
+
+    .card:hover .card-screenshot img {
+      transform: scale(1.03);
+    }
+
+    .card:hover .card-screenshot::after {
+      opacity: 0;
+    }
+
+    /* ===== Card left — info ===== */
+    .card-info {
+      padding: 2rem 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-number {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 3.5rem;
+      line-height: 1;
+      color: var(--border);
+      margin-bottom: 0.75rem;
+      transition: color var(--transition);
+    }
+
+    .card:hover .card-number {
+      color: var(--border-hover);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    .card-arrow {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--text-tertiary);
+      opacity: 0;
+      transform: translate(0, 0);
+      transition: all var(--transition);
+      margin-top: 4px;
+    }
+
+    .card-aesthetic {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    .card-meta {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-fonts {
+      font-size: 0.68rem;
+      color: var(--text-tertiary);
+      font-weight: 400;
+    }
+
+    .card-colors {
+      display: flex;
+      gap: 5px;
+    }
+
+    .color-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover .color-dot {
+      transform: scale(1.15);
+    }
+
+    /* ===== Card right — screenshot ===== */
+    .card-screenshot {
+      position: relative;
+      overflow: hidden;
+      background: #F0EFEC;
+      border-left: 1px solid var(--border);
+    }
+
+    .card-screenshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .card-screenshot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--surface-raised) 0%, transparent 8%);
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+
+    /* Badge on screenshot */
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2;
+    }
+
+    .badge-dark {
+      background: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.85);
+    }
+
+    .badge-light {
+      background: rgba(255,255,255,0.75);
+      color: rgba(0,0,0,0.65);
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .badge-mixed {
+      background: rgba(0,0,0,0.35);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+
+    .footer-line {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-text {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      font-weight: 300;
+    }
+
+    .footer-text a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+
+    .footer-text a:hover {
+      border-color: var(--text-secondary);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .card {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: cardIn 0.6s ease forwards;
+    }
+
+    @keyframes cardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.12s; }
+    .card:nth-child(3) { animation-delay: 0.19s; }
+    .card:nth-child(4) { animation-delay: 0.26s; }
+    .card:nth-child(5) { animation-delay: 0.33s; }
+
+    .header {
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 860px) {
+      .card {
+        grid-template-columns: 1fr;
+      }
+
+      .card-screenshot {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        height: 240px;
+        order: -1;
+      }
+
+      .card-screenshot::after {
+        background: linear-gradient(to top, var(--surface-raised) 0%, transparent 10%);
+      }
+
+      .card-info {
+        padding: 1.5rem;
+      }
+
+      .card-number {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        padding: 2rem 1.25rem 1rem;
+      }
+
+      .gallery {
+        padding: 1.5rem 1.25rem 3rem;
+        gap: 1.25rem;
+      }
+
+      .card-info {
+        padding: 1.25rem;
+      }
+
+      .card-screenshot {
+        height: 200px;
+      }
+
+      .footer {
+        padding: 0 1.25rem 2rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .card-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-top">
+      <div class="logo-mark">IB</div>
+      <h1>Design <em>Variants</em></h1>
+    </div>
+    <p class="header-sub">
+      Five distinct design directions for the INBLOSSOM beauty salon website. Click any card to view the full-page prototype.
+    </p>
+    <div class="header-divider"></div>
+  </header>
+
+  <main class="gallery">
+    {variants.map((v) => (
+      <a class="card" href={v.file} target="_blank" rel="noopener">
+        <div class="card-info">
+          <span class="card-number">{v.id}</span>
+          <div class="card-header">
+            <h2 class="card-title">{v.name}</h2>
+            <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17L17 7M17 7H7M17 7V17" />
+            </svg>
+          </div>
+          <p class="card-aesthetic">{v.aesthetic}</p>
+          <p class="card-desc">{v.description}</p>
+          <div class="card-meta">
+            <span class="card-fonts">{v.fonts}</span>
+            <div class="card-colors">
+              {v.colors.map((color) => (
+                <div class="color-dot" style={`background: ${color};`}></div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="card-screenshot">
+          <img src={v.screenshot} alt={`Preview of ${v.name} design variant`} loading="lazy" />
+          <span class={`card-badge badge-${v.badge.toLowerCase()}`}>
+            {v.badge} theme
+          </span>
+        </div>
+      </a>
+    ))}
+  </main>
+
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <div class="footer-content">
+      <p class="footer-text">INBLOSSOM Salon Kosmetyczny, Bialystok</p>
+      <p class="footer-text">
+        <a href="https://inblossom.pl" target="_blank" rel="noopener">inblossom.pl</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
