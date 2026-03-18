@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="INBLOSSOM Beauty Salon — salon kosmetyczny w Białymstoku. Depilacja laserowa, zabiegi na twarz, masaże i więcej. Piękno zaczyna się tutaj.">
+    <meta name="theme-color" content="#B76E54">
+    <title>INBLOSSOM — Beauty Salon Białystok</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Darker+Grotesque:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        ::selection {
+            background: #B76E54;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background: #B76E54;
+            color: #fff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 400;
+            color: #111111;
+            background: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img { max-width: 100%; display: block; }
+        button { border: none; background: none; cursor: pointer; font-family: inherit; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========================================
+           TYPOGRAPHY HELPERS
+           ======================================== */
+        .section-label {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #8A8580;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant', serif;
+            font-weight: 600;
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            color: #111111;
+            line-height: 1.1;
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255,255,255,0.97);
+            border-bottom: 1px solid #F0EEEB;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav.scrolled {
+            border-bottom-color: #E0DDD9;
+            box-shadow: 0 1px 20px rgba(0,0,0,0.04);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant', serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .nav-logo .logo-in {
+            font-family: 'Darker Grotesque', sans-serif;
+            color: #C6953B;
+            margin-right: 0.08em;
+        }
+
+        .nav-logo .logo-blossom {
+            color: #111111;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-links a {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            color: #111111;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #B76E54;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #111111;
+            border: 1px solid #111111;
+            padding: 10px 24px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #B76E54;
+            z-index: -1;
+            transition: width 0.4s ease;
+        }
+
+        .nav-cta:hover {
+            color: #fff;
+            border-color: #B76E54;
+        }
+
+        .nav-cta:hover::before {
+            width: 100%;
+        }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1010;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: #111111;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.active span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        /* Mobile menu */
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            width: 100%;
+            background: #FFFFFF;
+            border-bottom: 1px solid #F0EEEB;
+            padding: 32px 24px;
+            transform: translateY(-10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 999;
+        }
+
+        .nav-mobile.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .nav-mobile a {
+            display: block;
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: #111111;
+            padding: 12px 0;
+            border-bottom: 1px solid #F0EEEB;
+        }
+
+        .nav-mobile a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-mobile .mobile-cta {
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: 1px solid #111111;
+            padding: 12px 32px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .nav-mobile { display: block; }
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #FFFFFF;
+            padding: 72px 24px 60px;
+            overflow: hidden;
+        }
+
+        /* Faint rose gold glow behind sign */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -55%);
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(183,110,84,0.06) 0%, rgba(183,110,84,0) 70%);
+            pointer-events: none;
+        }
+
+        /* Thin rose gold horizontal accent lines */
+        .hero-accent-line {
+            position: absolute;
+            height: 1px;
+            background: #D4A08A;
+            opacity: 0.3;
+        }
+
+        .hero-accent-line.left {
+            top: 35%;
+            left: 0;
+            width: 80px;
+        }
+
+        .hero-accent-line.right {
+            top: 65%;
+            right: 0;
+            width: 120px;
+        }
+
+        /* The sign composition */
+        .sign-composition {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 48px;
+        }
+
+        .sign-composition {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sign-frame {
+            position: relative;
+            padding: 2.2rem 3.5rem;
+            border: 1.5px solid #111111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            clip-path: inset(0 0 0 0);
+        }
+
+        .sign-frame.animate-in {
+            animation: frameDraw 0.6s ease-out forwards;
+        }
+
+        @keyframes frameDraw {
+            0% { clip-path: inset(50% 50% 50% 50%); }
+            100% { clip-path: inset(0 0 0 0); }
+        }
+
+        .sign-text {
+            display: flex;
+            align-items: baseline;
+            gap: 0;
+            line-height: 1;
+        }
+
+        .sign-text-in {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 600;
+            font-size: clamp(2.6rem, 6vw, 3.8rem);
+            color: #C6953B;
+            letter-spacing: 0.08em;
+            margin-right: 0.15em;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease, transform 0.6s ease;
+        }
+
+        .sign-text-in.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sign-blossom {
+            font-family: 'Cormorant', serif;
+            font-weight: 600;
+            font-size: clamp(2.6rem, 6vw, 3.8rem);
+            letter-spacing: 0.15em;
+            color: #111111;
+            line-height: 1;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .sign-blossom.visible {
+            opacity: 1;
+        }
+
+        .sign-subtitle {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #8A8580;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .sign-subtitle.visible {
+            opacity: 1;
+        }
+
+        /* Rose gold accent that breaks the frame — a thin line + dot extending past the top-right corner */
+        .sign-frame::after {
+            content: '';
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 24px;
+            height: 24px;
+            border-right: 1.5px solid var(--rose-gold);
+            border-top: 1.5px solid var(--rose-gold);
+            opacity: 0;
+            transition: opacity 0.6s ease 1.2s;
+        }
+
+        .sign-frame.animate-in::after {
+            opacity: 1;
+        }
+
+        /* Tagline */
+        .hero-tagline {
+            font-family: 'Cormorant', serif;
+            font-weight: 400;
+            font-style: italic;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: #8A8580;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .hero-tagline.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CTA */
+        .hero-cta {
+            display: inline-block;
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #111111;
+            border: 1.5px solid #111111;
+            padding: 14px 40px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .hero-cta.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: color 0.4s ease, opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #B76E54;
+            z-index: -1;
+            transition: width 0.4s ease;
+        }
+
+        .hero-cta:hover {
+            color: #FFFFFF;
+            border-color: #B76E54;
+        }
+
+        .hero-cta:hover::before {
+            width: 100%;
+        }
+
+        @media (max-width: 520px) {
+            .sign-frame {
+                padding: 1.6rem 2rem;
+            }
+        }
+
+        /* ========================================
+           REVEAL ANIMATIONS
+           ======================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-child {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal-child.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           SERVICES SECTION
+           ======================================== */
+        .services-section {
+            padding: 140px 0;
+            background: #FFFFFF;
+        }
+
+        .section-heading-line {
+            position: relative;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-heading-line::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #111111;
+            opacity: 0.15;
+        }
+
+        .section-heading-line .section-label {
+            position: relative;
+            display: inline-block;
+            background: #FFFFFF;
+            padding: 0 40px;
+            margin-bottom: 12px;
+        }
+
+        .section-heading-line .section-title {
+            position: relative;
+            display: inline-block;
+            background: #FFFFFF;
+            padding: 0 48px;
+        }
+
+        /* Service cards grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        @media (max-width: 900px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 580px) {
+            .services-grid { grid-template-columns: 1fr; }
+        }
+
+        .service-card {
+            background: #F0EEEB;
+            padding: 40px 28px 32px;
+            position: relative;
+            border-top: 1.5px solid #111111;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #B76E54;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+        }
+
+        .service-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Breaking frame: number overflows top border */
+        .service-number {
+            position: absolute;
+            top: -18px;
+            left: 28px;
+            font-family: 'Cormorant', serif;
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: #B76E54;
+            background: #F0EEEB;
+            padding: 0 8px;
+            line-height: 1;
+        }
+
+        .service-card h3 {
+            font-family: 'Cormorant', serif;
+            font-weight: 500;
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+            color: #111111;
+        }
+
+        .service-card p {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #8A8580;
+            margin-bottom: 16px;
+        }
+
+        .service-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+        }
+
+        .service-links a {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #B76E54;
+            letter-spacing: 0.03em;
+            transition: color 0.2s ease;
+        }
+
+        .service-links a::after {
+            content: ' \2192';
+        }
+
+        .service-links a:hover {
+            color: #D4A08A;
+        }
+
+        /* ========================================
+           ABOUT SECTION
+           ======================================== */
+        .about-section {
+            padding: 140px 0;
+            background: #FFFFFF;
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+        }
+
+        .about-text-col .section-label {
+            margin-bottom: 16px;
+        }
+
+        .about-text-col .section-title {
+            margin-bottom: 32px;
+        }
+
+        .about-text {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-drop-cap {
+            font-family: 'Cormorant', serif;
+            font-weight: 600;
+            font-size: 4rem;
+            float: left;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 6px;
+            color: #B76E54;
+        }
+
+        /* Decorative monogram frame */
+        .about-deco {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .monogram-frame {
+            position: relative;
+            width: 240px;
+            height: 360px;
+            border: 1.5px solid #111111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .monogram-text {
+            font-family: 'Cormorant', serif;
+            font-weight: 600;
+            font-size: 5rem;
+            color: #B76E54;
+            opacity: 0.25;
+            letter-spacing: -0.05em;
+        }
+
+        /* Breaking frame: rose gold accent breaks top-right corner */
+        .monogram-frame::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 50px;
+            height: 50px;
+            border-top: 2px solid #B76E54;
+            border-right: 2px solid #B76E54;
+        }
+
+        @media (max-width: 768px) {
+            .monogram-frame {
+                width: 180px;
+                height: 270px;
+            }
+        }
+
+        /* ========================================
+           WHY US SECTION
+           ======================================== */
+        .why-section {
+            padding: 140px 0;
+            background: #FAF8F5;
+        }
+
+        .why-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px 64px;
+        }
+
+        @media (max-width: 640px) {
+            .why-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .why-item {
+            padding: 0;
+        }
+
+        .why-number {
+            font-family: 'Cormorant', serif;
+            font-weight: 600;
+            font-size: 2.2rem;
+            color: #B76E54;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .why-separator {
+            width: 32px;
+            height: 1px;
+            background: #D4A08A;
+            margin-bottom: 16px;
+        }
+
+        .why-item h3 {
+            font-family: 'Cormorant', serif;
+            font-weight: 500;
+            font-size: 1.25rem;
+            color: #111111;
+            margin-bottom: 8px;
+        }
+
+        .why-item p {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #8A8580;
+        }
+
+        /* ========================================
+           CONTACT SECTION
+           ======================================== */
+        .contact-section {
+            padding: 140px 0 100px;
+            background: #FFFFFF;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        /* Breaking frame: map pin breaks top border */
+        .contact-frame {
+            position: relative;
+            border: 1.5px solid #111111;
+            padding: 48px;
+        }
+
+        .contact-pin {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-pin svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .contact-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-columns { grid-template-columns: 1fr; }
+            .contact-frame { padding: 36px 24px; }
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .contact-info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            margin-top: 3px;
+            color: #B76E54;
+        }
+
+        .contact-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .contact-label {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #8A8580;
+            margin-bottom: 2px;
+        }
+
+        .contact-value {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+            color: #111111;
+        }
+
+        .contact-value a {
+            transition: color 0.2s ease;
+        }
+
+        .contact-value a:hover {
+            color: #B76E54;
+        }
+
+        /* Map placeholder */
+        .map-placeholder {
+            background: #F0EEEB;
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-placeholder iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+            border: 0;
+            filter: grayscale(0.6) contrast(0.9);
+            transition: filter 0.4s ease;
+        }
+
+        .map-placeholder:hover iframe {
+            filter: grayscale(0) contrast(1);
+        }
+
+        /* Social links */
+        .social-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 48px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 1px solid #E0DDD9;
+            border-radius: 50%;
+            color: #B76E54;
+            transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+
+        .social-link:hover {
+            border-color: #B76E54;
+            background: #B76E54;
+            color: #FFFFFF;
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            background: #FAF8F5;
+            padding: 60px 24px 40px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #D4A08A;
+            opacity: 0.4;
+        }
+
+        .footer-sign {
+            position: relative;
+            width: 200px;
+            height: 100px;
+            border: 1px solid #111111;
+            margin: 0 auto 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-sign-text {
+            display: flex;
+            align-items: baseline;
+            gap: 0;
+        }
+
+        .footer-sign-in {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 600;
+            font-size: 1.6rem;
+            color: #C6953B;
+            letter-spacing: 0.08em;
+            margin-right: 0.12em;
+            line-height: 1;
+        }
+
+        .footer-sign-blossom {
+            font-family: 'Cormorant', serif;
+            font-weight: 600;
+            font-size: 1.6rem;
+            letter-spacing: 0.12em;
+            color: #111111;
+            line-height: 1;
+        }
+
+        .footer-sign-sub {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 500;
+            font-size: 0.55rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #8A8580;
+            margin-top: 4px;
+        }
+
+        .footer-copy {
+            text-align: center;
+            font-family: 'Darker Grotesque', sans-serif;
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #8A8580;
+        }
+
+        /* ========================================
+           SECTION SPACING
+           ======================================== */
+        @media (max-width: 768px) {
+            .services-section,
+            .about-section,
+            .why-section,
+            .contact-section {
+                padding: 80px 0;
+            }
+            .section-heading-line {
+                margin-bottom: 48px;
+            }
+            .why-header {
+                margin-bottom: 48px;
+            }
+        }
+
+        /* ========================================
+           ROSE GOLD DECORATIVE LINE
+           ======================================== */
+        .rg-divider {
+            width: 100%;
+            height: 1px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .rg-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 1px;
+            background: #B76E54;
+            opacity: 0.35;
+        }
+
+        /* Extended rose gold line for section headings — breaking frame motif */
+        .heading-rose-line {
+            position: relative;
+            display: block;
+            width: 60px;
+            height: 1px;
+            background: #D4A08A;
+            margin: 16px auto 0;
+        }
+
+        .heading-rose-line::after {
+            content: '';
+            position: absolute;
+            right: -24px;
+            top: 0;
+            width: 24px;
+            height: 1px;
+            background: #B76E54;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ NAVIGATION ============ -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <span class="logo-in">IN</span><span class="logo-blossom">BLOSSOM</span>
+            </a>
+            <div class="nav-links">
+                <a href="#uslugi">Usługi</a>
+                <a href="#o-nas">O nas</a>
+                <a href="#dlaczego-my">Dlaczego my</a>
+                <a href="#kontakt">Kontakt</a>
+                <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="nav-cta">Umów wizytę</a>
+            </div>
+            <div class="nav-hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="nav-mobile" id="mobileMenu">
+            <a href="#uslugi">Usługi</a>
+            <a href="#o-nas">O nas</a>
+            <a href="#dlaczego-my">Dlaczego my</a>
+            <a href="#kontakt">Kontakt</a>
+            <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="mobile-cta">Umów wizytę</a>
+        </div>
+    </nav>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+        <div class="hero-accent-line left"></div>
+        <div class="hero-accent-line right"></div>
+
+        <div class="sign-composition">
+            <div class="sign-frame" id="signFrame">
+                <div class="sign-text">
+                    <span class="sign-text-in" id="signIn">IN</span>
+                    <span class="sign-blossom" id="signBlossom">BLOSSOM</span>
+                </div>
+                <span class="sign-subtitle" id="signSubtitle">BEAUTY SALON</span>
+            </div>
+        </div>
+
+        <p class="hero-tagline" id="heroTagline">Piękno zaczyna się tutaj</p>
+
+        <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="hero-cta" id="heroCta">Umów wizytę</a>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="services-section" id="uslugi">
+        <div class="container">
+            <div class="section-heading-line reveal">
+                <div class="section-label">Nasza oferta</div>
+                <h2 class="section-title">Usługi</h2>
+                <span class="heading-rose-line"></span>
+            </div>
+
+            <div class="services-grid">
+
+                <!-- 01 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">01</span>
+                    <h3>Depilacja Laserowa</h3>
+                    <p>Trwałe usuwanie owłosienia najnowszą technologią laserową. Skutecznie, bezpiecznie i komfortowo.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/depilacja-laserowa-damska">Damska</a>
+                        <a href="https://inblossom.pl/depilacja-laserowa-meska">Męska</a>
+                    </div>
+                </div>
+
+                <!-- 02 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">02</span>
+                    <h3>Laserowe Odmładzanie</h3>
+                    <p>Zaawansowane zabiegi odmładzające z użyciem technologii laserowej. Widoczne efekty już po pierwszej wizycie.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/laserowe-odmladzanie">Sprawdź</a>
+                    </div>
+                </div>
+
+                <!-- 03 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">03</span>
+                    <h3>Leczenie Trądziku</h3>
+                    <p>Laserowa terapia trądziku — skuteczna walka z niedoskonałościami bez inwazyjnych zabiegów.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/laserowe-leczenie-tradziku">Sprawdź</a>
+                    </div>
+                </div>
+
+                <!-- 04 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">04</span>
+                    <h3>Masaż</h3>
+                    <p>Profesjonalne masaże relaksacyjne i lecznicze. Idealne połączenie odprężenia z terapią ciała.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/masaz">Sprawdź</a>
+                    </div>
+                </div>
+
+                <!-- 05 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">05</span>
+                    <h3>Brwi &amp; Rzęsy</h3>
+                    <p>Kompleksowa stylizacja brwi i rzęs — od laminacji po przedłużanie. Podkreśl swoje spojrzenie.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/laminacja-brwi">Brwi</a>
+                        <a href="https://inblossom.pl/laminacja-rzes">Laminacja</a>
+                        <a href="https://inblossom.pl/przedluzenie-rzesy">Przedłużenie</a>
+                        <a href="https://inblossom.pl/kombo-brwi-rzesy">KOMBO</a>
+                        <a href="https://inblossom.pl/mezoterapia-mikroiglowa-brwi">Mezoterapia</a>
+                    </div>
+                </div>
+
+                <!-- 06 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">06</span>
+                    <h3>Manicure &amp; Pedicure</h3>
+                    <p>Piękne i zadbane paznokcie dzięki profesjonalnemu manicure i pedicure z użyciem najlepszych produktów.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/manicure-pedicure">Sprawdź</a>
+                    </div>
+                </div>
+
+                <!-- 07 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">07</span>
+                    <h3>Maski &amp; Masaż Twarzy</h3>
+                    <p>Odżywcze maski w połączeniu z relaksacyjnym masażem twarzy. Głębokie nawilżenie i regeneracja skóry.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/maski-masaz-twarzy">Sprawdź</a>
+                    </div>
+                </div>
+
+                <!-- 08 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">08</span>
+                    <h3>Oczyszczanie Twarzy</h3>
+                    <p>Dogłębne oczyszczanie skóry twarzy. Usuwamy zaskórniki, regulujemy wydzielanie sebum i przywracamy zdrowy blask.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/oczyszczanie-twarzy">Sprawdź</a>
+                    </div>
+                </div>
+
+                <!-- 09 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">09</span>
+                    <h3>Mezoterapia Mikroigłowa</h3>
+                    <p>Zaawansowana mezoterapia stymulująca naturalną regenerację skóry. Odmłodzenie i nawilżenie od wewnątrz.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/mezoterapia-mikroiglowa-twarzy-szyji">Twarz</a>
+                        <a href="https://inblossom.pl/mezoterapia-mikroiglowa-brwi">Brwi</a>
+                    </div>
+                </div>
+
+                <!-- 10 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">10</span>
+                    <h3>Peeling</h3>
+                    <p>Profesjonalne peelingi złuszczające — chemiczne i mechaniczne. Gładka, promienna i odświeżona skóra.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/peeling">Sprawdź</a>
+                    </div>
+                </div>
+
+                <!-- 11 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">11</span>
+                    <h3>Karboksyterapia</h3>
+                    <p>Terapia dwutlenkiem węgla poprawiająca krążenie, napięcie skóry i redukcję cellulitu. Naturalnie i bezpiecznie.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/karboksyterapia">Sprawdź</a>
+                    </div>
+                </div>
+
+                <!-- 12 -->
+                <div class="service-card reveal-child">
+                    <span class="service-number">12</span>
+                    <h3>Depilacja Pastą Cukrową</h3>
+                    <p>Naturalna metoda depilacji z użyciem pasty cukrowej. Delikatna dla skóry, skuteczna i długotrwała.</p>
+                    <div class="service-links">
+                        <a href="https://inblossom.pl/depilacja-pasta-cukrowa">Sprawdź</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about-section" id="o-nas">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-text-col reveal">
+                    <div class="section-label">Poznaj nas bliżej</div>
+                    <h2 class="section-title" style="margin-bottom: 12px;">O nas</h2>
+                    <span class="heading-rose-line" style="margin: 0 0 32px 0;"></span>
+                    <p class="about-text">
+                        <span class="about-drop-cap">O</span>dkryj miejsce, gdzie Twoje piękno rozkwita! Nasz salon to przestrzeń, w&nbsp;której łączymy profesjonalizm z&nbsp;pasją, oferując szeroki wachlarz usług kosmetycznych dostosowanych do Twoich indywidualnych potrzeb. Zaufaj naszym ekspertom i&nbsp;podaruj sobie chwilę relaksu oraz wyjątkowej pielęgnacji.
+                    </p>
+                </div>
+                <div class="about-deco reveal">
+                    <div class="monogram-frame">
+                        <span class="monogram-text">IB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="rg-divider"></div>
+
+    <!-- ============ WHY US ============ -->
+    <section class="why-section" id="dlaczego-my">
+        <div class="container">
+            <div class="why-header reveal">
+                <div class="section-label">Zaufaj profesjonalistom</div>
+                <h2 class="section-title">Dlaczego my</h2>
+                <span class="heading-rose-line"></span>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-item reveal-child">
+                    <div class="why-number">01</div>
+                    <div class="why-separator"></div>
+                    <h3>Doświadczony zespół</h3>
+                    <p>Nasi specjaliści to wykwalifikowani eksperci z wieloletnim doświadczeniem w branży kosmetycznej. Regularnie poszerzają swoją wiedzę na szkoleniach i kursach.</p>
+                </div>
+
+                <div class="why-item reveal-child">
+                    <div class="why-number">02</div>
+                    <div class="why-separator"></div>
+                    <h3>Nowoczesny sprzęt</h3>
+                    <p>Korzystamy z najnowocześniejszych urządzeń i technologii kosmetycznych, gwarantując bezpieczeństwo i najwyższą skuteczność zabiegów.</p>
+                </div>
+
+                <div class="why-item reveal-child">
+                    <div class="why-number">03</div>
+                    <div class="why-separator"></div>
+                    <h3>Indywidualne podejście</h3>
+                    <p>Każdy klient jest dla nas wyjątkowy. Dobieramy zabiegi i pielęgnację indywidualnie, uwzględniając potrzeby i oczekiwania Twojej skóry.</p>
+                </div>
+
+                <div class="why-item reveal-child">
+                    <div class="why-number">04</div>
+                    <div class="why-separator"></div>
+                    <h3>Szeroka oferta</h3>
+                    <p>Od depilacji laserowej, przez zabiegi na twarz, po masaże — znajdziesz u nas kompleksową ofertę usług kosmetycznych w jednym miejscu.</p>
+                </div>
+
+                <div class="why-item reveal-child">
+                    <div class="why-number">05</div>
+                    <div class="why-separator"></div>
+                    <h3>Komfortowa atmosfera</h3>
+                    <p>Nasz salon to przestrzeń stworzona z myślą o Twoim relaksie. Zadbaliśmy o każdy detal, byś mogła poczuć się wyjątkowo od pierwszej chwili.</p>
+                </div>
+
+                <div class="why-item reveal-child">
+                    <div class="why-number">06</div>
+                    <div class="why-separator"></div>
+                    <h3>Najwyższa jakość</h3>
+                    <p>Używamy wyłącznie sprawdzonych, wysokiej jakości produktów kosmetycznych. Twoje bezpieczeństwo i zadowolenie to nasz priorytet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact-section" id="kontakt">
+        <div class="container">
+            <div class="contact-header reveal">
+                <div class="section-label">Skontaktuj się</div>
+                <h2 class="section-title">Kontakt</h2>
+                <span class="heading-rose-line"></span>
+            </div>
+
+            <div class="contact-frame reveal" style="margin-top: 48px;">
+                <!-- Breaking frame: pin icon -->
+                <div class="contact-pin">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#B76E54" stroke-width="1.5" fill="none"/>
+                        <circle cx="12" cy="9" r="2.5" stroke="#B76E54" stroke-width="1.5" fill="none"/>
+                    </svg>
+                </div>
+
+                <div class="contact-columns">
+                    <div class="contact-info-col">
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                    <circle cx="12" cy="9" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">Adres</div>
+                                <div class="contact-value">ul. Towarowa 22A, 15-007 Białystok</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">Telefon</div>
+                                <div class="contact-value"><a href="tel:+48535449538">+48 535-449-538</a></div>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                    <path d="M22 6L12 13 2 6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">Email</div>
+                                <div class="contact-value"><a href="mailto:Inblossom.pl@gmail.com">Inblossom.pl@gmail.com</a></div>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-label">Godziny otwarcia</div>
+                                <div class="contact-value">Poniedziałek–Sobota 8:00–21:00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map-placeholder">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2356.1!2d23.1448!3d53.1325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ffb6b1e3bf5f7%3A0x2e4b7e4e1c3a5b0!2sul.+Towarowa+22A%2C+15-007+Bia%C5%82ystok!5e0!3m2!1spl!2spl!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social links -->
+            <div class="social-links reveal">
+                <a href="https://www.facebook.com/p/Inblossom-Salon-kosmetyczny-Bia%C5%82ystok-61557928358263/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/inblossom.bialystok" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/48535449538" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+                        <path d="M20.52 3.449C18.24 1.245 15.24 0 12.05 0 5.495 0 .16 5.335.16 11.892c0 2.096.547 4.142 1.588 5.945L.1 24l6.335-1.652A11.9 11.9 0 0012.05 23.8c6.555 0 11.89-5.335 11.89-11.892 0-3.176-1.24-6.165-3.42-8.459z" stroke="currentColor" stroke-width="1.2" fill="none" transform="scale(0.85) translate(2, 1)"/>
+                    </svg>
+                </a>
+                <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="social-link" aria-label="Booksy">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <path d="M9 7h6M9 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="footer-sign">
+            <div class="footer-sign-text">
+                <span class="footer-sign-in">IN</span>
+                <span class="footer-sign-blossom">BLOSSOM</span>
+            </div>
+            <span class="footer-sign-sub">BEAUTY SALON</span>
+        </div>
+        <p class="footer-copy">&copy; 2026 INBLOSSOM Beauty Salon. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <!-- ============ JAVASCRIPT ============ -->
+    <script>
+    (function() {
+        'use strict';
+
+        /* ----- Navigation scroll effect ----- */
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+
+        function onScroll() {
+            const scrollY = window.scrollY;
+            if (scrollY > 40) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScroll = scrollY;
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        /* ----- Mobile menu ----- */
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        /* ----- Hero orchestrated animation ----- */
+        function heroSequence() {
+            const signFrame = document.getElementById('signFrame');
+            const signIn = document.getElementById('signIn');
+            const signBlossom = document.getElementById('signBlossom');
+            const signSubtitle = document.getElementById('signSubtitle');
+            const heroTagline = document.getElementById('heroTagline');
+            const heroCta = document.getElementById('heroCta');
+
+            // Step 1: Frame draws in (0ms)
+            setTimeout(function() {
+                signFrame.classList.add('animate-in');
+            }, 200);
+
+            // Step 2: "IN" slides in from left (600ms)
+            setTimeout(function() {
+                signIn.classList.remove('start-offset');
+                signIn.classList.add('animate-in');
+            }, 700);
+
+            // Step 3: "BLOSSOM" fades in (1000ms)
+            setTimeout(function() {
+                signBlossom.classList.add('visible');
+            }, 1100);
+
+            // Step 4: "BEAUTY SALON" fades in (1400ms)
+            setTimeout(function() {
+                signSubtitle.classList.add('visible');
+            }, 1500);
+
+            // Step 5: Tagline fades up (1800ms)
+            setTimeout(function() {
+                heroTagline.classList.add('visible');
+            }, 1900);
+
+            // Step 6: CTA appears (2200ms)
+            setTimeout(function() {
+                heroCta.classList.add('visible');
+            }, 2300);
+        }
+
+        // Run hero sequence on load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', heroSequence);
+        } else {
+            heroSequence();
+        }
+
+        /* ----- IntersectionObserver: reveal animations ----- */
+        function setupRevealObserver() {
+            var reveals = document.querySelectorAll('.reveal');
+            var revealChildren = document.querySelectorAll('.reveal-child');
+
+            if (!('IntersectionObserver' in window)) {
+                // Fallback: show everything
+                reveals.forEach(function(el) { el.classList.add('in-view'); });
+                revealChildren.forEach(function(el) { el.classList.add('in-view'); });
+                return;
+            }
+
+            var revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            reveals.forEach(function(el) {
+                revealObserver.observe(el);
+            });
+
+            // Staggered children
+            var parentGroups = {};
+
+            revealChildren.forEach(function(child) {
+                var parent = child.parentElement;
+                if (!parent.dataset.revealGroupId) {
+                    parent.dataset.revealGroupId = 'rg-' + Math.random().toString(36).substr(2, 6);
+                }
+                var gid = parent.dataset.revealGroupId;
+                if (!parentGroups[gid]) {
+                    parentGroups[gid] = { parent: parent, children: [] };
+                }
+                parentGroups[gid].children.push(child);
+            });
+
+            Object.keys(parentGroups).forEach(function(gid) {
+                var group = parentGroups[gid];
+                var parentObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            group.children.forEach(function(child, index) {
+                                setTimeout(function() {
+                                    child.classList.add('in-view');
+                                }, index * 100);
+                            });
+                            parentObserver.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.08,
+                    rootMargin: '0px 0px -30px 0px'
+                });
+
+                parentObserver.observe(group.parent);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupRevealObserver);
+        } else {
+            setupRevealObserver();
+        }
+
+        /* ----- Smooth scroll for anchor links ----- */
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                var target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    var navHeight = nav.offsetHeight;
+                    var targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+    })();
+    </script>
+</body>
+</html>
