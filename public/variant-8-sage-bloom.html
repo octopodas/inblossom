@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="INBLOSSOM Salon Kosmetyczny w Białymstoku — depilacja laserowa, mezoterapia, stylizacja brwi i rzęs, masaż, manicure i wiele więcej. Piękno zaczyna się tutaj.">
+    <meta name="theme-color" content="#5B7553">
+    <meta property="og:title" content="INBLOSSOM — Salon Kosmetyczny Białystok">
+    <meta property="og:description" content="Piękno zaczyna się tutaj. Profesjonalne zabiegi kosmetyczne w sercu Białegostoku.">
+    <title>INBLOSSOM — Salon Kosmetyczny Białystok</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet">
+    <style>
+        /* =============================================
+           RESET & VARIABLES
+           ============================================= */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sage: #5B7553;
+            --sage-light: #7A9A6F;
+            --sage-muted: #A8BEA0;
+            --forest: #1A2E1C;
+            --cream: #F7F3EB;
+            --cream-dark: #EDE8DC;
+            --honey: #C09E6B;
+            --honey-glow: rgba(192, 158, 107, 0.2);
+            --taupe: #C4B5A0;
+            --bark: #3D2E22;
+            --text: #2A2520;
+            --text-soft: #6B6258;
+            --text-muted: #9A9088;
+            --white: #FDFCFA;
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body: 'Bricolage Grotesque', system-ui, sans-serif;
+            --radius: 20px;
+            --radius-sm: 12px;
+            --radius-xs: 8px;
+        }
+
+        ::selection {
+            background: var(--sage);
+            color: var(--cream);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-weight: 400;
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+        button { border: none; background: none; cursor: pointer; font-family: inherit; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* =============================================
+           GRAIN OVERLAY
+           ============================================= */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            pointer-events: none;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' fill='%233D2E22'/%3E%3C/svg%3E");
+            background-size: 256px 256px;
+        }
+
+        /* =============================================
+           NAVIGATION
+           ============================================= */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10000;
+            padding: 0 28px;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(247, 243, 235, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 1px 0 rgba(91, 117, 83, 0.1);
+        }
+
+        .nav-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.4rem;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: baseline;
+            gap: 0;
+        }
+
+        .nav-logo .logo-in {
+            font-weight: 600;
+            color: var(--sage);
+        }
+
+        .nav-logo .logo-blossom {
+            color: var(--text);
+        }
+
+        .nav-logo .logo-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--honey);
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 4px;
+            vertical-align: middle;
+            transform: translateY(-2px);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.88rem;
+            color: var(--text-soft);
+            letter-spacing: 0.02em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--sage);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--sage);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.82rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--sage);
+            padding: 10px 24px;
+            border-radius: 100px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--forest);
+            transform: translateY(-1px);
+        }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 10001;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.active span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        /* Mobile menu */
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: 76px;
+            left: 0;
+            width: 100%;
+            background: var(--cream);
+            border-bottom: 1px solid var(--cream-dark);
+            padding: 24px 28px 32px;
+            transform: translateY(-10px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 9999;
+        }
+
+        .nav-mobile.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .nav-mobile a {
+            display: block;
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 1.05rem;
+            color: var(--text);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--cream-dark);
+        }
+
+        .nav-mobile a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-mobile .mobile-cta {
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: var(--sage);
+            color: var(--white);
+            padding: 12px 32px;
+            border-radius: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .nav-mobile { display: block; }
+        }
+
+        /* =============================================
+           HERO SECTION
+           ============================================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: var(--cream);
+            padding: 76px 0 0;
+            overflow: hidden;
+        }
+
+        /* Organic blob background shapes */
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0;
+            animation: blobFadeIn 2s ease forwards;
+        }
+
+        .hero-blob-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--sage-muted), transparent 70%);
+            top: -100px;
+            right: -150px;
+            opacity: 0;
+            animation-delay: 0.5s;
+        }
+
+        .hero-blob-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--honey-glow), transparent 70%);
+            bottom: -50px;
+            left: -100px;
+            opacity: 0;
+            animation-delay: 0.8s;
+        }
+
+        .hero-blob-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(164, 190, 160, 0.15), transparent 70%);
+            top: 40%;
+            left: 30%;
+            opacity: 0;
+            animation-delay: 1.1s;
+        }
+
+        @keyframes blobFadeIn {
+            to { opacity: 1; }
+        }
+
+        .hero-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 60px 28px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--sage);
+            background: rgba(91, 117, 83, 0.08);
+            padding: 8px 16px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: heroElIn 0.7s ease 0.3s forwards;
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--sage);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+            line-height: 1.08;
+            color: var(--forest);
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroElIn 0.8s ease 0.5s forwards;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--sage);
+            font-weight: 300;
+        }
+
+        .hero h1 .line-break { display: block; }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-soft);
+            max-width: 420px;
+            line-height: 1.7;
+            margin-bottom: 36px;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: heroElIn 0.7s ease 0.7s forwards;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: heroElIn 0.7s ease 0.9s forwards;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.92rem;
+            color: var(--white);
+            background: var(--sage);
+            padding: 14px 32px;
+            border-radius: 100px;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--forest);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(91, 117, 83, 0.25);
+        }
+
+        .btn-primary svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(3px);
+        }
+
+        .btn-secondary {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.92rem;
+            color: var(--text-soft);
+            padding: 14px 24px;
+            border-radius: 100px;
+            border: 1.5px solid var(--taupe);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--sage);
+            color: var(--sage);
+        }
+
+        @keyframes heroElIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero photo collage */
+        .hero-photos {
+            position: relative;
+            height: 520px;
+            opacity: 0;
+            animation: heroPhotosIn 1s ease 0.6s forwards;
+        }
+
+        @keyframes heroPhotosIn {
+            to { opacity: 1; }
+        }
+
+        .hero-photo {
+            position: absolute;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(42, 37, 32, 0.12);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hero-photo:hover {
+            transform: scale(1.03) rotate(0deg) !important;
+            z-index: 10;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-photo-1 {
+            width: 260px;
+            height: 340px;
+            top: 20px;
+            left: 0;
+            transform: rotate(-3deg);
+            z-index: 3;
+        }
+
+        .hero-photo-2 {
+            width: 220px;
+            height: 280px;
+            top: 40px;
+            right: 0;
+            transform: rotate(2deg);
+            z-index: 2;
+        }
+
+        .hero-photo-3 {
+            width: 180px;
+            height: 220px;
+            bottom: 20px;
+            left: 120px;
+            transform: rotate(1.5deg);
+            z-index: 4;
+        }
+
+        /* Floating botanical leaf SVG */
+        .hero-leaf {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.15;
+            animation: leafFloat 6s ease-in-out infinite;
+        }
+
+        .hero-leaf-1 {
+            top: 0;
+            right: 40px;
+            width: 80px;
+            animation-delay: 0s;
+        }
+
+        .hero-leaf-2 {
+            bottom: 60px;
+            left: 20px;
+            width: 60px;
+            animation-delay: 2s;
+            transform: rotate(120deg);
+        }
+
+        @keyframes leafFloat {
+            0%, 100% { transform: translateY(0) rotate(var(--leaf-rotate, 0deg)); }
+            50% { transform: translateY(-12px) rotate(var(--leaf-rotate, 0deg)); }
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                padding: 40px 28px 60px;
+                gap: 40px;
+            }
+
+            .hero-photos {
+                height: 360px;
+                order: -1;
+            }
+
+            .hero-photo-1 {
+                width: 180px;
+                height: 240px;
+                top: 10px;
+                left: 10%;
+            }
+
+            .hero-photo-2 {
+                width: 160px;
+                height: 200px;
+                top: 20px;
+                right: 5%;
+            }
+
+            .hero-photo-3 {
+                width: 140px;
+                height: 180px;
+                bottom: 10px;
+                left: 30%;
+            }
+        }
+
+        @media (max-width: 580px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero-photos {
+                height: 300px;
+            }
+
+            .hero-photo-1 {
+                width: 150px;
+                height: 200px;
+                left: 5%;
+            }
+
+            .hero-photo-2 {
+                width: 130px;
+                height: 170px;
+                right: 5%;
+            }
+
+            .hero-photo-3 {
+                width: 120px;
+                height: 150px;
+                left: 25%;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* =============================================
+           SECTION TYPOGRAPHY
+           ============================================= */
+        .section-label {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+            color: var(--forest);
+            line-height: 1.12;
+        }
+
+        .section-title em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--sage);
+        }
+
+        .section-desc {
+            font-size: 1rem;
+            color: var(--text-soft);
+            max-width: 480px;
+            margin-top: 16px;
+            line-height: 1.7;
+        }
+
+        /* =============================================
+           SERVICES SECTION — PHOTO CARDS
+           ============================================= */
+        .services-section {
+            padding: 120px 0 140px;
+            background: var(--white);
+            position: relative;
+        }
+
+        /* Decorative top curve */
+        .services-section::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--white);
+            border-radius: 60px 60px 0 0;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .services-header .section-desc {
+            margin: 16px auto 0;
+        }
+
+        /* Photo service cards — 2-column featured + 3-column grid */
+        .services-featured {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .service-card {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--cream);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(42, 37, 32, 0.1);
+        }
+
+        .service-card-photo {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .service-card-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .service-card:hover .service-card-photo img {
+            transform: scale(1.05);
+        }
+
+        .service-card-photo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(26, 46, 28, 0.4), transparent);
+            pointer-events: none;
+        }
+
+        .service-card-number {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: var(--white);
+            background: rgba(91, 117, 83, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .service-card-body {
+            padding: 24px 24px 28px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card-body h3 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.35rem;
+            color: var(--forest);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .service-card-body p {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 16px;
+        }
+
+        .service-card-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .service-card-links a {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.78rem;
+            color: var(--sage);
+            background: rgba(91, 117, 83, 0.08);
+            padding: 6px 14px;
+            border-radius: 100px;
+            letter-spacing: 0.02em;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .service-card-links a:hover {
+            background: var(--sage);
+            color: var(--white);
+        }
+
+        /* Smaller service cards grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .services-grid .service-card .service-card-photo {
+            height: 200px;
+        }
+
+        @media (max-width: 900px) {
+            .services-featured {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 580px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card-photo {
+                height: 220px;
+            }
+
+            .services-grid .service-card .service-card-photo {
+                height: 180px;
+            }
+        }
+
+        /* =============================================
+           REMAINING SERVICES — COMPACT LIST
+           ============================================= */
+        .services-compact {
+            margin-top: 48px;
+            padding-top: 48px;
+            border-top: 1px solid var(--cream-dark);
+        }
+
+        .services-compact-title {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 1.3rem;
+            color: var(--forest);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .services-compact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .compact-card {
+            background: var(--cream);
+            border-radius: var(--radius-sm);
+            padding: 24px 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .compact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--sage-muted), var(--honey), var(--sage-muted));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .compact-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(42, 37, 32, 0.06);
+        }
+
+        .compact-card:hover::before {
+            opacity: 1;
+        }
+
+        .compact-card-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(91, 117, 83, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+        }
+
+        .compact-card-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--sage);
+        }
+
+        .compact-card h4 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--forest);
+            margin-bottom: 6px;
+        }
+
+        .compact-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .compact-card-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--sage);
+            transition: color 0.2s ease;
+        }
+
+        .compact-card-link:hover {
+            color: var(--forest);
+        }
+
+        @media (max-width: 900px) {
+            .services-compact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-compact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =============================================
+           ABOUT SECTION
+           ============================================= */
+        .about-section {
+            padding: 120px 0;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text-col .section-title {
+            margin-bottom: 24px;
+        }
+
+        .about-body {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.8;
+        }
+
+        .about-body p + p {
+            margin-top: 16px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--cream-dark);
+        }
+
+        .about-stat-number {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 2.4rem;
+            color: var(--sage);
+            line-height: 1;
+        }
+
+        .about-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* About visual — stacked photo with botanical decoration */
+        .about-visual {
+            position: relative;
+        }
+
+        .about-photo-frame {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(42, 37, 32, 0.1);
+        }
+
+        .about-photo-frame img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Sage-colored botanical accent behind photo */
+        .about-accent {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 200px;
+            height: 200px;
+            background: rgba(91, 117, 83, 0.08);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .about-accent-2 {
+            position: absolute;
+            bottom: -16px;
+            left: -16px;
+            width: 120px;
+            height: 120px;
+            border: 2px solid var(--sage-muted);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        @media (max-width: 900px) {
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-visual {
+                order: -1;
+            }
+        }
+
+        /* =============================================
+           WHY US SECTION
+           ============================================= */
+        .why-section {
+            padding: 120px 0;
+            background: var(--forest);
+            color: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Organic background pattern */
+        .why-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23A8BEA0' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .why-section .section-label {
+            color: var(--sage-muted);
+        }
+
+        .why-section .section-title {
+            color: var(--cream);
+        }
+
+        .why-section .section-title em {
+            color: var(--sage-light);
+        }
+
+        .why-header {
+            text-align: center;
+            margin-bottom: 64px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(168, 190, 160, 0.12);
+            border-radius: var(--radius-sm);
+            padding: 36px 28px;
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .why-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(168, 190, 160, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .why-card-number {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 2rem;
+            color: var(--sage-muted);
+            opacity: 0.4;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .why-card h3 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--cream);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .why-card p {
+            font-size: 0.9rem;
+            color: rgba(247, 243, 235, 0.6);
+            line-height: 1.65;
+        }
+
+        @media (max-width: 900px) {
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 580px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =============================================
+           CONTACT SECTION
+           ============================================= */
+        .contact-section {
+            padding: 120px 0;
+            background: var(--cream);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 8px 32px rgba(42, 37, 32, 0.06);
+        }
+
+        .contact-info {
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            background: rgba(91, 117, 83, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--sage);
+        }
+
+        .contact-item-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .contact-item-value {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .contact-item-value a {
+            color: var(--sage);
+            transition: color 0.2s ease;
+        }
+
+        .contact-item-value a:hover {
+            color: var(--forest);
+        }
+
+        .contact-map {
+            position: relative;
+            min-height: 380px;
+            background: var(--cream-dark);
+        }
+
+        .contact-map iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Social links */
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: var(--white);
+            border: 1px solid var(--cream-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text-soft);
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--sage);
+            border-color: var(--sage);
+        }
+
+        .social-link:hover svg {
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .contact-card {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-map {
+                min-height: 280px;
+            }
+
+            .contact-info {
+                padding: 32px 28px;
+            }
+        }
+
+        /* =============================================
+           FOOTER
+           ============================================= */
+        .footer {
+            background: var(--forest);
+            padding: 48px 28px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 1.8rem;
+            color: var(--sage-muted);
+            margin-bottom: 8px;
+        }
+
+        .footer-logo em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--sage-light);
+        }
+
+        .footer-tagline {
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(168, 190, 160, 0.4);
+            margin-bottom: 24px;
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: rgba(247, 243, 235, 0.3);
+        }
+
+        /* =============================================
+           REVEAL ANIMATIONS
+           ============================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-child {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal-child.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger for children within the same parent */
+        .reveal-child:nth-child(1) { transition-delay: 0s; }
+        .reveal-child:nth-child(2) { transition-delay: 0.08s; }
+        .reveal-child:nth-child(3) { transition-delay: 0.16s; }
+        .reveal-child:nth-child(4) { transition-delay: 0.24s; }
+        .reveal-child:nth-child(5) { transition-delay: 0.32s; }
+        .reveal-child:nth-child(6) { transition-delay: 0.40s; }
+        .reveal-child:nth-child(7) { transition-delay: 0.48s; }
+        .reveal-child:nth-child(8) { transition-delay: 0.56s; }
+    </style>
+</head>
+<body>
+
+    <!-- ============ NAVIGATION ============ -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <span class="logo-in">IN</span><span class="logo-blossom">BLOSSOM</span>
+                <span class="logo-dot"></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#uslugi">Usługi</a>
+                <a href="#o-nas">O nas</a>
+                <a href="#dlaczego-my">Dlaczego my</a>
+                <a href="#kontakt">Kontakt</a>
+                <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="nav-cta">Umów wizytę</a>
+            </div>
+
+            <div class="nav-hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="nav-mobile" id="mobileMenu">
+            <a href="#uslugi">Usługi</a>
+            <a href="#o-nas">O nas</a>
+            <a href="#dlaczego-my">Dlaczego my</a>
+            <a href="#kontakt">Kontakt</a>
+            <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="mobile-cta">Umów wizytę</a>
+        </div>
+    </nav>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="hero-blob hero-blob-3"></div>
+
+        <div class="hero-inner">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Salon Kosmetyczny Białystok
+                </div>
+                <h1>
+                    Piękno <em>zaczyna</em>
+                    <span class="line-break">się tutaj</span>
+                </h1>
+                <p class="hero-desc">
+                    Odkryj miejsce, gdzie profesjonalizm łączy się z pasją. Szeroki wachlarz zabiegów kosmetycznych dopasowanych do Twoich indywidualnych potrzeb.
+                </p>
+                <div class="hero-actions">
+                    <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="btn-primary">
+                        Umów wizytę
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="#uslugi" class="btn-secondary">Nasze usługi</a>
+                </div>
+            </div>
+
+            <div class="hero-photos">
+                <div class="hero-photo hero-photo-1">
+                    <img src="https://inblossom.pl/content/images/masters/1.jpg" alt="Zabiegi laserowe INBLOSSOM" loading="eager">
+                </div>
+                <div class="hero-photo hero-photo-2">
+                    <img src="https://inblossom.pl/content/images/masters/3.jpg" alt="Stylizacja brwi INBLOSSOM" loading="eager">
+                </div>
+                <div class="hero-photo hero-photo-3">
+                    <img src="https://inblossom.pl/content/images/masters/5.jpg" alt="Manicure INBLOSSOM" loading="eager">
+                </div>
+
+                <!-- Botanical leaf decorations -->
+                <svg class="hero-leaf hero-leaf-1" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="--leaf-rotate: -15deg;">
+                    <path d="M40 0C40 0 10 30 10 70C10 95 22 110 40 120C58 110 70 95 70 70C70 30 40 0 40 0Z" fill="var(--sage-muted)" opacity="0.3"/>
+                    <path d="M40 10V110" stroke="var(--sage)" stroke-width="1" opacity="0.4"/>
+                    <path d="M40 30C30 40 20 55 18 70" stroke="var(--sage)" stroke-width="0.8" opacity="0.3" fill="none"/>
+                    <path d="M40 30C50 40 60 55 62 70" stroke="var(--sage)" stroke-width="0.8" opacity="0.3" fill="none"/>
+                    <path d="M40 50C32 58 24 68 22 80" stroke="var(--sage)" stroke-width="0.8" opacity="0.3" fill="none"/>
+                    <path d="M40 50C48 58 56 68 58 80" stroke="var(--sage)" stroke-width="0.8" opacity="0.3" fill="none"/>
+                </svg>
+                <svg class="hero-leaf hero-leaf-2" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="--leaf-rotate: 120deg;">
+                    <path d="M30 0C30 0 5 25 5 55C5 75 15 85 30 90C45 85 55 75 55 55C55 25 30 0 30 0Z" fill="var(--honey)" opacity="0.2"/>
+                    <path d="M30 8V85" stroke="var(--honey)" stroke-width="0.8" opacity="0.3"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="services-section" id="uslugi">
+        <div class="container">
+            <div class="services-header reveal">
+                <div class="section-label">Nasza oferta</div>
+                <h2 class="section-title">Usługi <em>dla Ciebie</em></h2>
+                <p class="section-desc">Kompleksowa pielęgnacja w jednym miejscu — od zaawansowanych zabiegów laserowych po relaksujące masaże.</p>
+            </div>
+
+            <!-- Featured: 2-column large cards with photos -->
+            <div class="services-featured">
+                <!-- 01 Depilacja Laserowa -->
+                <div class="service-card reveal-child">
+                    <div class="service-card-photo">
+                        <img src="https://inblossom.pl/content/images/pages/depilacja-laserowa-damska/1.jpg" alt="Depilacja laserowa w INBLOSSOM" loading="lazy">
+                        <span class="service-card-number">01</span>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Depilacja Laserowa</h3>
+                        <p>Trwałe usuwanie owłosienia najskuteczniejszym w Białymstoku laserem diodowym. Gładka skóra bez kompromisów.</p>
+                        <div class="service-card-links">
+                            <a href="https://inblossom.pl/depilacja-laserowa-damska">Damska</a>
+                            <a href="https://inblossom.pl/depilacja-laserowa-meska">Męska</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 02 Masaż -->
+                <div class="service-card reveal-child">
+                    <div class="service-card-photo">
+                        <img src="https://inblossom.pl/content/images/pages/masaz/1.jpg" alt="Masaż relaksacyjny w INBLOSSOM" loading="lazy">
+                        <span class="service-card-number">02</span>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Masaż</h3>
+                        <p>Profesjonalne masaże relaksacyjne i lecznicze. Idealne połączenie odprężenia z terapią ciała i ducha.</p>
+                        <div class="service-card-links">
+                            <a href="https://inblossom.pl/masaz">Sprawdź</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3-column cards with photos -->
+            <div class="services-grid">
+                <!-- 03 Laserowe Odmładzanie -->
+                <div class="service-card reveal-child">
+                    <div class="service-card-photo">
+                        <img src="https://inblossom.pl/content/images/pages/laserowe-odmladzanie/1.jpg" alt="Laserowe odmładzanie" loading="lazy">
+                        <span class="service-card-number">03</span>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Laserowe Odmładzanie</h3>
+                        <p>Zaawansowane zabiegi odmładzające z użyciem technologii laserowej. Widoczne efekty już po pierwszej wizycie.</p>
+                        <div class="service-card-links">
+                            <a href="https://inblossom.pl/laserowe-odmladzanie">Sprawdź</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 04 Brwi & Rzęsy -->
+                <div class="service-card reveal-child">
+                    <div class="service-card-photo">
+                        <img src="https://inblossom.pl/content/images/pages/laminacja-brwi/1.jpg" alt="Stylizacja brwi i rzęs" loading="lazy">
+                        <span class="service-card-number">04</span>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Brwi &amp; Rzęsy</h3>
+                        <p>Kompleksowa stylizacja — laminacja, przedłużanie, KOMBO. Podkreśl swoje spojrzenie u najlepszych.</p>
+                        <div class="service-card-links">
+                            <a href="https://inblossom.pl/laminacja-brwi">Brwi</a>
+                            <a href="https://inblossom.pl/laminacja-rzes">Laminacja</a>
+                            <a href="https://inblossom.pl/przedluzenie-rzesy">Przedłużenie</a>
+                            <a href="https://inblossom.pl/kombo-brwi-rzesy">KOMBO</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 05 Manicure -->
+                <div class="service-card reveal-child">
+                    <div class="service-card-photo">
+                        <img src="https://inblossom.pl/content/images/pages/manicure-pedicure/1.jpg" alt="Manicure i pedicure" loading="lazy">
+                        <span class="service-card-number">05</span>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Manicure &amp; Pedicure</h3>
+                        <p>Piękne i zadbane paznokcie dzięki profesjonalnej pielęgnacji z użyciem najlepszych produktów.</p>
+                        <div class="service-card-links">
+                            <a href="https://inblossom.pl/manicure-pedicure">Sprawdź</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 06 Oczyszczanie Twarzy -->
+                <div class="service-card reveal-child">
+                    <div class="service-card-photo">
+                        <img src="https://inblossom.pl/content/images/pages/oczyszczanie-twarzy/1.jpg" alt="Oczyszczanie twarzy" loading="lazy">
+                        <span class="service-card-number">06</span>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Oczyszczanie Twarzy</h3>
+                        <p>Dogłębne oczyszczanie skóry twarzy — usuwamy zaskórniki i przywracamy zdrowy, naturalny blask.</p>
+                        <div class="service-card-links">
+                            <a href="https://inblossom.pl/oczyszczanie-twarzy">Sprawdź</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 07 Mezoterapia -->
+                <div class="service-card reveal-child">
+                    <div class="service-card-photo">
+                        <img src="https://inblossom.pl/content/images/pages/mezoterapia-mikroiglowa-twarzy-szyji/1.jpg" alt="Mezoterapia mikroigłowa" loading="lazy">
+                        <span class="service-card-number">07</span>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Mezoterapia Mikroigłowa</h3>
+                        <p>Zaawansowana mezoterapia stymulująca naturalną regenerację skóry. Odmłodzenie od wewnątrz.</p>
+                        <div class="service-card-links">
+                            <a href="https://inblossom.pl/mezoterapia-mikroiglowa-twarzy-szyji">Twarz</a>
+                            <a href="https://inblossom.pl/mezoterapia-mikroiglowa-brwi">Brwi</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 08 Maski + Masaż Twarzy -->
+                <div class="service-card reveal-child">
+                    <div class="service-card-photo">
+                        <img src="https://inblossom.pl/content/images/pages/masaz/2.jpg" alt="Maski i masaż twarzy" loading="lazy">
+                        <span class="service-card-number">08</span>
+                    </div>
+                    <div class="service-card-body">
+                        <h3>Maski &amp; Masaż Twarzy</h3>
+                        <p>Odżywcze maski w połączeniu z relaksacyjnym masażem twarzy. Głębokie nawilżenie i regeneracja.</p>
+                        <div class="service-card-links">
+                            <a href="https://inblossom.pl/maski-masaz-twarzy">Sprawdź</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compact remaining services -->
+            <div class="services-compact">
+                <h3 class="services-compact-title">Więcej zabiegów</h3>
+                <div class="services-compact-grid">
+                    <!-- Leczenie Trądziku -->
+                    <a href="https://inblossom.pl/laserowe-leczenie-tradziku" class="compact-card reveal-child">
+                        <div class="compact-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                <line x1="15" y1="9" x2="15.01" y2="9"/>
+                            </svg>
+                        </div>
+                        <h4>Leczenie Trądziku</h4>
+                        <p>Laserowa terapia dla problematycznej skóry</p>
+                        <span class="compact-card-link">Sprawdź →</span>
+                    </a>
+
+                    <!-- Peeling -->
+                    <a href="https://inblossom.pl/peeling" class="compact-card reveal-child">
+                        <div class="compact-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3c-1.2 0-2.4.6-3 1.7A3.6 3.6 0 004.6 9c-1 1.2-1.1 2.9-.4 4.3A3.5 3.5 0 006 17.5 3.5 3.5 0 009.5 21c1.4 0 2.7-.7 3.5-1.7"/>
+                                <path d="M12 3c1.2 0 2.4.6 3 1.7A3.6 3.6 0 0119.4 9c1 1.2 1.1 2.9.4 4.3a3.5 3.5 0 01-1.8 4.2 3.5 3.5 0 01-3.5 3.5c-1.4 0-2.7-.7-3.5-1.7"/>
+                                <path d="M12 3v18"/>
+                            </svg>
+                        </div>
+                        <h4>Peeling</h4>
+                        <p>Gładka, promienna i odświeżona skóra</p>
+                        <span class="compact-card-link">Sprawdź →</span>
+                    </a>
+
+                    <!-- Karboksyterapia -->
+                    <a href="https://inblossom.pl/karboksyterapia" class="compact-card reveal-child">
+                        <div class="compact-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/>
+                            </svg>
+                        </div>
+                        <h4>Karboksyterapia</h4>
+                        <p>Regeneracja i poprawa napięcia skóry</p>
+                        <span class="compact-card-link">Sprawdź →</span>
+                    </a>
+
+                    <!-- Depilacja pastą cukrową -->
+                    <a href="https://inblossom.pl/depilacja-pasta-cukrowa" class="compact-card reveal-child">
+                        <div class="compact-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h4>Depilacja Cukrowa</h4>
+                        <p>Naturalna i delikatna metoda depilacji</p>
+                        <span class="compact-card-link">Sprawdź →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about-section" id="o-nas">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-text-col reveal">
+                    <div class="section-label">Poznaj nas bliżej</div>
+                    <h2 class="section-title">O <em>nas</em></h2>
+                    <div class="about-body">
+                        <p>Odkryj miejsce, gdzie Twoje piękno rozkwita! Nasz salon to przestrzeń, w&nbsp;której łączymy profesjonalizm z&nbsp;pasją, oferując szeroki wachlarz usług kosmetycznych dostosowanych do Twoich indywidualnych potrzeb.</p>
+                        <p>Zaufaj naszym ekspertom i&nbsp;podaruj sobie chwilę relaksu oraz wyjątkowej pielęgnacji. Dołącz do grona naszych zadowolonych klientów i&nbsp;poczuj się wyjątkowo.</p>
+                    </div>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <div class="about-stat-number">12+</div>
+                            <div class="about-stat-label">Rodzajów zabiegów</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-number">6</div>
+                            <div class="about-stat-label">Dni w tygodniu</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-number">13h</div>
+                            <div class="about-stat-label">Otwarci codziennie</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual reveal">
+                    <div class="about-accent"></div>
+                    <div class="about-accent-2"></div>
+                    <div class="about-photo-frame">
+                        <img src="https://inblossom.pl/content/images/masters/2.jpg" alt="Salon INBLOSSOM" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ WHY US ============ -->
+    <section class="why-section" id="dlaczego-my">
+        <div class="container">
+            <div class="why-header reveal">
+                <div class="section-label">Zaufaj profesjonalistom</div>
+                <h2 class="section-title">Dlaczego <em>my</em></h2>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card reveal-child">
+                    <div class="why-card-number">01</div>
+                    <h3>Doświadczony zespół</h3>
+                    <p>Wykwalifikowani specjaliści z wieloletnim doświadczeniem w branży kosmetycznej, stale poszerzający swoją wiedzę.</p>
+                </div>
+
+                <div class="why-card reveal-child">
+                    <div class="why-card-number">02</div>
+                    <h3>Nowoczesny sprzęt</h3>
+                    <p>Najnowocześniejsze urządzenia i technologie kosmetyczne — bezpieczeństwo i najwyższa skuteczność zabiegów.</p>
+                </div>
+
+                <div class="why-card reveal-child">
+                    <div class="why-card-number">03</div>
+                    <h3>Indywidualne podejście</h3>
+                    <p>Dobieramy zabiegi i pielęgnację indywidualnie, uwzględniając potrzeby i oczekiwania Twojej skóry.</p>
+                </div>
+
+                <div class="why-card reveal-child">
+                    <div class="why-card-number">04</div>
+                    <h3>Szeroka oferta</h3>
+                    <p>Od depilacji laserowej, przez zabiegi na twarz, po masaże — kompleksowa oferta usług w jednym miejscu.</p>
+                </div>
+
+                <div class="why-card reveal-child">
+                    <div class="why-card-number">05</div>
+                    <h3>Komfortowa atmosfera</h3>
+                    <p>Przestrzeń stworzona z myślą o Twoim relaksie. Każdy detal został zaplanowany, byś poczuła się wyjątkowo.</p>
+                </div>
+
+                <div class="why-card reveal-child">
+                    <div class="why-card-number">06</div>
+                    <h3>Najwyższa jakość</h3>
+                    <p>Wyłącznie sprawdzone, wysokiej jakości produkty kosmetyczne. Twoje bezpieczeństwo to nasz priorytet.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact-section" id="kontakt">
+        <div class="container">
+            <div class="contact-header reveal">
+                <div class="section-label">Skontaktuj się</div>
+                <h2 class="section-title">Kontakt</h2>
+            </div>
+
+            <div class="contact-card reveal">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                                <circle cx="12" cy="9" r="2.5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="contact-item-label">Adres</div>
+                            <div class="contact-item-value">ul. Towarowa 22A, 15-007 Białystok</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="contact-item-label">Telefon</div>
+                            <div class="contact-item-value"><a href="tel:+48535449538">+48 535-449-538</a></div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M22 6L12 13 2 6"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="contact-item-label">Email</div>
+                            <div class="contact-item-value"><a href="mailto:Inblossom.pl@gmail.com">Inblossom.pl@gmail.com</a></div>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="contact-item-label">Godziny otwarcia</div>
+                            <div class="contact-item-value">Poniedziałek–Sobota 8:00–21:00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2356.1!2d23.1448!3d53.1325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ffb6b1e3bf5f7%3A0x2e4b7e4e1c3a5b0!2sul.+Towarowa+22A%2C+15-007+Bia%C5%82ystok!5e0!3m2!1spl!2spl!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <!-- Social links -->
+            <div class="social-row reveal">
+                <a href="https://www.facebook.com/p/Inblossom-Salon-kosmetyczny-Bia%C5%82ystok-61557928358263/" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/inblossom.bialystok" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/>
+                        <circle cx="12" cy="12" r="5"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/48535449538" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                        <path d="M12 2a10 10 0 00-8.5 15.3L2 22l4.7-1.5A10 10 0 1012 2z"/>
+                    </svg>
+                </a>
+                <a href="https://inblossomspzoo.booksy.com/" target="_blank" rel="noopener" class="social-link" aria-label="Booksy">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+                        <path d="M9 7h6M9 11h4"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="footer-logo"><em>IN</em>BLOSSOM</div>
+        <div class="footer-tagline">Beauty Salon</div>
+        <p class="footer-copy">&copy; 2026 INBLOSSOM Salon Kosmetyczny. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <!-- ============ JAVASCRIPT ============ -->
+    <script>
+    (function() {
+        'use strict';
+
+        /* ----- Navigation scroll effect ----- */
+        var nav = document.getElementById('nav');
+
+        function onScroll() {
+            if (window.scrollY > 40) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        /* ----- Mobile menu ----- */
+        var hamburger = document.getElementById('hamburger');
+        var mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        /* ----- IntersectionObserver: reveal animations ----- */
+        function setupRevealObserver() {
+            var reveals = document.querySelectorAll('.reveal');
+            var revealChildren = document.querySelectorAll('.reveal-child');
+
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(function(el) { el.classList.add('in-view'); });
+                revealChildren.forEach(function(el) { el.classList.add('in-view'); });
+                return;
+            }
+
+            var revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            reveals.forEach(function(el) {
+                revealObserver.observe(el);
+            });
+
+            /* Staggered children */
+            var parentGroups = {};
+
+            revealChildren.forEach(function(child) {
+                var parent = child.parentElement;
+                if (!parent.dataset.revealGroupId) {
+                    parent.dataset.revealGroupId = 'rg-' + Math.random().toString(36).substr(2, 6);
+                }
+                var groupId = parent.dataset.revealGroupId;
+                if (!parentGroups[groupId]) {
+                    parentGroups[groupId] = { parent: parent, children: [] };
+                }
+                parentGroups[groupId].children.push(child);
+            });
+
+            Object.keys(parentGroups).forEach(function(groupId) {
+                var group = parentGroups[groupId];
+
+                var groupObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            group.children.forEach(function(child) {
+                                child.classList.add('in-view');
+                            });
+                            groupObserver.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.05,
+                    rootMargin: '0px 0px -20px 0px'
+                });
+
+                groupObserver.observe(group.parent);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupRevealObserver);
+        } else {
+            setupRevealObserver();
+        }
+
+        /* ----- Smooth scroll for anchor links ----- */
+        document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                var target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    var offset = 80;
+                    var targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top: targetPos, behavior: 'smooth' });
+                }
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
